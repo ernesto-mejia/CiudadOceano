@@ -46,8 +46,8 @@ Route::prefix('/admin')->group(function(){
 
     //Module Article
         Route::get('/articulos/{status}/',                           'Admin\ArticleController@getHome')->name('articulos');
-        Route::get('/articulos/add',                                  'Admin\ArticleController@getArticleAdd')->name('articulos_add');
-        Route::post('/articulos/add/',                                'Admin\ArticleController@postArticleAdd')->name('articulos_add');
+        Route::get('/articulo/add',                                  'Admin\ArticleController@getArticleAdd')->name('articulos_add');
+        Route::post('/articulo/add',                                'Admin\ArticleController@postArticleAdd')->name('articulos_add');
         Route::get('/articulos/{id}/edit',                           'Admin\ArticleController@getArticleEdit')->name('articulos_edit');
         Route::post('/articulos/{id}/edit',                          'Admin\ArticleController@postArticleEdit')->name('articulos_edit');
         Route::get('/articulos/{id}/delete',                         'Admin\ArticleController@getArticleDelete')->name('articulos_delete');

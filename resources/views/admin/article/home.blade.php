@@ -24,9 +24,9 @@
                     Artículos
                 </h2>
                 <ul>
-                    @if (kvfj(Auth::user()->permissions, 'article_add'))
+                    @if (kvfj(Auth::user()->permissions, 'articulos_add'))
                         <li>
-                            <a href="{{ url('/admin/article/add') }}">
+                            <a href="{{ url('/admin/articulo/add') }}">
                                 <i class="fas fa-plus"></i> Agregar artículo
                             </a>
                         </li>
@@ -36,17 +36,17 @@
                         <a href="#">Filtrar <i class="fas fa-chevron-down"></i></a>
                         <ul>
                             <li>
-                                <a href="{{ url('/admin/articles/1') }}">
+                                <a href="{{ url('/admin/articulos/1') }}">
                                     <i class="fas fa-globe-americas" style="color: green;"></i> Públicados
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ url('/admin/articles/0') }}">
+                                <a href="{{ url('/admin/articulos/0') }}">
                                     <i class="fas fa-globe-americas" style="color: blue;"></i> No públicados
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ url('/admin/articles/trash') }}">
+                                <a href="{{ url('/admin/articulos/trash') }}">
                                     <i class="fas fa-trash" style="color: red;"></i> Papelera
                                 </a>
                             </li>
@@ -93,7 +93,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($articles as $article)
+                        @foreach ($articulos as $article)
                             <tr>
                                 <td style="text-align: center;"  width="65">
                                     <img src="{{ url('/multimedia'.$article->file_path.'/t_'.$article->file) }}" width="65">
@@ -131,8 +131,7 @@
                             </tr>
                         @endforeach
                         <tr>
-                            <td colspan="5">{!! $articles->render() !!}</td>
-                        </tr>
+                         </tr>
                     </tbody>
                 </table>
 

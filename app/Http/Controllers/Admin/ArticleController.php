@@ -65,14 +65,12 @@ class ArticleController extends Controller
         $rules = [
     		'name'                              => 'required',
             'file'                              => 'required',
-            'body_1'                              => 'required',
-        ];
+         ];
 
         $messages = [
             'name.required'                     => 'El nombre de la noticia es requerido.',
             'file.required'                     => 'Seleccione una imagen destacada de noticia.',
-            'body_1.required'                     => 'La descripción de la noticia es requerida.',
-            'date.required'                     => 'La fecha de la noticia es requerida.'
+             'date.required'                     => 'La fecha de la noticia es requerida.'
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -102,7 +100,7 @@ class ArticleController extends Controller
             $product ->file                 = $filename;
             $product ->mobile               = asset($file_url);
             $product ->date                 = e($request->input('date'));
-            $product ->body_1               = e($request->input('body_1'));
+            $product ->sections               = e($request->input('sections'));
 
             if($product->save()):
 
@@ -120,7 +118,7 @@ class ArticleController extends Controller
                     $imagW->save($upload_path.'/'.$path.'/'.$filename);
                 endif;
 
-                return redirect('/admin/articles/1')->with('message', ' Artículo guardado con éxito.')->with('typealert', 'success');
+                return redirect('/admin/articulos/1')->with('message', ' Artículo guardado con éxito.')->with('typealert', 'success');
 
             endif;
 

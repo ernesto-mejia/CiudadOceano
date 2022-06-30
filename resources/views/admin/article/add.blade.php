@@ -33,7 +33,7 @@
 
             <div class="inside">
 
-                {!! Form::open(['url' => '/admin/article/add', 'files' => true]) !!}
+                {!! Form::open(['url' => '/admin/articulo/add', 'files' => true]) !!}
 
                     <div class="row" style="padding: 16px;">
 
@@ -76,9 +76,9 @@
                         <div class="col-md-12">
                             <div class="form-group">
 
-                                {{ Form::label('body_1','Descripcion:') }}
+                                {{ Form::label('sections','Número de secciones:') }}
                                 <div class="input-group-prepend">
-                                    {!! Form::textarea('body_1', null, ['class' => 'form-control ', 'id' => 'editor']) !!}
+                                    {!! Form::text('sections', null, ['class' => 'form-control ']) !!}
                                 </div>
 
                             </div>
