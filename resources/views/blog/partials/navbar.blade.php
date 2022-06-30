@@ -13,19 +13,19 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item ml-2">
+            <li class="nav-item ml-3">
                 <a style="    text-align: center;" href="{{url('/seccion/articulos')}}" class="nav-link"><img width="60" src="{{ asset('media/icons/b.png') }}" alt="" class="" /> <p class="m-0 pnav">Artículos</p></a>
             </li>
-            <li class="nav-item ml-2">
+            <li class="nav-item ml-3">
                 <a style="    text-align: center;" href="{{url('/seccion/campaña')}}" class="nav-link"><img width="60" src="{{ asset('media/icons/bb.png') }}" alt="" class="" /> <p class="m-0 pnav">Campaña</p></a>
             </li>
-            <li class="nav-item ml-2">
+            <li class="nav-item ml-3">
                 <a style="    text-align: center;" href="{{url('/seccion/exhibiciones')}}" class="nav-link"><img width="60" src="{{ asset('media/icons/a.png') }}" alt="" class="" /> <p class="m-0 pnav">Exhibiciones</p></a>
             </li>
-            <li class="nav-item ml-2">
+            <li class="nav-item ml-3">
                 <a style="    text-align: center;" href="{{url('/seccion/reciclaje')}}" class="nav-link"><img width="60" src="{{ asset('media/icons/c.png') }}" alt="" class="" /> <p class="m-0 pnav">Reciclaje</p></a>
             </li>
-            <li class="nav-item ml-2">
+            <li class="nav-item ml-3">
                 <a style="    text-align: center;" href="{{url('/seccion/comunidad')}}" class="nav-link"><img width="60" src="{{ asset('media/icons/o.png') }}" alt="" class="" /> <p class="m-0 pnav">Comunidad</p></a>
             </li>
             @auth
