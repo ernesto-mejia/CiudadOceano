@@ -84,7 +84,7 @@ class CarouselsController extends Controller
                         $constraint->upsize();
                     });
                     $imagW = Image::make($file_absolute);
-                    $imagW->resize(2000, 1125, function($constraint){
+                    $imagW->resize(1920, 1080, function($constraint){
                         $constraint->upsize();
                     });
                     $imagT->save($upload_path.'/'.$path.'/t_'.$filename);
@@ -182,7 +182,7 @@ class CarouselsController extends Controller
                         $constraint->upsize();
                     });
                     $imagW = Image::make($file_absolute);
-                    $imagW->resize(4000, 2251, function($constraint){
+                    $imagW->resize(1920, 1080, function($constraint){
                         $constraint->upsize();
                     });
                     $imagT->save($upload_path.'/'.$path.'/t_'.$filename);
