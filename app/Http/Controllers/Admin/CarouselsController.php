@@ -69,8 +69,8 @@ class CarouselsController extends Controller
             $file_absolute = $upload_path.'/'.$path.'/'.$filename;
 
             $c = new Carousel;
-            $c ->name                       = e($request->input('name'));
-            $c ->slug                       = Str::slug($request->input('name'));
+            $c ->name                       = $filename;
+            $c ->slug                       = $name;
             $c ->file_path                  = $path;
             $c ->file                       = $filename;
             $c ->url                        = e($request->input('url'));
@@ -140,8 +140,6 @@ class CarouselsController extends Controller
             $c = Carousel::findOrFail( $id);
             $imagepp                        = $c->file_path;
             $imagep                         = $c->file;
-            $c ->name                       = e($request->input('name'));
-            $c ->slug                       = Str::slug($request->input('name'));
             $c ->status                    = $request->input('status');
             $c ->type                        = 0;
             if($request->hasFile('file')):
@@ -154,7 +152,8 @@ class CarouselsController extends Controller
                 $file_absolute = $upload_path.'/'.$path.'/'.$filename;
                 $c ->file_path                  = $path;
                 $c ->file                       = $filename;
-
+                $c ->name                       = $filename;
+                $c ->slug                       = $name;
 
             endif;
 
@@ -279,8 +278,8 @@ class CarouselsController extends Controller
             $file_absolute = $upload_path.'/'.$path.'/'.$filename;
 
             $c = new Carousel;
-            $c ->name                       = e($request->input('name'));
-            $c ->slug                       = Str::slug($request->input('name'));
+            $c ->name                       = $filename;
+            $c ->slug                       = $name;
             $c ->file_path                  = $path;
             $c ->file                       = $filename;
             $c ->url                        = e($request->input('url'));
@@ -322,7 +321,7 @@ class CarouselsController extends Controller
         if($request->hasFile('file')):
             $rules = [
 
-                'file'                              => 'required|image|mimes:jpg,png,jpeg|max:1000|dimensions:min_width=1920,min_height=1080,max_width=1920,max_height=1080'
+                //'file'                              => 'required|image|mimes:jpg,png,jpeg|max:1000|dimensions:min_width=1920,min_height=1080,max_width=1920,max_height=1080'
 
             ];
         else:
@@ -350,8 +349,6 @@ class CarouselsController extends Controller
             $c = Carousel::findOrFail( $id);
             $imagepp                        = $c->file_path;
             $imagep                         = $c->file;
-            $c ->name                       = e($request->input('name'));
-            $c ->slug                       = Str::slug($request->input('name'));
             $c ->status                    = $request->input('status');
             $c ->type                    = 1;
 
@@ -365,7 +362,8 @@ class CarouselsController extends Controller
                 $file_absolute = $upload_path.'/'.$path.'/'.$filename;
                 $c ->file_path                  = $path;
                 $c ->file                       = $filename;
-
+                $c ->name                       = $filename;
+                $c ->slug                       = $name;
 
             endif;
 
