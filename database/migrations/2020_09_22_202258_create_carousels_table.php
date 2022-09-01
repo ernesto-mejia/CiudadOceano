@@ -20,6 +20,7 @@ class CreateCarouselsTable extends Migration
             $table->string  ('slug')        ->unique()->nullable();
             $table->string  ('file_path')        ->nullable();
             $table->string  ('file')        ->nullable();
+            $table->string  ('mobil')        ->nullable();
             $table->text    ('url')         ->nullable();
             $table->integer('status')->default('0');
             $table->integer('type')->nullable();

@@ -1,14 +1,10 @@
-<div id="" class="container" >
+<div id="Just" class="container" >
 
     <div class="row justify-content-center align-items-center h-100">
-        <div id="" class="col-12 col-md-6 h-100  mt-sm-5 text-center">
-            <h1 style="padding-top:10%; " >Cada año llegan al océano cerca de <span style="font-size: 60px; color: #20176a; font-weight: bold;">9 toneladas</span>  de residuos. </h1>
+        <p class="title_j">ENTÉRATE</p>
+        <div id="Img_just" class="col-12 col-md-12 h-100  mt-sm-5 text-center" style="background-image: url('  http://127.0.0.1:8000/multimedia/Sections/835-bas3.png'); ">
 
-        </div>
-
-        <div id="" class="col-12 col-md-6 h-100  mt-sm-5">
-
-            <img class="" src="{{ url('/multimedia/Sections/835-bas3.jpg') }}"  height="300" style="width: 100%;" >
+            <h1 style=" " >Cada año llegan al océano cerca de <span style="font-size: 60px; color: #75c2db; font-weight: bold;">9 toneladas</span>  de residuos. </h1>
 
         </div>
 

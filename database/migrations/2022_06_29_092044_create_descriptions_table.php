@@ -15,6 +15,11 @@ class CreateDescriptionsTable extends Migration
     {
         Schema::create('descriptions', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('article_id')->nullable();
+            $table->string('type')->nullable();
+            $table->string('section')->nullable();
+            $table->string('content')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

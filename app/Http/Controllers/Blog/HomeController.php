@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Blog;
 
 use App\Article;
+use App\Description;
 use App\Http\Controllers\Controller;
+use App\NGallery;
 use Illuminate\Support\Facades\DB;
 
 
@@ -63,19 +65,19 @@ class HomeController extends Controller
     {
         switch ($category) :
             case 'articulos':
-                $articles = DB::table('articles')->where('module', $category)->orderBy('id', 'DESC')->get();
+                $articles = DB::table('articles')->where('module', $category)->where('status', '1')->orderBy('id', 'DESC')->get();
             break;
             case 'campaña':
-                $articles = DB::table('articles')->where('module', $category)->orderBy('id', 'DESC')->get();
+                $articles = DB::table('articles')->where('module', $category)->where('status', '1')->orderBy('id', 'DESC')->get();
             break;
             case 'exhibiciones':
-                $articles = DB::table('articles')->where('module', $category)->orderBy('id', 'DESC')->get();
+                $articles = DB::table('articles')->where('module', $category)->where('status', '1')->orderBy('id', 'DESC')->get();
             break;
             case 'reciclaje':
-                $articles = DB::table('articles')->where('module', $category)->orderBy('id', 'DESC')->get();
+                $articles = DB::table('articles')->where('module', $category)->where('status', '1')->orderBy('id', 'DESC')->get();
             break;
             case 'comunidad':
-                $articles = DB::table('articles')->where('module', $category)->orderBy('id', 'DESC')->get();
+                $articles = DB::table('articles')->where('module', $category)->where('status', '1')->orderBy('id', 'DESC')->get();
             break;
         endswitch;
 
@@ -93,7 +95,7 @@ class HomeController extends Controller
 
         if($category == 'articulos'):
             $article = DB::table('articles')->orderBy('id', 'DESC')->where('module', $category)->where('slug', $slug)->first();
-
+            $descriptions  = Description::where('article_id', $article->id)->where('type', 'description')->get();
         elseif($category == 'campaña'):
             $article = DB::table('articles')->orderBy('id', 'DESC')->where('module', $category)->where('slug', $slug)->first();
 
@@ -108,19 +110,16 @@ class HomeController extends Controller
 
         endif;
 
-            $imagenes1   = DB::table('n_galleries')->where('after',  1) ->where('article_id',  $article->id)->whereNull('deleted_at')->get();
+            $imagenes   = NGallery::where('article_id',  $article->id)->whereNull('deleted_at')->get();
             $imagenes2   = DB::table('n_galleries')->where('after',  2 )->where('article_id', $article->id)->whereNull('deleted_at')->get();
             $imagenes3   = DB::table('n_galleries')->where('after',  3 )->where('article_id', $article->id)->whereNull('deleted_at')->get();
             $imagenes4   = DB::table('n_galleries')->where('after',  4 )->where('article_id', $article->id)->whereNull('deleted_at')->get();
             $imagenes5   = DB::table('n_galleries')->where('after',  5 )->where('article_id', $article->id)->whereNull('deleted_at')->get();
-
+            //dd( $imagenes);
             $data = [
                         'post' => $article,
-                        'imagenes1' => $imagenes1,
-                        'imagenes2' => $imagenes2,
-                        'imagenes3' => $imagenes3,
-                        'imagenes4' => $imagenes4,
-                        'imagenes5' => $imagenes5,
+                        'descriptions' => $descriptions,
+                        'imagenes' => $imagenes,
 
                     ];
 

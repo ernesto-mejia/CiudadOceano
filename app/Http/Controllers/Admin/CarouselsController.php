@@ -84,7 +84,7 @@ class CarouselsController extends Controller
                         $constraint->upsize();
                     });
                     $imagW = Image::make($file_absolute);
-                    $imagW->resize(1080, 1920, function($constraint){
+                    $imagW->resize(2000, 1125, function($constraint){
                         $constraint->upsize();
                     });
                     $imagT->save($upload_path.'/'.$path.'/t_'.$filename);
@@ -164,7 +164,7 @@ class CarouselsController extends Controller
                 $path = '/Carousels';
                 $fileExt = trim($request->file('file_mobile')->getClientOriginalExtension());
                 $upload_path = Config::get('filesystems.disks.uploads.root');
-                $name = Str::slug(str_replace($fileExt, '', $request->file('file')->getClientOriginalName()));
+                $name = Str::slug(str_replace($fileExt, '', $request->file('file_mobile')->getClientOriginalName()));
                 $filename = rand(1,999).'-'.$name.'.'.$fileExt;
                 $file_absolute = $upload_path.'/'.$path.'/'.$filename;
                 $c ->file_path                  = $path;
@@ -192,7 +192,7 @@ class CarouselsController extends Controller
                 endif;
 
                 if($request->hasFile('file_mobile')):
-                    $fl = $request->file->storeAs($path, $filename, 'uploads');
+                    $fl = $request->file_mobile->storeAs($path, $filename, 'uploads');
                     $imagT = Image::make($file_absolute);
                     $imagT->resize(256, 256, function($constraint){
                         $constraint->upsize();
@@ -234,7 +234,12 @@ class CarouselsController extends Controller
     {
         $cats = Carousel::orderBy('name', 'ASC')->where('type', 1)->get();
         $gallery = Section::where('slug', 'galeria')->first();
-
+            if (!$gallery) {
+                $c = new Section;
+                $c ->name                       = 'Galeria';
+                $c ->slug                       = 'galeria';
+                $c->save();
+            }
         $data = [
             'cats' => $cats,
             'gallery' => $gallery

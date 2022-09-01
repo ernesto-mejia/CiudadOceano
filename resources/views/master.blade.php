@@ -25,7 +25,6 @@
                     <link rel="stylesheet" href="{{ url('/css/style.css?v='.time()) }}">
                     <link rel="stylesheet" href="{{ url('/css/font.css?v='.time()) }}">
                     <link rel="stylesheet" href="{{ url('/css/querys.css?v='.time()) }}">
-                    <link rel="stylesheet" href="{{ url('/css/video.scss?v='.time()) }}">
                     @yield('css')
 
             </head>

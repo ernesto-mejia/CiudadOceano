@@ -18,7 +18,7 @@
 
         <div class="row">
 
-            <div class="col-md-5">
+            <div class="col-md-5 d-flex">
                 <div class="container-fluid p-0">
                     <div class="panel shadow">
                             <div class="header">

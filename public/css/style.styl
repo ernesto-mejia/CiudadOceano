@@ -2,19 +2,33 @@
     padding 0px
     margin 0px
 colorBg = #fff
-colorBg2 = #001930
+colorBg2 = hsl(209, 100%, 9%)
+colorP = #96d2de
+colorN = #000
 @font-face
     font-family "Montserrat-Regular"
     src url("../media/Fonts/Montserrat-Regular.ttf")
 @font-face
     font-family "Avenir"
     src url("../media/Fonts/Avenir.ttf")
+
+@font-face
+    font-family "Acumin"
+    src url("../media/Fonts/Acumin-Variable-Concept.ttf")
+
 body
     height 100vh
     font-family "Montserrat-Regular"
     background-color colorBg
+    width 100%
 footer
+    background-image url('  http://127.0.0.1:8000/media/icons/imgF.png')
     background-color colorBg2
+    padding 0
+    height 210px !important
+    width 100%
+    background-size 100% 100%
+    background-repeat no-repeat
 nav
     background-color colorBg2
     .navbar-brand
@@ -148,7 +162,7 @@ nav
 .PGallery
     width 70%
 .ContenedorGallery
-    padding 0 18%
+    padding 0
     height 58%
 .Pgallery
     p
@@ -157,6 +171,9 @@ nav
         text-align justify
 .Pjustify
     padding 2px 155px
+    p
+        text-align center
+        margin 0
 .contactoP
     p
         display inline-block
@@ -171,10 +188,38 @@ nav
 
 #Image_Mobile
     display none
-
+#Home
+    .titl_v
+        color colorP
+        font-family "Acumin"
+        width 100%
+        text-align center
+        font-size calc(3.5rem + .5vw)
+#Just
+    max-width 100% !important
+    .title_j
+        color colorN
+        font-family "Acumin"
+        width 100%
+        text-align center
+        font-size calc(3.5rem + .5vw)
+#Img_just
+    padding 0
+    height 650px !important
+    width 100%
+    background-size 100% 100%
+    background-repeat no-repeat
+    h1
+        padding-right 52%
+        color #fff
+        width 100%
+        position absolute
+        bottom 0
+        background-color rgba(15,33,47,0.5)
+        margin 0
 @media (max-width 990px)
     body
-        background-color colorBg2
+        background-color colorBg
     .pt-6
         padding-top 0%
     #cookies

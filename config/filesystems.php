@@ -57,7 +57,7 @@ return [
 
         'uploads' => [
             'driver' => 'local',
-            'root' => base_path('../public_html/co/multimedia'),
+            'root' => base_path('public/multimedia'),
             'visibility' => 'public',
         ],
         'uploads_user' => [

@@ -53,7 +53,7 @@ Route::prefix('/admin')->group(function(){
         Route::get('/articulos/{id}/delete',                         'Admin\ArticleController@getArticleDelete')->name('articulos_delete');
         Route::get('/articulos/{id}/restore',                        'Admin\ArticleController@getArticleRestore')->name('articulos_delete');
         Route::post('/articulos/{id}/gallery/add/{gallery}',         'Admin\ArticleController@postArticleGalleryAdd')->name('articulos_edit');
-        Route::get('/articulos/{id}/gallery/{gid}/delete',           'Admin\ArticleController@getArticleGalleryDelete')->name('articulos_edit');
+        Route::get('/articulos/{slug}/gallery/{id}/delete',           'Admin\ArticleController@getArticleGalleryDelete')->name('articulos_edit');
 
     //Module Campaign
         Route::get('/campañas/{status}/',                           'Admin\CampaignController@getHome')->name('campañas');

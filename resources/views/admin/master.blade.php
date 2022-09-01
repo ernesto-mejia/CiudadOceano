@@ -78,7 +78,7 @@
                     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
                     <script src="{{ asset('js/admin.js') }}"></script>
-                    <script src="{{ asset('js/imgnews.js?v='.time()) }}"></script>
+
                     @yield('scripts')
 
 
