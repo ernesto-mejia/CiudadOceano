@@ -55,7 +55,9 @@
                     @endif
 
                 <!--Content-->
+                <div class="container cont__">                    
                     @yield('content')
+                </div>
 
                 <!--Footer-->
                     @include('blog.partials.footer')

@@ -3,17 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Config;
 use Intervention\Image\Facades\Image;
-use App\User;
 use App\Carousel;
-use App\CMobile;
 use App\Section;
 
 class CarouselsController extends Controller
@@ -42,7 +37,7 @@ class CarouselsController extends Controller
     {
         $rules = [
 
-         //   'file'                              => 'required|image|mimes:jpg,png,jpeg|max:1000|dimensions:min_width=1920,min_height=1080,max_width=1920,max_height=1080'
+            'file'                              => 'required|image|mimes:jpg,png,jpeg|max:6144|dimensions:min_width=1920,min_height=1080,max_width=1920,max_height=1080'
 
         ];
 
@@ -50,7 +45,7 @@ class CarouselsController extends Controller
             'file.required'                     => 'Seleccione una imagen destacada un carousel.',
             'file.image'                        => 'El archivo no es una imagen.',
             'file.dimensions'                   => 'Se requiere una imagen de dimesiones 1920px x 1080px',
-            'file.max'                          => 'La imagen pesa más de 1Mb',
+            'file.max'                          => 'La imagen pesa más de 6Mb',
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -112,7 +107,7 @@ class CarouselsController extends Controller
         if($request->hasFile('file')):
             $rules = [
 
-                //'file'                              => 'required|image|mimes:jpg,png,jpeg|max:1000|dimensions:min_width=1920,min_height=1080,max_width=1920,max_height=1080'
+                'file'                              => 'required|image|mimes:jpg,png,jpeg|max:6144|dimensions:min_width=1920,min_height=1080,max_width=1920,max_height=1080'
 
             ];
         else:
@@ -122,12 +117,31 @@ class CarouselsController extends Controller
 
             ];
         endif;
-            $messages = [
-                'file.required'                     => 'Seleccione una imagen destacada un carousel.',
-                'file.image'                        => 'El archivo no es una imagen.',
-                'file.dimensions'                   => 'Se requiere una imagen de dimesiones 1920px x 1080px',
-                'file.max'                          => 'La imagen pesa más de 1Mb',
+
+
+        if($request->hasFile('file_mobile')):
+            $rules = [
+
+                'file_mobile'                              => 'required|image|mimes:jpg,png,jpeg|max:6144|dimensions:min_width=1080,min_height=1920,max_width=1080,max_height=1920'
+
             ];
+        else:
+            $rules = [
+
+
+
+            ];
+        endif;
+
+        $messages = [
+            'file.required'                     => 'Seleccione una imagen destacada un carousel.',
+            'file.image'                        => 'El archivo no es una imagen.',
+            'file.dimensions'                   => 'Se requiere una imagen de dimesiones 1920px x 1080px',
+            'file.max'                          => 'La imagen pesa más de 6Mb',
+            'file_mobile.image'                        => 'El archivo no es una imagen.',
+            'file_mobile.dimensions'                   => 'Se requiere una imagen de dimesiones 1080px x 1920px',
+            'file_mobile.max'                          => 'La imagen pesa más de 6Mb',
+        ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
 
@@ -156,6 +170,8 @@ class CarouselsController extends Controller
                 $c ->slug                       = $name;
 
             endif;
+
+           
 
             if( $request->hasFile('file_mobile') ):
                 $imagepp                        = $c->file_path;
