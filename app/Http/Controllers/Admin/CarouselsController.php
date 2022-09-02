@@ -229,7 +229,7 @@ class CarouselsController extends Controller
     ////  Galeria  ////////////////////
 
 
-        public function getHometGallery()
+    public function getHometGallery()
     {
         $cats = Carousel::orderBy('name', 'ASC')->where('type', 1)->get();
         $gallery = Section::where('slug', 'galeria')->first();
@@ -251,15 +251,15 @@ class CarouselsController extends Controller
     {
         $rules = [
 
-         //   'file'                              => 'required|image|mimes:jpg,png,jpeg|max:4000|dimensions:min_width=1920,min_height=1080,max_width=1920,max_height=1080'
+            'file'                              => 'required|image|mimes:jpg,png,jpeg|max:6144|dimensions:min_width=1920,min_height=1080,max_width=1920,max_height=1080'
 
         ];
 
         $messages = [
-            'file.required'                     => 'Seleccione una imagen destacada un carousel.',
-            'file.image'                        => 'El archivo no es una imagen.',
+            'file.required'                     => 'Seleccione una imagen de galeria',
+            'file.image'                        => 'El archivo no es una imagen. Formatos admitidos (jpg,png,jpeg)',
             'file.dimensions'                   => 'Se requiere una imagen de dimesiones 1920px x 1080px',
-            'file.max'                          => 'La imagen pesa más de 1Mb',
+            'file.max'                          => 'La imagen pesa más de 6Mb',
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -293,7 +293,7 @@ class CarouselsController extends Controller
                         $constraint->upsize();
                     });
                     $imagW = Image::make($file_absolute);
-                    $imagW->resize(1080, 1920, function($constraint){
+                    $imagW->resize(1920, 1080, function($constraint){
                         $constraint->upsize();
                     });
                     $imagT->save($upload_path.'/'.$path.'/t_'.$filename);
@@ -321,7 +321,7 @@ class CarouselsController extends Controller
         if($request->hasFile('file')):
             $rules = [
 
-                //'file'                              => 'required|image|mimes:jpg,png,jpeg|max:1000|dimensions:min_width=1920,min_height=1080,max_width=1920,max_height=1080'
+                'file'                              => 'required|image|mimes:jpg,png,jpeg|max:6144|dimensions:min_width=1920,min_height=1080,max_width=1920,max_height=1080'
 
             ];
         else:
@@ -332,10 +332,10 @@ class CarouselsController extends Controller
             ];
         endif;
             $messages = [
-                'file.required'                     => 'Seleccione una imagen destacada un carousel.',
-                'file.image'                        => 'El archivo no es una imagen.',
+                'file.required'                     => 'Seleccione una imagen de galeria',
+                'file.image'                        => 'El archivo no es una imagen. Formatos admitidos (jpg,png,jpeg)',
                 'file.dimensions'                   => 'Se requiere una imagen de dimesiones 1920px x 1080px',
-                'file.max'                          => 'La imagen pesa más de 1Mb',
+                'file.max'                          => 'La imagen pesa más de 6Mb',
             ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -383,11 +383,9 @@ class CarouselsController extends Controller
                     });
                     $imagT->save($upload_path.'/'.$path.'/t_'.$filename);
                     $imagW->save($upload_path.'/'.$path.'/'.$filename);
-                    Storage::disk('uploads')->delete('/'.$imagepp.'/'.$imagep);
-                    Storage::disk('uploads')->delete('/'.$imagepp.'/t_'.$imagep);
                 endif;
 
-                return redirect('/admin/gallery')->with('message', ' Galería guardado con éxito.')->with('typealert', 'success');
+                return back()->with('message', ' Galería guardado con éxito.')->with('typealert', 'success');
 
             endif;
 

@@ -4,10 +4,11 @@
 @section('title',  $post->name )
 
 @section('content')
-<div  class="col-12 justify-content-center align-items-center">
-    <div id="noticias-car" class="row justify-content-center" style="padding: 6% 0 3% 0; height: auto;">
+    <div  class="col-12 justify-content-center align-items-center">
+        <div id="noticias-car" class="row justify-content-center" style="padding: 6% 0 3% 0; height: auto;">
 
-        <!-- Destacado -->
+           
+            <!-- Destacado -->
 
             <!-- TITULO NOTICIA -->
                 <div id="mt-n" class="col-12 justify-content-center align-items-center Height5_2" style="padding: 0; margin-bottom: 10px; margin-top: 40px;">
@@ -25,37 +26,36 @@
                     </div>
                 </div>
 
-        <!-- Secccion-->
-        @for ($i=1 ; $i<=$post->sections; $i++)
-            <!-- DESCRIPCION -->
-                <div  class="col-12 justify-content-center align-items-center " style="padding: 0; margin-bottom: 25px;  height: auto;">
-                    <div id="" class="row justify-content-center align-items-center Height100" style="margin-bottom: 10px; padding: 0 20%; text-align: justify;" >
+            <!-- Secccion-->
+                @for ($i=1 ; $i<=$post->sections; $i++)
+                    <!-- DESCRIPCION -->
+                        <div  class="col-12 justify-content-center align-items-center " style="padding: 0; margin-bottom: 25px;  height: auto;">
+                            <div id="" class="row justify-content-center align-items-center Height100" style="margin-bottom: 10px; padding: 0 20%; text-align: justify;" >
 
-                        @foreach ($descriptions as $description)
-                            @if ($description->section == $i-1)
-                                {!! html_entity_decode($description->content, ENT_QUOTES | ENT_XML1, 'UTF-8') !!}
-                            @endif
-                        @endforeach
+                                @foreach ($descriptions as $description)
+                                    @if ($description->section == $i-1)
+                                        {!! html_entity_decode($description->content, ENT_QUOTES | ENT_XML1, 'UTF-8') !!}
+                                    @endif
+                                @endforeach
 
-
-                    </div>
-                </div>
-                <!-- IMAGENES -->
+                            </div>
+                        </div>
+                    <!-- IMAGENES 
 
                         <div class="row ContenedorGallery justify-content-center align-content-center" >
-                            <div id="carouselExampleControls" class="carousel slide h-100 w-100" data-ride="carousel">
+                            <div id="carouselExampleControls_{{$i}}" class="carousel slide h-100 w-100" data-ride="carousel">
                                 <div class="carousel-inner h-100">
-                                  @foreach ($imagenes as $imagen)
-                                    @if($i == $imagen->after)
-                                        <div class="carousel-item active h-100">
-                                            <img class="d-block w-100 h-100" src="{{ url('/multimedia'.$imagen->file_path.'/'.$imagen->file_name) }}" alt="">
-                                        </div>
-                                    @else
-                                        <div class="carousel-item  h-100">
-                                            <img class="d-block w-100 h-100" src="{{ url('/multimedia'.$imagen->file_path.'/'.$imagen->file_name) }}" alt="">
-                                        </div>
-                                    @endif
-                                  @endforeach
+                                    @foreach ($imagenes as $imagen)
+                                        @if($i == $imagen->after)
+                                            <div class="carousel-item active h-100">
+                                                <img class="d-block w-100 h-100" src="{{ url('/multimedia'.$imagen->file_path.'/'.$imagen->file_name) }}" alt="">
+                                            </div>
+                                        @else
+                                            <div class="carousel-item  h-100">
+                                                <img class="d-block w-100 h-100" src="{{ url('/multimedia'.$imagen->file_path.'/'.$imagen->file_name) }}" alt="">
+                                            </div>
+                                        @endif
+                                    @endforeach
 
 
                                 </div>
@@ -70,21 +70,24 @@
                             </div>
                         </div>
 
+-->
+                    <!--VIDEO -->
+                        @if ($post->video_1 != null )
+                            <div  class="col-12 justify-content-center align-items-center vimeo" style="padding: 0; height:50%; min-height:300px; margin-bottom: 25px;">
+                                <div id="" class="row justify-content-center align-items-center " style="height:300px; padding: 0 0; text-align: justify; " >
 
-                <!--VIDEO -->
-                @if ($post->video_1 != null )
-                    <div  class="col-12 justify-content-center align-items-center vimeo" style="padding: 0; height:50%; min-height:300px; margin-bottom: 25px;">
-                        <div id="" class="row justify-content-center align-items-center " style="height:300px; padding: 0 0; text-align: justify; " >
+                                    {!! html_entity_decode($post->video_1, ENT_QUOTES | ENT_XML1, 'UTF-8') !!}
 
-                            {!! html_entity_decode($post->video_1, ENT_QUOTES | ENT_XML1, 'UTF-8') !!}
+                                </div>
+                            </div>
+                        @endif
 
-                        </div>
-                    </div>
-                @endif
+                @endfor
 
-        @endfor
+              
+
+        </div>
     </div>
-</div>
 @endsection
 @section('scripts')
 @endsection

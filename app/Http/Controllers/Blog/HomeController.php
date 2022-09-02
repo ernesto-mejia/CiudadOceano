@@ -80,10 +80,11 @@ class HomeController extends Controller
                 $articles = DB::table('articles')->where('module', $category)->where('status', '1')->orderBy('id', 'DESC')->get();
             break;
         endswitch;
-
+        $countArt = count($articles);
 
         $data = [
-                    'articles' => $articles
+                    'articles' => $articles,
+                    'countArt' => $countArt
 
                 ];
 

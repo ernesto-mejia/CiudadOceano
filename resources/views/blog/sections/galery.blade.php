@@ -1,9 +1,9 @@
-<div id="" class="col-12 " style="height: 920px !important;">
+<div id="" class="col-12 ">
     <div class="row mb-2 justify-content-center align-content-center" style="height: 10%;">
        <h1> GALERÍA</h1>
     </div>
     <div class="row  justify-content-center align-content-center Pgallery" style="height: 30%;">
-        <p>Como resultado de un programa de limpieza de playas , el fotógrafo Alfredo Blásquez ha documentado una colección de objetos de la vida cotidiana , que provienen de diferentes puntos del planeta . Las corrientes marítimas arrojan objetos a miles de kilometros de distancia dañando la flora y fauna del planeta, en gnereal.</p>
+        <p>{!!  html_entity_decode($galleryInfo->description	, ENT_QUOTES | ENT_XML1, 'UTF-8')  !!}</p>
      </div>
      <div class="row ContenedorGallery justify-content-center align-content-center" >
         <div id="carouselExampleControls" class="carousel slide h-100 w-100" data-ride="carousel">

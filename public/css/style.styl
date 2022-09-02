@@ -5,27 +5,17 @@ colorBg = #fff
 colorBg2 = hsl(209, 100%, 9%)
 colorP = #96d2de
 colorN = #000
-@font-face
-    font-family "Montserrat-Regular"
-    src url("../media/Fonts/Montserrat-Regular.ttf")
-@font-face
-    font-family "Avenir"
-    src url("../media/Fonts/Avenir.ttf")
-
-@font-face
-    font-family "Acumin"
-    src url("../media/Fonts/Acumin-Variable-Concept.ttf")
 
 body
     height 100vh
-    font-family "Montserrat-Regular"
     background-color colorBg
     width 100%
+    font-family: 'Acumin'
 footer
-    background-image url('  http://127.0.0.1:8000/media/icons/imgF.png')
+    background-image url('https://ciudadoceano.com/media/icons/imgF.png')
     background-color colorBg2
     padding 0
-    height 210px !important
+    height auto
     width 100%
     background-size 100% 100%
     background-repeat no-repeat
@@ -35,10 +25,11 @@ nav
         img
             width 70px
 .Logo
-    font-family "Avenir"
     font-size calc(0.9rem + 0.9vw)
     margin 0
     align-content center
+    color #96d2de
+    text-transform uppercase
 .dropdown-menu
     left 85% !important
 .pt-6
@@ -58,30 +49,21 @@ nav
     max-width 75%
     display grid
     padding 15px
-
-
 #cookies p
     width 100%
     font-size calc(0.4rem + 0.25vw)
     text-decoration none
     color #fff
-
-
 #cookies h4
     color #fff
     text-decoration none
-
-
 .cookies-poli
     color #fff
     font-family "Avenir"
-
-
 .cookie-consent__agree
     border-radius 5px
     color #5d6277
     text-decoration none
-
 .dropdownhover .dropdown-menu
     transition 0.5s
     border-radius 0 3px 3px 0
@@ -90,27 +72,19 @@ nav
     display block
     top 1%
     min-width 8rem
-
-
 .dropdown-menu a
     color #707791
-
-
 .dropdown-menu lihover
     background #707791
 .pnav
     font-family "Avenir" !important
     font-size calc(0.9rem + 0.4vw)
-
+    color #9C9FA6
 .dropdown-menu ahover
     font-family "Montserrat-Bold"
     color #fff
-
-
 .dropdown-menu
     font-size 0.8rem !important
-
-
 .dropdownhover .dropdown-menu-user
     transition 0.5s
     border-radius 0 3px 3px 0
@@ -119,42 +93,25 @@ nav
     display block
     top 90%
     min-width 8rem
-
-
 .dropdown-menu-user a
     color #707791
-
-
 .dropdown-menu-user lihover
     background #707791
     color #fff
-
-
 .dropdown-menu-user lihover .us
     font-family "Montserrat-Bold"
     color #fff !important
-
-
 .dropdown-menu-user
     font-size 0.8rem !important
 #carouselExampleIndicators
     background-color colorBg2
-
+    height: 86vh;
 .video-wrap
     text-align center
 .video
     iframe
         max-width 100%
         max-height 100%
-    &.stuck
-        z-index 99
-        position fixed
-        bottom 20px
-        right 20px
-        transform translateY(100%)
-        width 260px
-        height 145px
-        animation fade-in-up .25s ease forwards
 .ImdDetails
     width 60%
 #PDetails
@@ -163,7 +120,7 @@ nav
     width 70%
 .ContenedorGallery
     padding 0
-    height 58%
+    height 59%
 .Pgallery
     p
         width 70%
@@ -178,14 +135,13 @@ nav
     p
         display inline-block
 .link-acc
-        display grid
-        height 100%
-        justify-content center
-        align-content center
-        color #fff
+    display grid
+    height 100%
+    justify-content center
+    align-content center
+    color #fff
 #Image_PC
     display block
-
 #Image_Mobile
     display none
 #Home
@@ -217,6 +173,8 @@ nav
         bottom 0
         background-color rgba(15,33,47,0.5)
         margin 0
+.navbar-toggler
+    color #fff
 @media (max-width 990px)
     body
         background-color colorBg
@@ -227,15 +185,12 @@ nav
         top calc(50% - -20%)
         left calc(50% - 36%)
     .ImdDetails
-        width 100
+        width 100%
     #PDetails
         width 70%
     .PGallery
         margin-bottom 25px
         width 95%
-    .ContenedorGallery
-        padding 0
-        height auto
     .Pjustify
         padding 2px 55px
     #Image_PC
