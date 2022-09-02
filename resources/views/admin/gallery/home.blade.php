@@ -35,21 +35,9 @@
                                     @csrf
                                     <div class="row" style="padding: 16px;">
 
-                                        <div class="col-12">
+                                     
 
-                                            {!! Form::label('name','Nombre:') !!}
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text">
-                                                        <i class="fas fa-keyboard"></i>
-                                                    </span>
-                                                </div>
-                                                {!! Form::text('name', null, [ 'class' => 'form-control']) !!}
-                                            </div>
-
-                                        </div>
-
-                                        <div class="col-12 mt16">
+                                        <div class="col-12 ">
 
                                             {!! Form::label('file','Imagen:') !!}
                                             <div class="input-group">

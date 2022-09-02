@@ -302,7 +302,7 @@ class ArticleController extends Controller
 
         if ($product->save()):
 
-            return redirect('/admin/article/'.$product->id.'/edit')->with('message', ' El artículo se restauro correctamente.')->with('typealert', 'success')->withInput();
+            return redirect('/admin/articulos/'.$product->id.'/edit')->with('message', ' El artículo se restauro correctamente.')->with('typealert', 'success')->withInput();
 
         endif;
 

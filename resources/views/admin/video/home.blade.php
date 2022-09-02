@@ -20,7 +20,7 @@
             <div class="container" style="    display: flex;    justify-content: center;">
                 <div class="video-wrap" style="max-width: 250px !important;">
                     <div class="video w-100">
-                      {!! html_entity_decode($cats->description, ENT_QUOTES | ENT_XML1, 'UTF-8') !!}
+                      {!! html_entity_decode($cats_->description, ENT_QUOTES | ENT_XML1, 'UTF-8') !!}
                     </div>
                 </div>
             </div>
@@ -64,14 +64,14 @@
                             </h2>
                         </div>
                         <div class="inside">
-                            {!! Form::open(['url' => '/admin/video/'.$cats->id.'/edit']) !!}
+                            {!! Form::open(['url' => '/admin/video/'.$cats_->id.'/edit']) !!}
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
 
                                             {{ Form::label('description','Descripcion:') }}
                                             <div class="input-group-prepend">
-                                                {!! Form::textarea('description', $cats->description, ['class' => 'form-control ', 'id' => 'editor','rows' => '5']) !!}
+                                                {!! Form::textarea('description', $cats_->description, ['class' => 'form-control ', 'id' => 'editor','rows' => '5']) !!}
                                             </div>
 
                                         </div>

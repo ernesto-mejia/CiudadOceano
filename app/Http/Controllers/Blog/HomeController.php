@@ -65,19 +65,19 @@ class HomeController extends Controller
     {
         switch ($category) :
             case 'articulos':
-                $articles = DB::table('articles')->where('module', $category)->where('status', '1')->orderBy('id', 'DESC')->get();
+                $articles = DB::table('articles')->where('module', $category)->where('status', '1')->where('deleted_at', null)->orderBy('id', 'DESC')->get();
             break;
             case 'campaña':
-                $articles = DB::table('articles')->where('module', $category)->where('status', '1')->orderBy('id', 'DESC')->get();
+                $articles = DB::table('articles')->where('module', $category)->where('status', '1')->where('deleted_at', null)->orderBy('id', 'DESC')->get();
             break;
             case 'exhibiciones':
-                $articles = DB::table('articles')->where('module', $category)->where('status', '1')->orderBy('id', 'DESC')->get();
+                $articles = DB::table('articles')->where('module', $category)->where('status', '1')->where('deleted_at', null)->orderBy('id', 'DESC')->get();
             break;
             case 'reciclaje':
-                $articles = DB::table('articles')->where('module', $category)->where('status', '1')->orderBy('id', 'DESC')->get();
+                $articles = DB::table('articles')->where('module', $category)->where('status', '1')->where('deleted_at', null)->orderBy('id', 'DESC')->get();
             break;
             case 'comunidad':
-                $articles = DB::table('articles')->where('module', $category)->where('status', '1')->orderBy('id', 'DESC')->get();
+                $articles = DB::table('articles')->where('module', $category)->where('status', '1')->where('deleted_at', null)->orderBy('id', 'DESC')->get();
             break;
         endswitch;
         $countArt = count($articles);

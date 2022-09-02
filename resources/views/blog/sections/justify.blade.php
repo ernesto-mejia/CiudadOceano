@@ -2,7 +2,7 @@
 
     <div class="row justify-content-center align-items-center h-100">
         <p class="title_j">ENTÉRATE</p>
-        <div id="Img_just" class="col-12 col-md-12 h-100  mt-sm-5 text-center" style="background-image: url('  http://127.0.0.1:8000/multimedia/Sections/835-bas3.png'); ">
+        <div id="Img_just" class="col-12 col-md-12 h-100  mt-sm-5 text-center" style="background-image: url('https://ciudadoceano.com/multimedia/Sections/835-bas3.png'); ">
 
             <h1 style=" " >Cada año llegan al océano cerca de <span style="font-size: 60px; color: #75c2db; font-weight: bold;">9 toneladas</span>  de residuos. </h1>
 
