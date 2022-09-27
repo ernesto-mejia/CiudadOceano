@@ -14,6 +14,12 @@ Route::prefix('/admin')->group(function(){
         Route::get('/user/{id}/permissions',                    'Admin\UserController@getUserPermissions')->name('user_permissions');
         Route::post('/user/{id}/permissions',                   'Admin\UserController@postUserPermissions')->name('user_permissions');
 
+    //Module Area
+        Route::get('/areas',                                'Admin\AreaController@getHome')->name('areas');
+        Route::post('/area/add',                            'Admin\AreaController@postAreaAdd')->name('area_add');
+        Route::get('/area/{id}/edit',                       'Admin\AreaController@getAreaEdit')->name('area_edit');
+        Route::post('/area/{id}/edit',                      'Admin\AreaController@postAreaEdit')->name('area_edit');
+        Route::get('/area/{id}/delete',                     'Admin\AreaController@getAreaDelete')->name('area_delete');
 
     //Module Carousels
         Route::get('/carousels',                                'Admin\CarouselsController@getHome')->name('carousels');

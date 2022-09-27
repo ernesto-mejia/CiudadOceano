@@ -3,14 +3,14 @@
 @section('title',  '' )
 
 @section('content')
-    <div id="" class="col-12 h-100">
+    <div id="Articles" class="col-12 h-100">
         <div class="row h-100  justify-content-center align-content-center">
             @if ($countArt == 0)
                 <h1>Sin contenido por el momento.</h1>
             @else
                 @foreach ($articles as $article)
 
-                    <div class="col-md-4 col-6 justify-content-center align-items-center mt-3" style="height: 35%; padding: 0 4%; margin-bottom: 3%;">
+                    <div class="col-md-4 col-6  cont-card-event" >
 
                         <a href="{{  url('seccion/'.$article->module.'/'.$article->slug) }}"  class=" h-100 w-100 justify-content-center">
 

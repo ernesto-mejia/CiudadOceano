@@ -26,9 +26,6 @@
         return $a;
     }
 
-
-
-
     function getRoleUserArray($mode, $id)
     {
 
@@ -136,6 +133,16 @@
                     'articulos_edit' => 'Puede editar.',
                     'articulos_add' => 'Puede agregar.',
                     'articulos_delete' => 'Puede elimiar.',
+                ]
+            ],
+            'Modulos' => [
+                'icon' => '<i class="far fa-layer-group"></i>',
+                'title' => 'Modulo de Modulos principales',
+                'keys' => [
+                    'areas' => 'Puede ver el listado.',
+                    'area_edit' => 'Puede editar.',
+                    'area_add' => 'Puede agregar.',
+                    'area_delete' => 'Puede elimiar.',
                 ]
             ],
             'campañas' => [

@@ -24,6 +24,14 @@
     url('../fonts/avenir_condensed.ttf#svgFontName') format('svg');
     /* Legacy iOS */
 }
+@font-face {
+    font-family: 'Avenir-regular';
+    src: url('../fonts/AvenirNextCondensed-Regular.ttf') format('embedded-opentype'), /* IE6-IE8 */
+    url('../fonts/AvenirNextCondensed-Regular.ttf') format('woff'), /* Modern Browsers */
+    url('../fonts/AvenirNextCondensed-Regular.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('../fonts/AvenirNextCondensed-Regular.ttf#svgFontName') format('svg');
+    /* Legacy iOS */
+}
 
 @font-face {
     font-family: "Acumin";

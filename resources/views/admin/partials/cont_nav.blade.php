@@ -52,6 +52,15 @@
         </li>
         @endif
 
+        @if (kvfj(Auth::user()->permissions, 'areas'))
+        <li>
+            <a href="{{ url('/admin/areas') }}" class="lk-areas lk-area_add lk-area_edit">
+                <i class="far fa-layer-group"></i>
+                Modulos principales
+            </a>
+        </li>
+        @endif
+
         @if (kvfj(Auth::user()->permissions, 'articulos'))
         <li>
             <a href="{{ url('/admin/articulos/1') }}" class="lk-articulos lk-articulos_add lk-articulos_edit">
@@ -60,6 +69,7 @@
             </a>
         </li>
         @endif
+
         @if (kvfj(Auth::user()->permissions, 'campañas'))
         <li>
             <a href="{{ url('/admin/campañas/1/') }}" class="lk-campaña lk-campaña_add lk-campaña_edit">
