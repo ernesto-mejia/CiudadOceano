@@ -182,7 +182,7 @@
                                         @if ($ima->after == $i)
                                             <div class="tumb">
 
-                                                <a href="{{ url('/admin/article/'.$product->id.'/gallery/'.$ima->id.'/delete') }}" data-toggle="tooltip" data-placement="top" title="Eliminar">
+                                                <a href="{{ url('/admin/articulos/'.$product->id.'/gallery/'.$ima->id.'/delete') }}" data-toggle="tooltip" data-placement="top" title="Eliminar">
                                                     <i class="fas fa-trash-alt"></i>
                                                 </a>
 

@@ -55,7 +55,7 @@
                     @endif
 
                 <!--Content-->
-                <div class="container cont__ d-flex" style="min-height: 60vh;" >
+                <div class="container cont__" style="min-height: 60vh;" >
                     @yield('content')
                 </div>
 
