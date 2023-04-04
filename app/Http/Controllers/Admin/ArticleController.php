@@ -150,16 +150,7 @@ class ArticleController extends Controller
 
             endif;
         }else {
-            $rules = [
-                'name'                              => 'required',
-                'file'                              => 'required',
-                'date'                              => 'required',
-                'slug'                              => 'required|slug|unique:articles,slug',
-            ];
-             $messages = [
-                'slug.required'                     => 'El artículo ya se encuentra registrado',
-                'slug.unique'                        => 'El artículo ya se encuentra registrado',
-            ];
+
             $validator ='El artículo ya se encuentra registrado';
             return back()->withErrors($validator)->with('message','Se ha producido un error')->with('typealert','danger')->withInput();
 

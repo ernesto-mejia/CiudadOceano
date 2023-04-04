@@ -4,7 +4,7 @@
 @section('breadcrumb')
 
     <li class="breadcrumb-item">
-        <a href="{{ url('/admin/news') }}">
+        <a href="{{ url('/admin/articulos/1') }}">
             <i class="fal fa-newspaper"></i>
             Notícias
         </a>

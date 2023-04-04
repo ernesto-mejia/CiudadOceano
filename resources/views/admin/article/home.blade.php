@@ -4,7 +4,7 @@
 @section('breadcrumb')
 
     <li class="breadcrumb-item">
-        <a href="{{ url('/admin/article') }}">
+        <a href="{{ url('/admin/articulos/1') }}">
             <i class="fal fa-newspaper"></i>
             Artículos
         </a>
@@ -88,7 +88,7 @@
             </div>
             <div class="col-md-7">
                 <div class="panel shadow">
-                    {!! Form::open(['url' => '/admin/articulo/search']) !!}
+                    {{-- {!! Form::open(['url' => '/admin/articulo/search']) !!}
                         <div class="input-group">
                             {!! Form::text('search', null, ['class' => 'form-control', 'placeholder' => 'Ingrese su busqueda', 'required']) !!}
 
@@ -99,7 +99,7 @@
                             </div>
                         </div>
 
-                    {!! Form::close() !!}
+                    {!! Form::close() !!} --}}
                     <div class="header">
                         <h2 class="title">
                             <i class="fal fa-newspaper"></i>

@@ -4,13 +4,13 @@
 @section('breadcrumb')
 
     <li class="breadcrumb-item">
-        <a href="{{ url('/admin/articles/1') }}">
+        <a href="{{ url('/admin/articulos/1') }}">
             <i class="fal fa-newspaper"></i>
             Artículos
         </a>
     </li>
     <li class="breadcrumb-item">
-        <a href="{{ url('/admin/article/'.$product->id.'edit ') }}">
+        <a href="{{ url('/admin/articulos/'.$product->id.'/edit ') }}">
             <i class="far fa-folder-open"></i>
             Editar notícia
         </a>
