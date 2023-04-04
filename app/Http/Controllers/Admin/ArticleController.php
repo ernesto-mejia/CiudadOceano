@@ -63,86 +63,108 @@ class ArticleController extends Controller
 
     public function postArticleAdd(Request $request)
     {
-        $rules = [
-    		'name'                              => 'required',
-            'file'                              => 'required',
-            'date'                              => 'required',
-         ];
+        $input = $request->all();
+        $input['slug']= Str::slug($request->input('name'));
+        $product    = Article::where('slug', $input['slug'])->get();
+        if ($product == null) {
+            $rules = [
+                'name'                              => 'required',
+                'file'                              => 'required',
+                'date'                              => 'required',
+                'slug'                              => 'slug|unique:articles,slug',
+            ];
 
-        $messages = [
-            'name.required'                     => 'El nombre de la noticia es requerido.',
-            'file.required'                     => 'Seleccione una imagen destacada de noticia.',
-             'date.required'                     => 'La fecha del artículo es requerida.'
-        ];
+            $messages = [
+                'name.required'                     => 'El nombre de la noticia es requerido.',
+                'file.required'                     => 'Seleccione una imagen destacada de noticia.',
+                'date.required'                     => 'La fecha del artículo es requerida.',
+                'slug.unique'                        => 'El artículo ya se encuentra registrado',
+            ];
 
-        $validator = Validator::make($request->all(), $rules, $messages);
+            $validator = Validator::make($request->all(), $rules, $messages);
 
-        if($validator->fails()):
+            if($validator->fails()):
 
-            return back()->withErrors($validator)->with('message','Se ha producido un error')->with('typealert','danger')->withInput();
+                return back()->withErrors($validator)->with('message','Se ha producido un error')->with('typealert','danger')->withInput();
 
-        else:
+            else:
 
-            $articleName = Str::slug($request->input('name'));
-            $path = '/Article/'.$articleName;
-            $fileExt = trim($request->file('file')->getClientOriginalExtension());
-            $upload_path = Config::get('filesystems.disks.uploads.root');
-            $name = Str::slug(str_replace($fileExt, '', $request->file('file')->getClientOriginalName()));
-            $filename = rand(1,999).'-'.$name.'.'.$fileExt;
+                $articleName = Str::slug($request->input('name'));
+                $path = '/Article/'.$articleName;
+                $fileExt = trim($request->file('file')->getClientOriginalExtension());
+                $upload_path = Config::get('filesystems.disks.uploads.root');
+                $name = Str::slug(str_replace($fileExt, '', $request->file('file')->getClientOriginalName()));
+                $filename = rand(1,999).'-'.$name.'.'.$fileExt;
 
-            $file_absolute = $upload_path.'/'.$path.'/'.$filename;
-            $file_url = 'multimedia'.$path.'/t_'.$filename;
+                $file_absolute = $upload_path.'/'.$path.'/'.$filename;
+                $file_url = 'multimedia'.$path.'/t_'.$filename;
 
-            $product = new Article;
-            $product->status                = '0';
-            $product->module                = 'articulos';
-            $product ->name                 = e($request->input('name'));
-            $product ->slug                 = Str::slug($request->input('name'));
-            $product ->file_path            = $path;
-            $product ->file                 = $filename;
-            $product ->mobile               = asset($file_url);
-            $product ->date                 = e($request->input('date'));
-            $product ->sections               = e($request->input('sections'));
+                $product = new Article;
+                $product->status                = '0';
+                $product->module                = 'articulos';
+                $product ->name                 = e($request->input('name'));
+                $product ->slug                 = Str::slug($request->input('name'));
+                $product ->file_path            = $path;
+                $product ->file                 = $filename;
+                $product ->mobile               = asset($file_url);
+                $product ->date                 = e($request->input('date'));
+                $product ->sections               = e($request->input('sections'));
 
-            if($product->save()):
-                $s = Str::slug($request->input('name'));
-                $p = Article::where('slug', $s)->first();
+                if($product->save()):
+                    $s = Str::slug($request->input('name'));
+                    $p = Article::where('slug', $s)->first();
 
-                $s = e($request->input('sections'));
+                    $s = e($request->input('sections'));
 
-                for ($i=0; $i <= $s; $i++) {
-                    $content = new Description();
-                    $content->article_id            = $p->id;
-                    $content->type                  = 'description';
-                    $content ->section              = $i;
-                    $content->save();
+                    for ($i=0; $i <= $s; $i++) {
+                        $content = new Description();
+                        $content->article_id            = $p->id;
+                        $content->type                  = 'description';
+                        $content ->section              = $i;
+                        $content->save();
 
-                    $content = new Description();
-                    $content->article_id            = $p->id;
-                    $content->type                  = 'video';
-                    $content ->section              = $i;
-                    $content->save();
-                }
+                        $content = new Description();
+                        $content->article_id            = $p->id;
+                        $content->type                  = 'video';
+                        $content ->section              = $i;
+                        $content->save();
+                    }
 
-                if($request->hasFile('file')):
-                    $fl = $request->file->storeAs($path, $filename, 'uploads');
-                    $imagT = Image::make($file_absolute);
-                    $imagT->resize(256, 256, function($constraint){
-                        $constraint->upsize();
-                    });
-                    $imagW = Image::make($file_absolute);
-                    $imagW->resize(1920, 1080, function($constraint){
-                        $constraint->upsize();
-                    });
-                    $imagT->save($upload_path.'/'.$path.'/t_'.$filename);
-                    $imagW->save($upload_path.'/'.$path.'/'.$filename);
+                    if($request->hasFile('file')):
+                        $fl = $request->file->storeAs($path, $filename, 'uploads');
+                        $imagT = Image::make($file_absolute);
+                        $imagT->resize(256, 256, function($constraint){
+                            $constraint->upsize();
+                        });
+                        $imagW = Image::make($file_absolute);
+                        $imagW->resize(1920, 1080, function($constraint){
+                            $constraint->upsize();
+                        });
+                        $imagT->save($upload_path.'/'.$path.'/t_'.$filename);
+                        $imagW->save($upload_path.'/'.$path.'/'.$filename);
+                    endif;
+
+                    return redirect('/admin/articulos/1')->with('message', ' Artículo guardado con éxito.')->with('typealert', 'success');
+
                 endif;
 
-                return redirect('/admin/articulos/1')->with('message', ' Artículo guardado con éxito.')->with('typealert', 'success');
-
             endif;
+        }else {
+            $rules = [
+                'name'                              => 'required',
+                'file'                              => 'required',
+                'date'                              => 'required',
+                'slug'                              => 'required|slug|unique:articles,slug',
+            ];
+             $messages = [
+                'slug.required'                     => 'El artículo ya se encuentra registrado',
+                'slug.unique'                        => 'El artículo ya se encuentra registrado',
+            ];
+            $validator ='El artículo ya se encuentra registrado';
+            return back()->withErrors($validator)->with('message','Se ha producido un error')->with('typealert','danger')->withInput();
 
-        endif;
+        }
+
     }
 
 
