@@ -148,7 +148,7 @@
                             </h2>
                         </div>
                         <div class="inside">
-                            <img src="{{ url('/multimedia'.$product->file_path.'/'.$product->slug.'/'.$product->file) }}" class="img-fluid">
+                            <img src="{{ url('/multimedia'.$product->file_path.'/'.$product->file) }}" class="img-fluid">
                         </div>
 
                     </div>

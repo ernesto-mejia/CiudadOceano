@@ -100,7 +100,7 @@
                         @foreach ($news as $new)
                             <tr>
                                 <td style="text-align: center;"  width="65">
-                                    <img src="{{ url('/multimedia/'.$new->file_path.'/'.$new->slug.'/t_'.$new->file) }}" width="65">
+                                    <img src="{{ url('/multimedia/'.$new->file_path.'/t_'.$new->file) }}" width="65">
                                 </td>
                                 <td style="text-align: center;">{{ $new->name }} </td>
                                 <td style="text-align: center;">{{ $new->body }}</td>

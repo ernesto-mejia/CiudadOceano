@@ -1,12 +1,12 @@
 @extends('admin.master')
-@section('title', 'Artículos')
+@section('title', 'Exhibiciones')
 
 @section('breadcrumb')
 
     <li class="breadcrumb-item">
-        <a href="{{ url('/admin/articulos/1') }}">
-            <i class="fal fa-newspaper"></i>
-            Artículos
+        <a href="{{ url('/admin/exhibiciones/1') }}">
+            <i class="fal fa-camera-polaroid"></i>
+            Exhibiciones
         </a>
     </li>
 
@@ -22,7 +22,7 @@
                     <div class="header">
                         <h2 class="title">
                             <i class="fas fa-plus"></i>
-                            Agregar artículo
+                            Agregar exhibición
                         </h2>
                     </div>
 
@@ -102,8 +102,8 @@
                     {!! Form::close() !!} --}}
                     <div class="header">
                         <h2 class="title">
-                            <i class="fal fa-newspaper"></i>
-                            Artículos
+                            <i class="fal fa-camera-polaroid"></i>
+                            Exhibiciones
                         </h2>
                         <ul>
 

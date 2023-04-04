@@ -65,7 +65,7 @@ class ArticleController extends Controller
     {
         $input = $request->all();
         $input['slug']= Str::slug($request->input('name'));
-        $product    = Article::where('slug', $input['slug'])->get();
+        $product    = Article::where('slug', $input['slug'])->first();
         if ($product == null) {
             $rules = [
                 'name'                              => 'required',
@@ -89,31 +89,33 @@ class ArticleController extends Controller
 
             else:
 
-                $articleName = Str::slug($request->input('name'));
-                $path = '/Article/'.$articleName;
+                $s = Str::slug($request->input('name'));
+                $path_ = '/Article';
+                $path = '/Article/'.$s;
                 $fileExt = trim($request->file('file')->getClientOriginalExtension());
                 $upload_path = Config::get('filesystems.disks.uploads.root');
                 $name = Str::slug(str_replace($fileExt, '', $request->file('file')->getClientOriginalName()));
                 $filename = rand(1,999).'-'.$name.'.'.$fileExt;
 
-                $file_absolute = $upload_path.'/'.$path.'/'.$filename;
                 $file_url = 'multimedia'.$path.'/t_'.$filename;
+
+
+                $file_absolute = $upload_path.'/'.$path.'/'.$filename;
 
                 $product = new Article;
                 $product->status                = '0';
                 $product->module                = 'articulos';
                 $product ->name                 = e($request->input('name'));
                 $product ->slug                 = Str::slug($request->input('name'));
-                $product ->file_path            = $path;
+                $product ->file_path            = $path_;
                 $product ->file                 = $filename;
                 $product ->mobile               = asset($file_url);
                 $product ->date                 = e($request->input('date'));
                 $product ->sections               = e($request->input('sections'));
 
                 if($product->save()):
-                    $s = Str::slug($request->input('name'));
-                    $p = Article::where('slug', $s)->first();
 
+                    $p = Article::where('slug', $s)->first();
                     $s = e($request->input('sections'));
 
                     for ($i=0; $i <= $s; $i++) {
@@ -131,7 +133,7 @@ class ArticleController extends Controller
                     }
 
                     if($request->hasFile('file')):
-                        $fl = $request->file->storeAs($path, $filename, 'uploads');
+                        $fl = $request->file->storeAs($path,$filename, 'uploads');
                         $imagT = Image::make($file_absolute);
                         $imagT->resize(256, 256, function($constraint){
                             $constraint->upsize();
@@ -150,7 +152,16 @@ class ArticleController extends Controller
 
             endif;
         }else {
-
+            $rules = [
+                'name'                              => 'required',
+                'file'                              => 'required',
+                'date'                              => 'required',
+                'slug'                              => 'required|slug|unique:articles,slug',
+            ];
+             $messages = [
+                'slug.required'                     => 'El artículo ya se encuentra registrado',
+                'slug.unique'                        => 'El artículo ya se encuentra registrado',
+            ];
             $validator ='El artículo ya se encuentra registrado';
             return back()->withErrors($validator)->with('message','Se ha producido un error')->with('typealert','danger')->withInput();
 
@@ -257,8 +268,9 @@ class ArticleController extends Controller
 
             if($request->hasFile('file')):
 
-                $articleName = Str::slug($request->input('name'));
-                $path = '/Article/'.$articleName;
+                $s = Str::slug($request->input('name'));
+                $path_ = '/Article';
+                $path = '/Article/'.$s;
                 $fileExt = trim($request->file('file')->getClientOriginalExtension());
                 $upload_path = Config::get('filesystems.disks.uploads.root');
                 $name = Str::slug(str_replace($fileExt, '', $request->file('file')->getClientOriginalName()));
@@ -266,7 +278,7 @@ class ArticleController extends Controller
                 $file_absolute = $upload_path.'/'.$path.'/'.$filename;
                 $file_url = 'multimedia'.$path.'/t_'.$filename;
                 $product ->mobile               = asset($file_url);
-                $product ->file_path            = $path;
+                $product ->file_path            = $path_;
                 $product ->file                 = $filename;
 
             endif;

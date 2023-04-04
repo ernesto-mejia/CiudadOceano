@@ -43,23 +43,23 @@ class ExhibitionController extends Controller
                 break;
         }
         $data = ['articles' => $products];
-        return view('admin.article.home', $data);
+        return view('admin.exhibits.home', $data);
 
     }
 
 
-    public function getArticleAdd()
+    public function getExhibitionAdd()
     {
         $cats = Article::where('module', 'exhibiciones')->pluck('name', 'id');
         $data = [
             'cats' => $cats
         ];
-        return view('admin.article.add', $data);
+        return view('admin.exhibits.add', $data);
 
     }
 
 
-    public function postArticleAdd(Request $request)
+    public function postExhibitionAdd(Request $request)
     {
         $rules = [
     		'name'                              => 'required',
@@ -126,7 +126,7 @@ class ExhibitionController extends Controller
     }
 
 
-    public function getArticleEdit($id)
+    public function getExhibitionEdit($id)
     {
         $product        = Article::findOrFail($id);
         $galerias        =NGallery::where('article_id', $product->id)->get();
@@ -136,11 +136,11 @@ class ExhibitionController extends Controller
             'galerias' => $galerias
         ];
 
-        return view('admin.article.edit', $data);
+        return view('admin.exhibits.edit', $data);
     }
 
 
-    public function postArticleEdit(Request $request, $id)
+    public function postExhibitionEdit(Request $request, $id)
     {
         $rules = [
     		'name'                              => 'required'
@@ -219,7 +219,7 @@ class ExhibitionController extends Controller
     }
 
 
-    public function getArticleDelete($id)
+    public function getExhibitionDelete($id)
     {
         $product = Article::find( $id);
 
@@ -231,7 +231,7 @@ class ExhibitionController extends Controller
     }
 
 
-    public function getArticleRestore($id)
+    public function getExhibitionRestore($id)
     {
         $product = Article::onlyTrashed()->where('id', $id)->first();
         $product ->deleted_at   = null;
@@ -243,7 +243,7 @@ class ExhibitionController extends Controller
 
     }
 
-    public function postArticleGalleryAdd($id, $gallery, Request $request)
+    public function postExhibitionGalleryAdd($id, $gallery, Request $request)
     {
 
         $rules = [
@@ -332,7 +332,7 @@ class ExhibitionController extends Controller
 
     }
 
-    public function getArticleGalleryDelete($id, $gid)
+    public function getExhibitionGalleryDelete($id, $gid)
     {
         $g = NGallery::findOrFail( $gid);
         $path = $g->file_path;
@@ -356,7 +356,7 @@ class ExhibitionController extends Controller
         endif;
     }
 
-    public function postArticleSearch (Request $request)
+    public function postExhibitionSearch (Request $request)
     {
 
         $rules = [
@@ -378,7 +378,7 @@ class ExhibitionController extends Controller
 
 
             $data = ['article' => $products];
-            return view('admin.article.search', $data);
+            return view('admin.exhibits.search', $data);
 
         endif;
     }

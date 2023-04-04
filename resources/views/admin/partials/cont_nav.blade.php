@@ -81,7 +81,7 @@
 
         @if (kvfj(Auth::user()->permissions, 'exhibiciones'))
         <li>
-            <a href="{{ url('/admin/exhibiciones') }}" class="lk-exhibiciones lk-exhibiciones_add lk-exhibiciones_edit">
+            <a href="{{ url('/admin/exhibiciones/1') }}" class="lk-exhibiciones lk-exhibiciones_add lk-exhibiciones_edit">
                 <i class="fal fa-camera-polaroid"></i>
                 Exhibiciones
             </a>

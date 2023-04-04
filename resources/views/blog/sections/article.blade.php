@@ -15,14 +15,14 @@
             </div>
         <!-- iMAGEN DESTACADA -->
             <div  class="col-12 justify-content-center align-items-center Height70" style="padding: 0 20%; margin-bottom: 40px;">
-                <img src="{{ url('/multimedia/'.$post->file_path.'/'.$post->file) }}" class="d-block imagen_noticia w-100 h-100" alt="...">
+                <img src="{{ url('/multimedia/'.$post->file_path.'/'.$post->slug.'/'.$post->file) }}" class="d-block imagen_noticia w-100 h-100" alt="...">
 
             </div>
 
             <!-- Secccion-->
                 @for ($i=1 ; $i<=$post->sections; $i++)
                     <!-- DESCRIPCION -->
-                        <div  class="col-12 justify-content-center align-items-center " style="margin-bottom: 25px;  height: auto;">
+                        <div  class="col-12 justify-content-center align-items-center text-justify " style="margin-bottom: 25px;  height: auto;  padding: 5px 10%; ">
 
                             @foreach ($descriptions as $description)
                                 @if ($description->section == $i-1)
