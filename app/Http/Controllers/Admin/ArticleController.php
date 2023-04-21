@@ -176,6 +176,7 @@ class ArticleController extends Controller
         $galerias        =NGallery::where('article_id', $product->id)->get();
         $descriptions       = Description::where('article_id', $product->id)->where('type', 'description')->get();
         $videos       = Description::where('article_id', $product->id)->where('type', 'video')->get();
+        //dd($videos);
         $data  = [
             'product' => $product,
             'galerias' => $galerias,

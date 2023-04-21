@@ -12,7 +12,6 @@ body
     width 100%
     font-family: 'Avenir-regular'
 footer
-
     background-image url('https://ciudadoceano.com/media/icons/imgF.png')
     background-color colorBg2
     padding 0
@@ -21,20 +20,35 @@ footer
     background-size 100% 100%
     background-repeat no-repeat
 nav
+    position: sticky !important
+    padding-top: 0 !important
+    padding-bottom: 0 !important
+    width: 100% !important
+    z-index: 999 !important
+    top: 0 !important
     background-color colorBg2
     .navbar-brand
         img
-            width 70px
+            width 28px
 
 .cont__
+    height: calc(100vh - 7vh)
     max-width 100% !important
     padding 0
 .Logo
-    font-size calc(0.9rem + 0.9vw)
+    font-family: "Poppins-Bold"
+    font-size calc(0.5rem + 0.5vw)
     margin 0
     align-content center
     color #96d2de
     text-transform uppercase
+    height: 28px
+    width: 77px
+    white-space: pre-wrap
+    display: flex
+    justify-content: center
+    align-items: center
+    line-height: 1
 .dropdown-menu
     left 85% !important
 .pt-6
@@ -84,7 +98,7 @@ nav
 .pnav
     font-family "Avenir" !important
     font-size calc(0.9rem + 0.4vw)
-    color #9C9FA6
+    color #fff
 .dropdown-menu ahover
     font-family "Montserrat-Bold"
     color #fff
@@ -110,7 +124,7 @@ nav
     font-size 0.8rem !important
 #carouselExampleIndicators
     background-color colorBg2
-    height: 86vh
+    height: 100%
 .video-wrap
     text-align center
 .video
@@ -189,7 +203,23 @@ nav
     padding 4%
     border-radius 8px
     box-shadow 2px 4px 16px 0px rgb(0 0 0 / 25%)
-
+#Articles
+    background-image url('https://ciudadoceano.com/media/imagenes/webFondo.png')
+    background-color colorBg2
+    height auto
+    width: 100%
+    background-size: cover
+    background-position: center
+    background-repeat: no-repeat
+.title_article
+    justify-content: center;
+    height: 30%;
+    color: #fff;
+    font-family: 'Poppins-ThinItalic';
+    font-size: calc(0.8rem + 0.5vw);
+    text-align: center;
+    align-items: center;
+    display: flex;
 @media (max-width 990px)
     body
         background-color colorBg

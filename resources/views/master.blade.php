@@ -55,12 +55,9 @@
                     @endif
 
                 <!--Content-->
-                <div class="container cont__ d-flex" style="min-height: 60vh;" >
+                <div class="container cont__ "  >
                     @yield('content')
                 </div>
-
-                <!--Footer-->
-                    @include('blog.partials.footer')
 
                 <!--Script-->
                     <script src="{{ asset('js/jquery.js') }}"></script>

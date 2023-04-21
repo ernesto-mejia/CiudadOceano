@@ -41,3 +41,27 @@
     url('../fonts/AcuminVariableConcept.otf#svgFontName') format('svg');
     /* Legacy iOS */
 }
+@font-face {
+    font-family: "Poppins-Medium";
+    src: url('../fonts/Poppins-Medium.ttf') format('embedded-opentype'), /* IE6-IE8 */
+    url('../fonts/Poppins-Medium.ttf') format('woff'), /* Modern Browsers */
+    url('../fonts/Poppins-Medium.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('../fonts/Poppins-Medium.ttf') format('svg');
+    /* Legacy iOS */
+}
+@font-face {
+    font-family: "Poppins-Bold";
+    src: url('../fonts/Poppins-Bold.ttf') format('embedded-opentype'), /* IE6-IE8 */
+    url('../fonts/Poppins-Bold.ttf') format('woff'), /* Modern Browsers */
+    url('../fonts/Poppins-Bold.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('../fonts/Poppins-Bold.ttf#svgFontName') format('svg');
+    /* Legacy iOS */
+}
+@font-face {
+    font-family: "Poppins-ThinItalic";
+    src: url('../fonts/Poppins-ThinItalic.ttf') format('embedded-opentype'), /* IE6-IE8 */
+    url('../fonts/Poppins-ThinItalic.ttf') format('woff'), /* Modern Browsers */
+    url('../fonts/Poppins-ThinItalic.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('../fonts/Poppins-ThinItalic.ttf#svgFontName') format('svg');
+    /* Legacy iOS */
+}

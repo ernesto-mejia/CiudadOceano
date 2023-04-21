@@ -1,13 +1,13 @@
-<nav class="navbar navbar-expand-md  ">
+<nav class="navbar navbar-expand-md  " style="padding-top: 0; padding-bottom: 0 ">
 
-    <a class="navbar-brand text-center" href="{{url('/')}}">
+    <a class="navbar-brand text-center d-inline-flex" href="{{url('/')}}">
         <img src="{{ url('multimedia'.$company[0]->file_path.'/'.$company[0]->file) }}" alt="" class="" >
         <p class="Logo">{!! html_entity_decode($company[0]->company_name, ENT_QUOTES | ENT_XML1, 'UTF-8') !!}</p>
     </a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-      <i class="fad fa-bars"></i>
+        <span class="navbar-toggler-icon"></span>
+        <i class="fad fa-bars"></i>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -15,7 +15,7 @@
         <ul class="navbar-nav ml-auto">
             @foreach ($areas as $area)
                 <li class="nav-item ml-4">
-                    <a style="text-align: center;" href="{{url('/seccion/'.$area->slug)}}" class="nav-link"><img width="60" src="{{ url('/multimedia/'.$area->file_path.'/t_'.$area->file) }}" alt="" class="" /> <p class="m-0 pnav">{{$area->name}}</p></a>
+                    <a style="text-align: center;" href="{{url('/seccion/'.$area->slug)}}" class="nav-link"><p class="m-0 pnav">{{$area->name}}</p></a>
                 </li>
             @endforeach
 
