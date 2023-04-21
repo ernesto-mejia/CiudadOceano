@@ -135,16 +135,6 @@
                     'articulos_delete' => 'Puede elimiar.',
                 ]
             ],
-            'Modulos' => [
-                'icon' => '<i class="far fa-layer-group"></i>',
-                'title' => 'Modulos principales',
-                'keys' => [
-                    'areas' => 'Puede ver el listado.',
-                    'area_edit' => 'Puede editar.',
-                    'area_add' => 'Puede agregar.',
-                    'area_delete' => 'Puede elimiar.',
-                ]
-            ],
             'exhibiciones' => [
                 'icon' => '<i class="fal fa-camera-polaroid"></i>',
                 'title' => 'Modulo de Exhibiciones',
@@ -157,7 +147,7 @@
             ],
             'carousels' => [
                 'icon' => '<i class="far fa-object-group"></i>',
-                'title' => 'Modulo Carousel',
+                'title' => 'Modulo Imagen de inicio',
                 'keys' => [
                     'carousels' => 'Puede ver el listado.',
                     'carousel_edit' => 'Puede editar.',

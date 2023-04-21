@@ -97,6 +97,7 @@ class HomeController extends Controller
         if($category == 'articulos'):
             $article = DB::table('articles')->orderBy('id', 'DESC')->where('module', $category)->where('slug', $slug)->first();
             $descriptions  = Description::where('article_id', $article->id)->where('type', 'description')->get();
+            $videos       = Description::where('article_id', $article->id)->where('type', 'video')->get();
         elseif($category == 'campaña'):
             $article = DB::table('articles')->orderBy('id', 'DESC')->where('module', $category)->where('slug', $slug)->first();
 
@@ -112,16 +113,12 @@ class HomeController extends Controller
         endif;
 
             $imagenes   = NGallery::where('article_id',  $article->id)->whereNull('deleted_at')->get();
-            $imagenes2   = DB::table('n_galleries')->where('after',  2 )->where('article_id', $article->id)->whereNull('deleted_at')->get();
-            $imagenes3   = DB::table('n_galleries')->where('after',  3 )->where('article_id', $article->id)->whereNull('deleted_at')->get();
-            $imagenes4   = DB::table('n_galleries')->where('after',  4 )->where('article_id', $article->id)->whereNull('deleted_at')->get();
-            $imagenes5   = DB::table('n_galleries')->where('after',  5 )->where('article_id', $article->id)->whereNull('deleted_at')->get();
-            //dd( $imagenes);
+              //dd( $imagenes);
             $data = [
                         'post' => $article,
                         'descriptions' => $descriptions,
                         'imagenes' => $imagenes,
-
+                        'videos' => $videos
                     ];
 
             return view('blog.sections.article', $data);

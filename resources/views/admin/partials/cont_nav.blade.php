@@ -52,14 +52,14 @@
         </li>
         @endif
 
-        @if (kvfj(Auth::user()->permissions, 'areas'))
+        {{-- @if (kvfj(Auth::user()->permissions, 'areas'))
         <li>
             <a href="{{ url('/admin/areas') }}" class="lk-areas lk-area_add lk-area_edit">
                 <i class="far fa-layer-group"></i>
                 Modulos principales
             </a>
         </li>
-        @endif
+        @endif --}}
 
         @if (kvfj(Auth::user()->permissions, 'articulos'))
         <li>
@@ -88,7 +88,7 @@
         </li>
         @endif
 
-        @if (kvfj(Auth::user()->permissions, 'comunidad'))
+        {{-- @if (kvfj(Auth::user()->permissions, 'comunidad'))
         <li>
             <a href="{{ url('/admin/communities/1') }}" class="lk-comunidad lk-comunidad_add lk-comunidad_edit">
                 <i class="fal fa-users-class"></i>
@@ -104,7 +104,7 @@
                 Reciclaje
             </a>
         </li>
-        @endif
+        @endif --}}
 
         @if (kvfj(Auth::user()->permissions, 'carousels'))
         <li>

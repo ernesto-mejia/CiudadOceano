@@ -8,16 +8,17 @@
         <div class="row " >
 
             <!-- TITULO NOTICIA -->
-            <div class="col-12 justify-content-center align-items-center Height5_2" >
+                <div class="col-12 justify-content-center align-items-center Height5_2" >
 
-                <h3 style="text-align: center;">{!!  html_entity_decode($post->name, ENT_QUOTES | ENT_XML1, 'UTF-8')  !!}</h3>
+                    <h1 class="m-3" style="text-align: center;">{!!  html_entity_decode($post->name, ENT_QUOTES | ENT_XML1, 'UTF-8')  !!}</h1>
 
-            </div>
-        <!-- iMAGEN DESTACADA -->
-            <div  class="col-12 justify-content-center align-items-center Height70" style="padding: 0 20%; margin-bottom: 40px;">
-                <img src="{{ url('/multimedia/'.$post->file_path.'/'.$post->slug.'/'.$post->file) }}" class="d-block imagen_noticia w-100 h-100" alt="...">
+                </div>
 
-            </div>
+            <!-- iMAGEN DESTACADA -->
+                <div  class="col-12 justify-content-center align-items-center Height70" style="padding: 0 20%; margin-bottom: 40px;">
+                    <img src="{{ url('/multimedia/'.$post->file_path.'/'.$post->slug.'/'.$post->file) }}" class="d-block imagen_noticia w-100 h-100" alt="...">
+
+                </div>
 
             <!-- Secccion-->
                 @for ($i=1 ; $i<=$post->sections; $i++)
@@ -41,10 +42,6 @@
                                             <div class="carousel-item active h-100">
                                                 <img class="d-block w-100 h-100" src="{{ url('/multimedia'.$imagen->file_path.'/'.$imagen->file_name) }}" alt="">
                                             </div>
-                                        @else
-                                            <div class="carousel-item  h-100">
-                                                <img class="d-block w-100 h-100" src="{{ url('/multimedia'.$imagen->file_path.'/'.$imagen->file_name) }}" alt="">
-                                            </div>
                                         @endif
                                     @endforeach
 
@@ -62,18 +59,21 @@
                         </div>
 
                     <!--VIDEO -->
-                        @if ($post->video_1 != null )
-                            <div  class="col-12 justify-content-center align-items-center vimeo" style="padding: 0; height:50%; min-height:300px; margin-bottom: 25px;">
-
-                                {!! html_entity_decode($post->video_1, ENT_QUOTES | ENT_XML1, 'UTF-8') !!}
-
-                            </div>
+                    @foreach ($videos as $video)
+                        @if ($video->content != null )
+                            @if ($video->section == $i-1)
+                                <div  class="col-12 justify-content-center align-items-center vimeo" style="padding: 0; height:50%; min-height:300px; margin-bottom: 25px;">
+                                    <p class="titl_v text-center">CIUDAD OCÉANO</p>
+                                    <div class="video-wrap">
+                                        <div class="video">
+                                            {!! html_entity_decode($video->content, ENT_QUOTES | ENT_XML1, 'UTF-8') !!}
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
                         @endif
-
+                    @endforeach
                 @endfor
-
-
-
         </div>
     </div>
 @endsection
