@@ -13,12 +13,34 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
         <ul class="navbar-nav ml-auto">
-            @foreach ($areas as $area)
-                <li class="nav-item ml-4">
-                    <a style="text-align: center;" href="{{url('/seccion/'.$area->slug)}}" class="nav-link"><p class="m-0 pnav">{{$area->name}}</p></a>
-                </li>
-            @endforeach
+            <li class="nav-item ml-4">
+                <a style="text-align: center;" href="{{url('/seccion/articulos')}}" class="nav-link"><p class="m-0 pnav">Artículos</p></a>
+            </li>
+            <li class="nav-item ml-4">
+                <a style="text-align: center;" href="{{url('/seccion/exposiciones')}}" class="nav-link"><p class="m-0 pnav">Exposiciones</p></a>
+            </li>
 
+            <li class="nav-item ml-4">
+                <a style="text-align: center;" href="{{url('/seccion/campañas')}}" class="nav-link"><p class="m-0 pnav">Campañas</p></a>
+            </li>
+            @foreach ( $sections as $politica )
+                <li class="nav-item ml-4">
+                    <a style="text-align: center;" href="{{url('/politicas/'.$politica->slug)}}" class="nav-link"><p class="m-0 pnav">{{ $politica->name }}</p></a>
+                </li>
+
+            @endforeach
+            <li class="nav-item ml-4 redes">
+                <a target="_blank" href="https://es-la.facebook.com/ciudadoceano">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a target="_blank" href="https://www.instagram.com/ciudadoceano/?hl=es-la">
+                    <i  class="fab fa-instagram" ></i>
+                </a>
+                <a target="_blank" href="https://www.youtube.com/@ciudadoceano5975">
+                    <i  class="fab fa-youtube" ></i>
+                </a>
+
+            </li>
             @auth
                 <li class="nav-item  link-user dropdow ">
                     <a href="#" class="nav-link   dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">Hola: {{ Auth::user()->name }} </a>
