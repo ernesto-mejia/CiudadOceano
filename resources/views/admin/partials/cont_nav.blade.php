@@ -70,11 +70,11 @@
         </li>
         @endif
 
-        @if (kvfj(Auth::user()->permissions, 'campañas'))
+        @if (kvfj(Auth::user()->permissions, 'campaings'))
         <li>
-            <a href="{{ url('/admin/campañas/1/') }}" class="lk-campaña lk-campaña_add lk-campaña_edit">
+            <a href="{{ url('/admin/campaings/1/') }}" class="lk-campaings lk-campaing_add lk-campaing_edit">
                 <i class="fal fa-building"></i>
-                Campaña
+                Campañas
             </a>
         </li>
         @endif
@@ -83,7 +83,7 @@
         <li>
             <a href="{{ url('/admin/exhibiciones/1') }}" class="lk-exhibiciones lk-exhibiciones_add lk-exhibiciones_edit">
                 <i class="fal fa-camera-polaroid"></i>
-                Exhibiciones
+                Exposiciones
             </a>
         </li>
         @endif

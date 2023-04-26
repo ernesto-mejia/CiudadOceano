@@ -1,10 +1,9 @@
-
 @extends('master')
 
 @section('title',  $post->name )
 
 @section('content')
-    <div  class="col-12">
+    <div id="Article"  class="col-12">
         <div class="row " >
 
             <!-- TITULO NOTICIA -->
@@ -77,5 +76,6 @@
         </div>
     </div>
 @endsection
+
 @section('scripts')
 @endsection

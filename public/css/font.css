@@ -65,3 +65,22 @@
     url('../fonts/Poppins-ThinItalic.ttf#svgFontName') format('svg');
     /* Legacy iOS */
 }
+
+
+@font-face {
+    font-family: "PermanentMarker-Regular";
+    src: url('../fonts/PermanentMarker-Regular.ttf') format('embedded-opentype'), /* IE6-IE8 */
+    url('../fonts/PermanentMarker-Regular.ttf') format('woff'), /* Modern Browsers */
+    url('../fonts/PermanentMarker-Regular.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('../fonts/PermanentMarker-Regular.ttf#svgFontName') format('svg');
+    /* Legacy iOS */
+}
+
+@font-face {
+    font-family: "Poppins-Regular";
+    src: url('../fonts/Poppins-Regular.ttf') format('embedded-opentype'), /* IE6-IE8 */
+    url('../fonts/Poppins-Regular.ttf') format('woff'), /* Modern Browsers */
+    url('../fonts/Poppins-Regular.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('../fonts/Poppins-Regular.ttf#svgFontName') format('svg');
+    /* Legacy iOS */
+}

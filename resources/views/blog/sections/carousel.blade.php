@@ -1,4 +1,4 @@
-<div  id="carouselExampleIndicators"  class="carousel slide" data-ride="carousel">
+<div  id="carouselExampleIndicators"  class="carousel slide w-100" data-ride="carousel">
 
     <div id="Image_PC" class="carousel-inner h-100">
 

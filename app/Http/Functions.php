@@ -175,6 +175,16 @@
                     'gallery_delete' => 'Puede elimiar.',
                 ]
             ],
+            'campaings' => [
+                'icon' => '<i class="fal fa-photo-video"></i>',
+                'title' => 'Modulo de Campañas',
+                'keys' => [
+                    'campaings' => 'Puede ver el listado.',
+                    'campaing_edit' => 'Puede editar.',
+                    'campaing_add' => 'Puede agregar.',
+                    'campaing_delete' => 'Puede elimiar.',
+                ]
+            ],
 
         ];
         return $p;
