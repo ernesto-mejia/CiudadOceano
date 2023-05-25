@@ -28,7 +28,7 @@
 
                     <div class="inside">
 
-                        {!! Form::open(['url' => '/admin/articulo/add', 'files' => true]) !!}
+                        {!! Form::open(['url' => '/admin/exhibiciones/add', 'files' => true]) !!}
 
                             <div class="row">
 
@@ -111,17 +111,17 @@
                                 <a href="#">Filtrar <i class="fas fa-chevron-down"></i></a>
                                 <ul>
                                     <li>
-                                        <a href="{{ url('/admin/articulos/1') }}">
+                                        <a href="{{ url('/admin/exhibiciones/1') }}">
                                             <i class="fas fa-globe-americas" style="color: green;"></i> Públicados
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="{{ url('/admin/articulos/0') }}">
+                                        <a href="{{ url('/admin/exhibiciones/0') }}">
                                             <i class="fas fa-globe-americas" style="color: blue;"></i> No públicados
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="{{ url('/admin/articulos/trash') }}">
+                                        <a href="{{ url('/admin/exhibiciones/trash') }}">
                                             <i class="fas fa-trash" style="color: red;"></i> Papelera
                                         </a>
                                     </li>
@@ -145,7 +145,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($articulos as $article)
+                                @foreach ($articles as $article)
                                     <tr>
                                         <td style="text-align: center;"  width="65">
                                             <img src="{{ url('/multimedia'.$article->file_path.'/'.$article->slug.'/t_'.$article->file) }}" width="65">

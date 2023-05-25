@@ -8,7 +8,7 @@
     @else
         @foreach ($articles as $article)
 
-            <div class="col-md-4 col-6" >
+            <div class="col-md-4 col-12" >
                 <a href="{{  url('seccion/'.$article->module.'/'.$article->slug) }}">
                 <div   class="cont-card-event" style="background-color: #000;    height: 250px;     padding: 0% !important;">
 

@@ -84,3 +84,29 @@
     url('../fonts/Poppins-Regular.ttf#svgFontName') format('svg');
     /* Legacy iOS */
 }
+
+@font-face {
+    font-family: "Poppins-Italic";
+    src: url('../fonts/Poppins-Italic.ttf') format('embedded-opentype'), /* IE6-IE8 */
+    url('../fonts/Poppins-Italic.ttf') format('woff'), /* Modern Browsers */
+    url('../fonts/Poppins-Italic.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('../fonts/Poppins-Italic.ttf#svgFontName') format('svg');
+    /* Legacy iOS */
+}
+
+@font-face {
+    font-family: "Poppins-Light";
+    src: url('../fonts/Poppins-Light.ttf') format('embedded-opentype'), /* IE6-IE8 */
+    url('../fonts/Poppins-Light.ttf') format('woff'), /* Modern Browsers */
+    url('../fonts/Poppins-Light.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('../fonts/Poppins-Light.ttf#svgFontName') format('svg');
+    /* Legacy iOS */
+}
+@font-face {
+    font-family: "Poppins-SemiBold";
+    src: url('../fonts/Poppins-SemiBold.ttf') format('embedded-opentype'), /* IE6-IE8 */
+    url('../fonts/Poppins-SemiBold.ttf') format('woff'), /* Modern Browsers */
+    url('../fonts/Poppins-SemiBold.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('../fonts/Poppins-SemiBold.ttf#svgFontName') format('svg');
+    /* Legacy iOS */
+}

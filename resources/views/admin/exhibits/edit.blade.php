@@ -4,13 +4,13 @@
 @section('breadcrumb')
 
     <li class="breadcrumb-item">
-        <a href="{{ url('/admin/articulos/1') }}">
+        <a href="{{ url('/admin/exhibiciones/1') }}">
             <i class="fal fa-newspaper"></i>
             Artículos
         </a>
     </li>
     <li class="breadcrumb-item">
-        <a href="{{ url('/admin/articulos/'.$product->id.'/edit ') }}">
+        <a href="{{ url('/admin/exhibiciones/'.$product->id.'/edit ') }}">
             <i class="far fa-folder-open"></i>
             Editar notícia
         </a>
@@ -36,7 +36,7 @@
                     <div class="inside">
 
 
-                        {!! Form::open(['url' => '/admin/articulos/'.$product->id.'/edit', 'files' => true, 'method' => 'post', 'novalidate']) !!}
+                        {!! Form::open(['url' => '/admin/exhibiciones/'.$product->id.'/edit', 'files' => true, 'method' => 'post', 'novalidate']) !!}
                         @csrf
                             <div class="row" style="padding: 16px;">
 

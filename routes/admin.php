@@ -85,14 +85,14 @@ Route::prefix('/admin')->group(function(){
 
     //Module Exhibition
         Route::get('/exhibiciones/{status}/',                           'Admin\ExhibitionController@getHome')->name('exhibiciones');
-        Route::get('/exhibicion/add',                                  'Admin\ExhibitionController@getExhibitionAdd')->name('exhibicion_add');
-        Route::post('/exhibicion/add/',                                'Admin\ExhibitionController@postExhibitionAdd')->name('exhibicion_add');
-        Route::get('/exhibicion/{id}/edit',                           'Admin\ExhibitionController@getExhibitionEdit')->name('exhibicion_edit');
-        Route::post('/exhibicion/{id}/edit',                          'Admin\ExhibitionController@postExhibitionEdit')->name('exhibicion_edit');
-        Route::get('/exhibicion/{id}/delete',                         'Admin\ExhibitionController@getExhibitionDelete')->name('exhibicion_delete');
-        Route::get('/exhibicion/{id}/restore',                        'Admin\ExhibitionController@getExhibitionRestore')->name('exhibicion_delete');
-        Route::post('/exhibicion/{id}/gallery/add/{gallery}',         'Admin\ExhibitionController@postExhibitionGalleryAdd')->name('exhibicion_edit');
-        Route::get('/exhibicion/{id}/gallery/{gid}/delete',           'Admin\ExhibitionController@getExhibitionGalleryDelete')->name('exhibicion_edit');
+        Route::get('/exhibiciones/add',                                  'Admin\ExhibitionController@getExhibitionAdd')->name('exhibicion_add');
+        Route::post('/exhibiciones/add/',                                'Admin\ExhibitionController@postExhibitionAdd')->name('exhibicion_add');
+        Route::get('/exhibiciones/{id}/edit',                           'Admin\ExhibitionController@getExhibitionEdit')->name('exhibicion_edit');
+        Route::post('/exhibiciones/{id}/edit',                          'Admin\ExhibitionController@postExhibitionEdit')->name('exhibicion_edit');
+        Route::get('/exhibiciones/{id}/delete',                         'Admin\ExhibitionController@getExhibitionDelete')->name('exhibicion_delete');
+        Route::get('/exhibiciones/{id}/restore',                        'Admin\ExhibitionController@getExhibitionRestore')->name('exhibicion_delete');
+        Route::post('/exhibiciones/{id}/gallery/add/{gallery}',         'Admin\ExhibitionController@postExhibitionGalleryAdd')->name('exhibicion_edit');
+        Route::get('/exhibiciones/{id}/gallery/{gid}/delete',           'Admin\ExhibitionController@getExhibitionGalleryDelete')->name('exhibicion_edit');
 
 
     //Module Recycling

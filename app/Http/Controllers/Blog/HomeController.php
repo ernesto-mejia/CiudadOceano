@@ -100,9 +100,12 @@ class HomeController extends Controller
             $videos       = Description::where('article_id', $article->id)->where('type', 'video')->get();
         elseif($category == 'campaña'):
             $article = DB::table('articles')->orderBy('id', 'DESC')->where('module', $category)->where('slug', $slug)->first();
-
+            $descriptions  = Description::where('article_id', $article->id)->where('type', 'description')->get();
+            $videos       = Description::where('article_id', $article->id)->where('type', 'video')->get();
         elseif($category == 'exhibiciones'):
             $article = DB::table('articles')->orderBy('id', 'DESC')->where('module', $category)->where('slug', $slug)->first();
+            $descriptions  = Description::where('article_id', $article->id)->where('type', 'description')->get();
+            $videos       = Description::where('article_id', $article->id)->where('type', 'video')->get();
 
         elseif($category == 'reciclaje'):
             $article = DB::table('articles')->orderBy('id', 'DESC')->where('module', $category)->where('slug', $slug)->first();
