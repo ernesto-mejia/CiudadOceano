@@ -1,5 +1,5 @@
 
-    <div id="Home" class="col-12 h-100 mt-2 mb-2" >
+    <div id="Home" class="col-12 h-100 mt-2 mb-2" style="padding-top: 8%">
 
         <div class="row h-100  justify-content-center align-content-center">
 

@@ -1,6 +1,6 @@
 <div id="Just" class="container" >
 
-    <div class="row justify-content-center align-items-center h-100" style="padding-top: 10%;">
+    <div class="row justify-content-center align-items-center h-100" >
         <p class="title_j" style="color:#fff;">Nosotros</p>
         <div id="Img_just" class="col-12 col-md-12 h-100 text-center"  >
 

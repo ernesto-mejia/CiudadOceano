@@ -132,13 +132,17 @@ class ExhibitionController extends Controller
                     }
 
                     if($request->hasFile('file')):
-                        $fl = $request->file->storeAs($path,$filename, 'uploads');
-                        $imagT = Image::make($file_absolute);
-                        $imagT->resize(256, 256, function($constraint){
+                        $fl = $request->file->storeAs($path, $filename, 'uploads');
+                        $imagT = Image::make($file_absolute, function($constraint){
                             $constraint->upsize();
                         });
-                        $imagW = Image::make($file_absolute);
-                        $imagW->resize(1920, 1080, function($constraint){
+                        $imagT->resize(540, 960, function($constraint){
+                            $constraint->upsize();
+                        });
+                        $imagW = Image::make($file_absolute, function($constraint){
+                            $constraint->upsize();
+                        });
+                        $imagW->resize(540, 960, function($constraint){
                             $constraint->upsize();
                         });
                         $imagT->save($upload_path.'/'.$path.'/t_'.$filename);
@@ -286,16 +290,17 @@ class ExhibitionController extends Controller
             if($product->save()):
 
                 if($request->hasFile('file')):
-                    $fl = $request->file->storeAs($path, $filename, 'uploads');
-                    $imag = Image::make($file_absolute, function($constraint){
+                    $fl = $request->file->storeAs($path,$filename, 'uploads');
+                    $imagT = Image::make($file_absolute);
+                    $imagT->resize(540, 960, function($constraint){
                         $constraint->upsize();
                     });
-                    $imag->resize(320, 200, function($constraint){
+                    $imagW = Image::make($file_absolute);
+                    $imagW->resize(1080, 1920, function($constraint){
                         $constraint->upsize();
                     });
-                    $imag->save($upload_path.'/'.$path.'/t_'.$filename);
-                    Storage::disk('uploads')->delete('/'.$imagepp.'/'.$imagep);
-                    Storage::disk('uploads')->delete('/'.$imagepp.'/t_'.$imagep);
+                    $imagT->save($upload_path.'/'.$path.'/t_'.$filename);
+                    $imagW->save($upload_path.'/'.$path.'/'.$filename);
                 endif;
 
                 return back()->with('message', ' La exhibición se actualizado con éxito.')->with('typealert', 'success');
