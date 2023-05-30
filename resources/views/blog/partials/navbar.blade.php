@@ -17,7 +17,7 @@
                 <a style="text-align: center;" href="{{url('/seccion/articulos')}}" class="nav-link"><p class="m-0 pnav">Artículos</p></a>
             </li>
             <li class="nav-item ml-4">
-                <a style="text-align: center;" href="{{url('/seccion/exposiciones')}}" class="nav-link"><p class="m-0 pnav">Exposiciones</p></a>
+                <a style="text-align: center;" href="{{url('/seccion/exhibiciones')}}" class="nav-link"><p class="m-0 pnav">Exposiciones</p></a>
             </li>
 
             <li class="nav-item ml-4">

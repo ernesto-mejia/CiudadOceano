@@ -5,12 +5,12 @@
     <!--- Image Slider -->
         @include('blog.sections.carousel')
 
-    <!--- Video
-        include('blog.sections.video')
-    -->
-    <!--- Justificacion
-        include('blog.sections.justify')
-    -->
+    <!--- Video -->
+        @include('blog.sections.video')
+
+    <!--- Justificacion -->
+        @include('blog.sections.justify')
+
     <!--- Detalles
         include('blog.sections.details')
     -->

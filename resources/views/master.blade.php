@@ -56,7 +56,7 @@
                     @endif
 
                 <!--Content-->
-                <div class="container cont__ Bubbles"  >
+                <div class="cont__ Bubbles"  >
                     @yield('content')
                 </div>
 

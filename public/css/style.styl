@@ -10,7 +10,7 @@ body
     height 100vh
     background-color colorBg
     width 100%
-    font-family: 'Avenir-regular'
+    font-family: 'Poppins-Regular' !important
 footer
     background-image url('https://ciudadoceano.com/media/icons/imgF.png')
     background-color colorBg2
@@ -30,13 +30,13 @@ nav
     .navbar-brand
         img
             width 28px
-
 .cont__
+    overflow: auto
     height: calc(100vh - 7vh)
     max-width 100% !important
     padding 0
 .Logo
-    font-family: "Poppins-Bold"
+    font-family: 'Poppins-SemiBold' !important
     font-size calc(0.5rem + 0.5vw)
     margin 0
     align-content center
@@ -78,7 +78,6 @@ nav
     text-decoration none
 .cookies-poli
     color #fff
-    font-family "Avenir"
 .cookie-consent__agree
     border-radius 5px
     color #5d6277
@@ -96,11 +95,10 @@ nav
 .dropdown-menu lihover
     background #707791
 .pnav
-    font-family "Avenir" !important
-    font-size calc(0.9rem + 0.4vw)
+    font-family: 'Poppins-Light' !important
+    font-size calc(0.5rem + 0.4vw)
     color #fff
 .dropdown-menu ahover
-    font-family "Montserrat-Bold"
     color #fff
 .dropdown-menu
     font-size 0.8rem !important
@@ -118,7 +116,6 @@ nav
     background #707791
     color #fff
 .dropdown-menu-user lihover .us
-    font-family "Montserrat-Bold"
     color #fff !important
 .dropdown-menu-user
     font-size 0.8rem !important
@@ -126,6 +123,7 @@ nav
     background-color colorBg2
     height: 100%
 .video-wrap
+        height: 100%
     text-align center
 .video
     iframe
@@ -166,7 +164,6 @@ nav
 #Home
     .titl_v
         color colorP
-        font-family "Acumin"
         width 100%
         text-align center
         font-size calc(3.5rem + .5vw)
@@ -174,7 +171,6 @@ nav
     max-width 100% !important
     .title_j
         color colorN
-        font-family "Acumin"
         width 100%
         text-align center
         font-size calc(3.5rem + .5vw)
@@ -229,6 +225,20 @@ body
         margin-left: 20px
 #Article
     color: #fff
+    height: 100%
+    overflow auto
+.title_home
+    text-align: center
+    font-size: 4rem
+    position: absolute
+    width: 100%
+    color: white
+    z-index: 999
+    top: 0
+    height: 100%
+    justify-content: center
+    align-items: center
+    display: flex
 @media (max-width 990px)
     body
         background-color colorBg
