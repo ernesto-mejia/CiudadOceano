@@ -83,6 +83,7 @@
                     <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
                     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
                     <script src="{{ asset('js/site.js') }}"></script>
+                    <script src="{{ asset('js/bold.js') }}"></script>
 
                     <!--individual-Script-page-->
                         @yield('scripts')
