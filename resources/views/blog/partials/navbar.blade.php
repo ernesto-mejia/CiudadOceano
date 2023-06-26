@@ -23,12 +23,7 @@
             <li class="nav-item ml-4">
                 <a style="text-align: center;" href="{{url('/seccion/campañas')}}" class="nav-link"><p class="m-0 pnav">Campañas</p></a>
             </li>
-            @foreach ( $sections as $politica )
-                <li class="nav-item ml-4">
-                    <a style="text-align: center;" href="{{url('/politicas/'.$politica->slug)}}" class="nav-link"><p class="m-0 pnav">{{ $politica->name }}</p></a>
-                </li>
 
-            @endforeach
             <li class="nav-item ml-4 redes">
                 <a target="_blank" href="https://es-la.facebook.com/ciudadoceano">
                     <i class="fab fa-facebook-f"></i>

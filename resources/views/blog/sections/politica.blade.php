@@ -5,13 +5,17 @@
 
 
 @section('content')
-    @foreach ($politicas as $politic)
-        <div class="row w-100 h-100  justify-content-center align-content-center m-0">
-            <div class="col-10">
+    @foreach ($sections as $politic)
+    <div id="{{$politic->name}}" class="col-12 h-100 mt-2 mb-2" style="padding-top: 8%">
 
-                <h1 class="text-justify p-3" style="color: #fff;">{!! html_entity_decode($politic->description, ENT_QUOTES | ENT_XML1, 'UTF-8') !!}</h1>
+        <div class="row h-100  justify-content-center align-content-center">
 
-            </div>
+            </h1>
+                {{ $politic->name }}
+            <h1>
+
+            <p class="text-justify p-3" style="color: #fff;">{!! html_entity_decode($politic->description, ENT_QUOTES | ENT_XML1, 'UTF-8') !!}</p>
+
         </div>
     @endforeach
 @endsection
