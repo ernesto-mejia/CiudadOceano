@@ -15,8 +15,7 @@
                 </div>
 
             <!-- iMAGEN DESTACADA -->
-                <div  class="col-12 justify-content-center align-items-center Height70" style="padding: 0 20%; margin-bottom: 40px;">
-                    <img src="{{ url('/multimedia/'.$post->file_path.'/'.$post->slug.'/'.$post->file) }}" class="d-block imagen_noticia w-100 h-100" alt="...">
+                <div  class="col-12 justify-content-center align-items-center Height70 img-portada" style="padding: 0 20%; margin-bottom: 40px;background-image: url({{ url('/multimedia/'.$post->file_path.'/'.$post->slug.'/'.$post->file) }});" >
 
                 </div>
 
@@ -64,7 +63,7 @@
                             @if ($video->section == $i-1)
                                 <div  class="col-12 justify-content-center align-items-center vimeo" style="padding: 0; height:50%; min-height:300px; margin-bottom: 25px;">
                                     <p class="titl_v text-center">CIUDAD OCÉANO</p>
-                                    <div class="video-wrap">
+                                    <div class="video-wrap text-center">
                                         <div class="video">
                                             {!! html_entity_decode($video->content, ENT_QUOTES | ENT_XML1, 'UTF-8') !!}
                                         </div>
