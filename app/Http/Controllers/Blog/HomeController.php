@@ -63,23 +63,7 @@ class HomeController extends Controller
 
     public function getCategories($category)
     {
-        switch ($category) :
-            case 'articulos':
-                $articles = DB::table('articles')->where('module', $category)->where('status', '1')->where('deleted_at', null)->orderBy('id', 'DESC')->get();
-            break;
-            case 'campaña':
-                $articles = DB::table('articles')->where('module', $category)->where('status', '1')->where('deleted_at', null)->orderBy('id', 'DESC')->get();
-            break;
-            case 'exhibiciones':
-                $articles = DB::table('articles')->where('module', $category)->where('status', '1')->where('deleted_at', null)->orderBy('id', 'DESC')->get();
-            break;
-            case 'reciclaje':
-                $articles = DB::table('articles')->where('module', $category)->where('status', '1')->where('deleted_at', null)->orderBy('id', 'DESC')->get();
-            break;
-            case 'comunidad':
-                $articles = DB::table('articles')->where('module', $category)->where('status', '1')->where('deleted_at', null)->orderBy('id', 'DESC')->get();
-            break;
-        endswitch;
+        $articles = DB::table('articles')->where('module', $category)->where('status', '1')->where('deleted_at', null)->orderBy('id', 'DESC')->get();
         $countArt = count($articles);
 
         $data = [
@@ -91,40 +75,23 @@ class HomeController extends Controller
         return view('blog.sections.articles', $data);
     }
 
-    public function getModule($category, $slug )
+    public function getModule($category, $slug)
     {
 
-        if($category == 'articulos'):
-            $article = DB::table('articles')->orderBy('id', 'DESC')->where('module', $category)->where('slug', $slug)->first();
-            $descriptions  = Description::where('article_id', $article->id)->where('type', 'description')->get();
-            $videos       = Description::where('article_id', $article->id)->where('type', 'video')->get();
-        elseif($category == 'campaña'):
-            $article = DB::table('articles')->orderBy('id', 'DESC')->where('module', $category)->where('slug', $slug)->first();
-            $descriptions  = Description::where('article_id', $article->id)->where('type', 'description')->get();
-            $videos       = Description::where('article_id', $article->id)->where('type', 'video')->get();
-        elseif($category == 'exhibiciones'):
-            $article = DB::table('articles')->orderBy('id', 'DESC')->where('module', $category)->where('slug', $slug)->first();
-            $descriptions  = Description::where('article_id', $article->id)->where('type', 'description')->get();
-            $videos       = Description::where('article_id', $article->id)->where('type', 'video')->get();
+        $article = DB::table('articles')->orderBy('id', 'DESC')->where('module', $category)->where('slug', $slug)->first();
+        $descriptions  = Description::where('article_id', $article->id)->where('type', 'description')->get();
+        $videos       = Description::where('article_id', $article->id)->where('type', 'video')->get();
 
-        elseif($category == 'reciclaje'):
-            $article = DB::table('articles')->orderBy('id', 'DESC')->where('module', $category)->where('slug', $slug)->first();
+        $imagenes   = NGallery::where('article_id',  $article->id)->whereNull('deleted_at')->get();
+            //dd( $article);
+        $data = [
+                    'post' => $article,
+                    'descriptions' => $descriptions,
+                    'imagenes' => $imagenes,
+                    'videos' => $videos
+                ];
 
-        elseif($category == 'comunidad'):
-            $article = DB::table('articles')->orderBy('id', 'DESC')->where('module', $category)->where('slug', $slug)->first();
-
-        endif;
-
-            $imagenes   = NGallery::where('article_id',  $article->id)->whereNull('deleted_at')->get();
-              //dd( $imagenes);
-            $data = [
-                        'post' => $article,
-                        'descriptions' => $descriptions,
-                        'imagenes' => $imagenes,
-                        'videos' => $videos
-                    ];
-
-            return view('blog.sections.article', $data);
+        return view('blog.sections.article', $data);
 
 
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Article;
+use App\Description;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
@@ -43,35 +44,34 @@ class CampaignController extends Controller
                 break;
         }
         $data = ['articles' => $products];
-        return view('admin.article.home', $data);
+        return view('admin.campaing.home', $data);
 
     }
 
 
-    public function getArticleAdd()
+    public function getCampaignAdd()
     {
         $cats = Article::where('module', 'campaña')->pluck('name', 'id');
         $data = [
             'cats' => $cats
         ];
-        return view('admin.article.add', $data);
+        return view('admin.campaing.add', $data);
 
     }
 
 
-    public function postArticleAdd(Request $request)
+    public function postCampaignAdd(Request $request)
     {
         $rules = [
     		'name'                              => 'required',
             'file'                              => 'required',
-            'body_1'                              => 'required',
+            'date'                              => 'required',
         ];
 
         $messages = [
-            'name.required'                     => 'El nombre de la noticia es requerido.',
-            'file.required'                     => 'Seleccione una imagen destacada de noticia.',
-            'body_1.required'                     => 'La descripción de la noticia es requerida.',
-            'date.required'                     => 'La fecha de la noticia es requerida.'
+            'name.required'                     => 'El nombre de la campaña es requerido.',
+            'file.required'                     => 'Seleccione una imagen destacada de campaña.',
+            'date.required'                     => 'La fecha de la campaña es requerida.'
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -82,7 +82,9 @@ class CampaignController extends Controller
 
         else:
 
+            $s = Str::slug($request->input('name'));
             $articleName = Str::slug($request->input('name'));
+            $path_ = '/Campaign';
             $path = '/Campaign/'.$articleName;
             $fileExt = trim($request->file('file')->getClientOriginalExtension());
             $upload_path = Config::get('filesystems.disks.uploads.root');
@@ -93,16 +95,32 @@ class CampaignController extends Controller
 
             $product = new Article;
             $product->status                = '0';
-            $product->module                = 'campaña';
+            $product->module                = 'campañas';
             $product ->name                 = e($request->input('name'));
             $product ->slug                 = Str::slug($request->input('name'));
-            $product ->file_path            = $path;
+            $product ->file_path            = $path_;
             $product ->file                 = $filename;
             $product ->mobile               = asset($file_url);
             $product ->date                 = e($request->input('date'));
-            $product ->body_1               = e($request->input('body_1'));
+            $product ->sections               = e($request->input('sections'));
 
             if($product->save()):
+                $p = Article::where('slug', $s)->first();
+                $s = e($request->input('sections'));
+
+                for ($i=0; $i <= $s; $i++) {
+                    $content = new Description();
+                    $content->article_id            = $p->id;
+                    $content->type                  = 'description';
+                    $content ->section              = $i;
+                    $content->save();
+
+                    $content = new Description();
+                    $content->article_id            = $p->id;
+                    $content->type                  = 'video';
+                    $content ->section              = $i;
+                    $content->save();
+                }
 
                 if($request->hasFile('file')):
                     $fl = $request->file->storeAs($path, $filename, 'uploads');
@@ -118,7 +136,7 @@ class CampaignController extends Controller
                     $imagW->save($upload_path.'/'.$path.'/'.$filename);
                 endif;
 
-                return redirect('/admin/campaigns/1')->with('message', ' Campaña guardada con éxito.')->with('typealert', 'success');
+                return redirect('/admin/campañas/1')->with('message', ' Campaña guardada con éxito.')->with('typealert', 'success');
 
             endif;
 
@@ -126,21 +144,25 @@ class CampaignController extends Controller
     }
 
 
-    public function getArticleEdit($id)
+    public function getCampaignEdit($id)
     {
         $product        = Article::findOrFail($id);
         $galerias        =NGallery::where('article_id', $product->id)->get();
+        $descriptions       = Description::where('article_id', $product->id)->where('type', 'description')->get();
+        $videos       = Description::where('article_id', $product->id)->where('type', 'video')->get();
 
         $data           = [
             'product' => $product,
-            'galerias' => $galerias
+            'galerias' => $galerias,
+            'descriptions' => $descriptions,
+            'videos' => $videos
         ];
-
-        return view('admin.article.edit', $data);
+        //dd($data);
+        return view('admin.campaing.edit', $data);
     }
 
 
-    public function postArticleEdit(Request $request, $id)
+    public function postCampaignEdit(Request $request, $id)
     {
         $rules = [
     		'name'                              => 'required'
@@ -165,18 +187,56 @@ class CampaignController extends Controller
             $product->module                = 'campaña';
             $product ->name                 = e($request->input('name'));
             $product ->slug                 = Str::slug($request->input('name'));
-            $product ->video_1                 = e($request->input('video_1'));
-            $product ->video_2                 = e($request->input('video_2'));
-            $product ->video_3                 = e($request->input('video_3'));
-            $product ->video_4                 = e($request->input('video_4'));
-            $product ->video_5                 = e($request->input('video_5'));
             $product ->date                 = e($request->input('date'));
-            $product ->body_1                 = e($request->input('body_1'));
-            $product ->body_2                 = e($request->input('body_2'));
-            $product ->body_3                = e($request->input('body_3'));
-            $product ->body_4                 = e($request->input('body_4'));
-            $product ->body_5                = e($request->input('body_5'));
+            $contacto =  request([
 
+                'description'
+
+            ]);
+
+            foreach($contacto as $clave=> $valor){
+                for($i=0;$i<count($contacto[$clave]);$i++){
+                    $descriptions = Description::where('article_id', $product->id)->where('type', 'description')->where('section', $i)->first();
+                    //dd($descriptions);
+                    if ($descriptions == null) {
+                        $content = new Description();
+                        $content->article_id                = $product->id;
+                        $content->type                  = 'description';
+                        $content ->section                 = $i;
+                        $content ->content                 =$contacto[$clave][$i];
+                        $content->save();
+                    }else {
+                        $descriptions ->content                 =$contacto[$clave][$i];
+                        $descriptions->save();
+                    }
+                }
+            }
+
+
+
+            $contacto =  request([
+
+                'video'
+
+            ]);
+
+            foreach($contacto as $clave=> $valor){
+                for($i=0;$i<count($contacto[$clave]);$i++){
+                    $descriptions = Description::where('article_id', $product->id)->where('type', 'video')->where('section', $i)->first();
+                    //dd($descriptions);
+                    if ($descriptions == null) {
+                        $content = new Description();
+                        $content->article_id                = $product->id;
+                        $content->type                  = 'video';
+                        $content ->section                 = $i;
+                        $content ->content                 =$contacto[$clave][$i];
+                        $content->save();
+                    }else {
+                        $descriptions ->content                 =$contacto[$clave][$i];
+                        $descriptions->save();
+                    }
+                }
+            }
             if($request->hasFile('file')):
 
                 $articleName = Str::slug($request->input('name'));
@@ -218,7 +278,7 @@ class CampaignController extends Controller
     }
 
 
-    public function getArticleDelete($id)
+    public function getCampaignDelete($id)
     {
         $product = Article::find( $id);
 
@@ -230,14 +290,14 @@ class CampaignController extends Controller
     }
 
 
-    public function getArticleRestore($id)
+    public function getCampaignRestore($id)
     {
         $product = Article::onlyTrashed()->where('id', $id)->first();
         $product ->deleted_at   = null;
 
         if ($product->save()):
 
-            return redirect('/admin/campaign/'.$product->id.'/edit')->with('message', ' La campaña se restauro correctamente.')->with('typealert', 'success')->withInput();
+            return redirect('/admin/campañas/'.$product->id.'/edit')->with('message', ' La campaña se restauro correctamente.')->with('typealert', 'success')->withInput();
 
         endif;
 
@@ -261,80 +321,57 @@ class CampaignController extends Controller
             return back()->withErrors($validator)->with('message','Se ha producido un error')->with('typealert','danger')->withInput();
 
         else:
-            if($request->hasFile('file')):
-                $article =  DB::table('articles')->orderBy('id', 'DESC')->where('id', $id)->first();
-                $path = '/Campaign/'.$article->slug;
-                $fileExt = trim($request->file('file')->getClientOriginalExtension());
-                $upload_path = Config::get('filesystems.disks.uploads.root');
+            //dd($gallery);
+            $p = Article::find( $id);
 
-                $name = Str::slug(str_replace($fileExt, '', $request->file('file')->getClientOriginalName()));
+            for ($i=0; $i <= $p->sections ; $i++) {
 
-                $filename = rand(1,999).'-'.$name.'.'.$fileExt;
-                $file_absolute = $upload_path.'/'.$path.'/'.$filename;
+                if($request->hasFile('file')):
+                    $article =  DB::table('articles')->orderBy('id', 'DESC')->where('id', $id)->first();
+                    $path = '/Campaign/'.$article->slug;
+                    $fileExt = trim($request->file('file')->getClientOriginalExtension());
+                    $upload_path = Config::get('filesystems.disks.uploads.root');
 
-                switch ($gallery):
-                    case '1':
-                        $g =new NGallery;
-                        $g->article_id = $id;
-                        $g->after = $gallery;
-                        $g->file_path = $path;
-                        $g->file_name = $filename;
-                        break;
-                    case '2':
-                        $g =new NGallery;
-                        $g->article_id = $id;
-                        $g->after = $gallery;
-                        $g->file_path = $path;
-                        $g->file_name = $filename;
-                        break;
-                    case '3':
-                        $g =new NGallery;
-                        $g->article_id = $id;
-                        $g->after = $gallery;
-                        $g->file_path = $path;
-                        $g->file_name = $filename;
-                        break;
-                    case '4':
-                        $g =new NGallery;
-                        $g->article_id = $id;
-                        $g->after = $gallery;
-                        $g->file_path = $path;
-                        $g->file_name = $filename;
-                        break;
-                    case '5':
-                        $g =new NGallery;
-                        $g->article_id = $id;
-                        $g->after = $gallery;
-                        $g->file_path = $path;
-                        $g->file_name = $filename;
-                        break;
-                endswitch;
+                    $name = Str::slug(str_replace($fileExt, '', $request->file('file')->getClientOriginalName()));
 
-               if($g->save()):
+                    $filename = rand(1,999).'-'.$name.'.'.$fileExt;
+                    $file_absolute = $upload_path.'/'.$path.'/'.$filename;
 
-                    if($request->hasFile('file')):
-                        $fl = $request->file->storeAs($path, $filename, 'uploads');
-                        $imagT = Image::make($file_absolute);
-                        $imagT->resize(256, 256, function($constraint){
-                            $constraint->upsize();
-                        });
-                        $imagW = Image::make($file_absolute);
-                        $imagW->resize(1920, 1080, function($constraint){
-                            $constraint->upsize();
-                        });
-                        $imagT->save($upload_path.'/'.$path.'/t_'.$filename);
-                        $imagW->save($upload_path.'/'.$path.'/'.$filename);
+
+                    $g =new NGallery;
+                    $g->article_id = $id;
+                    $g->after = $gallery;
+                    $g->file_path = $path;
+                    $g->file_name = $filename;
+
+
+                    if($g->save()):
+
+                        if($request->hasFile('file')):
+                            $fl = $request->file->storeAs($path, $filename, 'uploads');
+                            $imagT = Image::make($file_absolute);
+                            $imagT->resize(256, 256, function($constraint){
+                                $constraint->upsize();
+                            });
+                            $imagW = Image::make($file_absolute);
+                            $imagW->resize(1920, 1080, function($constraint){
+                                $constraint->upsize();
+                            });
+                            $imagT->save($upload_path.'/'.$path.'/t_'.$filename);
+                            $imagW->save($upload_path.'/'.$path.'/'.$filename);
+                        endif;
+
+                        return back()->with('message', ' Archivo multimedia guardado con éxito.')->with('typealert', 'success')->withInput();
+
                     endif;
-
-                    return back()->with('message', ' Archivo multimedia guardado con éxito.')->with('typealert', 'success')->withInput();
-
                 endif;
-            endif;
+            }
+
         endif;
 
     }
 
-    public function getArticleGalleryDelete($id, $gid)
+    public function getCampaignGalleryDelete($id, $gid)
     {
         $g = NGallery::findOrFail( $gid);
         $path = $g->file_path;
@@ -358,7 +395,7 @@ class CampaignController extends Controller
         endif;
     }
 
-    public function postArticleSearch (Request $request)
+    public function postCampaignSearch (Request $request)
     {
 
         $rules = [
@@ -380,7 +417,7 @@ class CampaignController extends Controller
 
 
             $data = ['article' => $products];
-            return view('admin.article.search', $data);
+            return view('admin.campaing.search', $data);
 
         endif;
     }

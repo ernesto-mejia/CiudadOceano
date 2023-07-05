@@ -145,6 +145,16 @@
                     'exhibiciones_delete' => 'Puede elimiar.',
                 ]
             ],
+            'campañas' => [
+                'icon' => '<i class="fal fa-photo-video"></i>',
+                'title' => 'Modulo de Campañas',
+                'keys' => [
+                    'campañas' => 'Puede ver el listado.',
+                    'campaña_edit' => 'Puede editar.',
+                    'campaña_add' => 'Puede agregar.',
+                    'campaña_delete' => 'Puede elimiar.',
+                ]
+            ],
             'carousels' => [
                 'icon' => '<i class="far fa-object-group"></i>',
                 'title' => 'Modulo Imagen de inicio',
@@ -173,16 +183,6 @@
                     'gallery_edit' => 'Puede editar.',
                     'gallery_add' => 'Puede agregar.',
                     'gallery_delete' => 'Puede elimiar.',
-                ]
-            ],
-            'campaings' => [
-                'icon' => '<i class="fal fa-photo-video"></i>',
-                'title' => 'Modulo de Campañas',
-                'keys' => [
-                    'campaings' => 'Puede ver el listado.',
-                    'campaing_edit' => 'Puede editar.',
-                    'campaing_add' => 'Puede agregar.',
-                    'campaing_delete' => 'Puede elimiar.',
                 ]
             ],
 

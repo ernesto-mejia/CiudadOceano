@@ -70,9 +70,9 @@
         </li>
         @endif
 
-        @if (kvfj(Auth::user()->permissions, 'campaings'))
+        @if (kvfj(Auth::user()->permissions, 'campañas'))
         <li>
-            <a href="{{ url('/admin/campaings/1/') }}" class="lk-campaings lk-campaing_add lk-campaing_edit">
+            <a href="{{ url('/admin/campañas/1/') }}" class="lk-campañas lk-campaña_add lk-campaña_edit">
                 <i class="fal fa-building"></i>
                 Campañas
             </a>
