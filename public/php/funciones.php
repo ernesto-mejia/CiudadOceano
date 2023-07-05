@@ -13,7 +13,7 @@ function obtenerConexion()
 {
     $password = "";
     $user = "root";
-    $dbName = "ciudadoceano";
+    $dbName = "ciudado_ceano";
     $database = new PDO('mysql:host=localhost;dbname=' . $dbName, $user, $password);
     $database->query("set names utf8;");
     $database->setAttribute(PDO::ATTR_EMULATE_PREPARES, FALSE);

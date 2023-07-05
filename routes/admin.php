@@ -14,6 +14,12 @@ Route::prefix('/admin')->group(function(){
         Route::get('/user/{id}/permissions',                    'Admin\UserController@getUserPermissions')->name('user_permissions');
         Route::post('/user/{id}/permissions',                   'Admin\UserController@postUserPermissions')->name('user_permissions');
 
+    //Module Area
+        Route::get('/areas',                                'Admin\AreaController@getHome')->name('areas');
+        Route::post('/area/add',                            'Admin\AreaController@postAreaAdd')->name('area_add');
+        Route::get('/area/{id}/edit',                       'Admin\AreaController@getAreaEdit')->name('area_edit');
+        Route::post('/area/{id}/edit',                      'Admin\AreaController@postAreaEdit')->name('area_edit');
+        Route::get('/area/{id}/delete',                     'Admin\AreaController@getAreaDelete')->name('area_delete');
 
     //Module Carousels
         Route::get('/carousels',                                'Admin\CarouselsController@getHome')->name('carousels');
@@ -46,14 +52,14 @@ Route::prefix('/admin')->group(function(){
 
     //Module Article
         Route::get('/articulos/{status}/',                           'Admin\ArticleController@getHome')->name('articulos');
-        Route::get('/articulos/add',                                  'Admin\ArticleController@getArticleAdd')->name('articulos_add');
-        Route::post('/articulos/add/',                                'Admin\ArticleController@postArticleAdd')->name('articulos_add');
+        Route::get('/articulo/add',                                  'Admin\ArticleController@getArticleAdd')->name('articulos_add');
+        Route::post('/articulo/add',                                'Admin\ArticleController@postArticleAdd')->name('articulos_add');
         Route::get('/articulos/{id}/edit',                           'Admin\ArticleController@getArticleEdit')->name('articulos_edit');
         Route::post('/articulos/{id}/edit',                          'Admin\ArticleController@postArticleEdit')->name('articulos_edit');
         Route::get('/articulos/{id}/delete',                         'Admin\ArticleController@getArticleDelete')->name('articulos_delete');
         Route::get('/articulos/{id}/restore',                        'Admin\ArticleController@getArticleRestore')->name('articulos_delete');
         Route::post('/articulos/{id}/gallery/add/{gallery}',         'Admin\ArticleController@postArticleGalleryAdd')->name('articulos_edit');
-        Route::get('/articulos/{id}/gallery/{gid}/delete',           'Admin\ArticleController@getArticleGalleryDelete')->name('articulos_edit');
+        Route::get('/articulos/{slug}/gallery/{id}/delete',           'Admin\ArticleController@getArticleGalleryDelete')->name('articulos_edit');
 
     //Module Campaign
         Route::get('/campañas/{status}/',                           'Admin\CampaignController@getHome')->name('campañas');
@@ -79,14 +85,14 @@ Route::prefix('/admin')->group(function(){
 
     //Module Exhibition
         Route::get('/exhibiciones/{status}/',                           'Admin\ExhibitionController@getHome')->name('exhibiciones');
-        Route::get('/exhibicion/add',                                  'Admin\ExhibitionController@getExhibitionAdd')->name('exhibicion_add');
-        Route::post('/exhibicion/add/',                                'Admin\ExhibitionController@postExhibitionAdd')->name('exhibicion_add');
-        Route::get('/exhibicion/{id}/edit',                           'Admin\ExhibitionController@getExhibitionEdit')->name('exhibicion_edit');
-        Route::post('/exhibicion/{id}/edit',                          'Admin\ExhibitionController@postExhibitionEdit')->name('exhibicion_edit');
-        Route::get('/exhibicion/{id}/delete',                         'Admin\ExhibitionController@getExhibitionDelete')->name('exhibicion_delete');
-        Route::get('/exhibicion/{id}/restore',                        'Admin\ExhibitionController@getExhibitionRestore')->name('exhibicion_delete');
-        Route::post('/exhibicion/{id}/gallery/add/{gallery}',         'Admin\ExhibitionController@postExhibitionGalleryAdd')->name('exhibicion_edit');
-        Route::get('/exhibicion/{id}/gallery/{gid}/delete',           'Admin\ExhibitionController@getExhibitionGalleryDelete')->name('exhibicion_edit');
+        Route::get('/exhibiciones/add',                                  'Admin\ExhibitionController@getExhibitionAdd')->name('exhibicion_add');
+        Route::post('/exhibiciones/add/',                                'Admin\ExhibitionController@postExhibitionAdd')->name('exhibicion_add');
+        Route::get('/exhibiciones/{id}/edit',                           'Admin\ExhibitionController@getExhibitionEdit')->name('exhibicion_edit');
+        Route::post('/exhibiciones/{id}/edit',                          'Admin\ExhibitionController@postExhibitionEdit')->name('exhibicion_edit');
+        Route::get('/exhibiciones/{id}/delete',                         'Admin\ExhibitionController@getExhibitionDelete')->name('exhibicion_delete');
+        Route::get('/exhibiciones/{id}/restore',                        'Admin\ExhibitionController@getExhibitionRestore')->name('exhibicion_delete');
+        Route::post('/exhibiciones/{id}/gallery/add/{gallery}',         'Admin\ExhibitionController@postExhibitionGalleryAdd')->name('exhibicion_edit');
+        Route::get('/exhibiciones/{id}/gallery/{gid}/delete',           'Admin\ExhibitionController@getExhibitionGalleryDelete')->name('exhibicion_edit');
 
 
     //Module Recycling

@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <h2>Le damos la bienvenida a la Cerveceria Metropolitana</h2>
+    <h2>Le damos la bienvenida a la Ciudad Océano</h2>
     <p>Hola: <strong>{{ $name }}</strong></p>
     <p>Este es un correo electrónico que le ayudara a activar su cuenta en nuestra plataforma.</p>
     <p>Para activar su cuenta haga clic en el siguente boton e ingrese el siguiente codigo: <h2>{{ $code }}</h2></p>

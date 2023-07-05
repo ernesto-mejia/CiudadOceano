@@ -1,9 +1,9 @@
-<div id="" class="col-12 h-100">
+<div id="" class="col-12 ">
     <div class="row mb-2 justify-content-center align-content-center" style="height: 10%;">
-       <h2>  {{ $galleryInfo->name }}</h2>
+       <h1> GALERÍA</h1>
     </div>
     <div class="row  justify-content-center align-content-center Pgallery" style="height: 30%;">
-        {!! html_entity_decode($galleryInfo->description, ENT_QUOTES | ENT_XML1, 'UTF-8') !!}
+        <p>{!!  html_entity_decode($galleryInfo->description	, ENT_QUOTES | ENT_XML1, 'UTF-8')  !!}</p>
      </div>
      <div class="row ContenedorGallery justify-content-center align-content-center" >
         <div id="carouselExampleControls" class="carousel slide h-100 w-100" data-ride="carousel">

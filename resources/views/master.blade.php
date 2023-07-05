@@ -25,7 +25,7 @@
                     <link rel="stylesheet" href="{{ url('/css/style.css?v='.time()) }}">
                     <link rel="stylesheet" href="{{ url('/css/font.css?v='.time()) }}">
                     <link rel="stylesheet" href="{{ url('/css/querys.css?v='.time()) }}">
-                    <link rel="stylesheet" href="{{ url('/css/video.scss?v='.time()) }}">
+                    <link rel="stylesheet" href="{{ url('/css/bubbles.css?v='.time()) }}">
                     @yield('css')
 
             </head>
@@ -56,11 +56,24 @@
                     @endif
 
                 <!--Content-->
+                <div class="cont__ Bubbles"  >
                     @yield('content')
+                </div>
 
-                <!--Footer-->
-                    @include('blog.partials.footer')
-
+                <div class="">
+                    <div class="bubble bubble--1"></div>
+                    <div class="bubble bubble--2"></div>
+                    <div class="bubble bubble--3"></div>
+                    <div class="bubble bubble--4"></div>
+                    <div class="bubble bubble--5"></div>
+                    <div class="bubble bubble--6"></div>
+                    <div class="bubble bubble--7"></div>
+                    <div class="bubble bubble--8"></div>
+                    <div class="bubble bubble--9"></div>
+                    <div class="bubble bubble--10"></div>
+                    <div class="bubble bubble--11"></div>
+                    <div class="bubble bubble--12"></div>
+                  </div>
                 <!--Script-->
                     <script src="{{ asset('js/jquery.js') }}"></script>
                     <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
@@ -70,6 +83,7 @@
                     <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
                     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
                     <script src="{{ asset('js/site.js') }}"></script>
+                    <script src="{{ asset('js/bold.js') }}"></script>
 
                     <!--individual-Script-page-->
                         @yield('scripts')

@@ -3,17 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Config;
 use Intervention\Image\Facades\Image;
-use App\User;
 use App\Carousel;
-use App\CMobile;
 use App\Section;
 
 class CarouselsController extends Controller
@@ -42,7 +37,7 @@ class CarouselsController extends Controller
     {
         $rules = [
 
-         //   'file'                              => 'required|image|mimes:jpg,png,jpeg|max:1000|dimensions:min_width=1920,min_height=1080,max_width=1920,max_height=1080'
+            'file'                              => 'required|image|mimes:jpg,png,jpeg|max:6144|dimensions:min_width=1920,min_height=1080,max_width=1920,max_height=1080'
 
         ];
 
@@ -50,7 +45,7 @@ class CarouselsController extends Controller
             'file.required'                     => 'Seleccione una imagen destacada un carousel.',
             'file.image'                        => 'El archivo no es una imagen.',
             'file.dimensions'                   => 'Se requiere una imagen de dimesiones 1920px x 1080px',
-            'file.max'                          => 'La imagen pesa más de 1Mb',
+            'file.max'                          => 'La imagen pesa más de 6Mb',
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -69,8 +64,8 @@ class CarouselsController extends Controller
             $file_absolute = $upload_path.'/'.$path.'/'.$filename;
 
             $c = new Carousel;
-            $c ->name                       = e($request->input('name'));
-            $c ->slug                       = Str::slug($request->input('name'));
+            $c ->name                       = $filename;
+            $c ->slug                       = $name;
             $c ->file_path                  = $path;
             $c ->file                       = $filename;
             $c ->url                        = e($request->input('url'));
@@ -84,7 +79,7 @@ class CarouselsController extends Controller
                         $constraint->upsize();
                     });
                     $imagW = Image::make($file_absolute);
-                    $imagW->resize(1080, 1920, function($constraint){
+                    $imagW->resize(1920, 1080, function($constraint){
                         $constraint->upsize();
                     });
                     $imagT->save($upload_path.'/'.$path.'/t_'.$filename);
@@ -112,7 +107,7 @@ class CarouselsController extends Controller
         if($request->hasFile('file')):
             $rules = [
 
-                //'file'                              => 'required|image|mimes:jpg,png,jpeg|max:1000|dimensions:min_width=1920,min_height=1080,max_width=1920,max_height=1080'
+                'file'                              => 'required|image|mimes:jpg,png,jpeg|max:6144|dimensions:min_width=1920,min_height=1080,max_width=1920,max_height=1080'
 
             ];
         else:
@@ -122,12 +117,31 @@ class CarouselsController extends Controller
 
             ];
         endif;
-            $messages = [
-                'file.required'                     => 'Seleccione una imagen destacada un carousel.',
-                'file.image'                        => 'El archivo no es una imagen.',
-                'file.dimensions'                   => 'Se requiere una imagen de dimesiones 1920px x 1080px',
-                'file.max'                          => 'La imagen pesa más de 1Mb',
+
+
+        if($request->hasFile('file_mobile')):
+            $rules = [
+
+                'file_mobile'                              => 'required|image|mimes:jpg,png,jpeg|max:6144|dimensions:min_width=1080,min_height=1920,max_width=1080,max_height=1920'
+
             ];
+        else:
+            $rules = [
+
+
+
+            ];
+        endif;
+
+        $messages = [
+            'file.required'                     => 'Seleccione una imagen destacada un carousel.',
+            'file.image'                        => 'El archivo no es una imagen.',
+            'file.dimensions'                   => 'Se requiere una imagen de dimesiones 1920px x 1080px',
+            'file.max'                          => 'La imagen pesa más de 6Mb',
+            'file_mobile.image'                        => 'El archivo no es una imagen.',
+            'file_mobile.dimensions'                   => 'Se requiere una imagen de dimesiones 1080px x 1920px',
+            'file_mobile.max'                          => 'La imagen pesa más de 6Mb',
+        ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
 
@@ -140,8 +154,6 @@ class CarouselsController extends Controller
             $c = Carousel::findOrFail( $id);
             $imagepp                        = $c->file_path;
             $imagep                         = $c->file;
-            $c ->name                       = e($request->input('name'));
-            $c ->slug                       = Str::slug($request->input('name'));
             $c ->status                    = $request->input('status');
             $c ->type                        = 0;
             if($request->hasFile('file')):
@@ -154,9 +166,12 @@ class CarouselsController extends Controller
                 $file_absolute = $upload_path.'/'.$path.'/'.$filename;
                 $c ->file_path                  = $path;
                 $c ->file                       = $filename;
-
+                $c ->name                       = $filename;
+                $c ->slug                       = $name;
 
             endif;
+
+           
 
             if( $request->hasFile('file_mobile') ):
                 $imagepp                        = $c->file_path;
@@ -164,7 +179,7 @@ class CarouselsController extends Controller
                 $path = '/Carousels';
                 $fileExt = trim($request->file('file_mobile')->getClientOriginalExtension());
                 $upload_path = Config::get('filesystems.disks.uploads.root');
-                $name = Str::slug(str_replace($fileExt, '', $request->file('file')->getClientOriginalName()));
+                $name = Str::slug(str_replace($fileExt, '', $request->file('file_mobile')->getClientOriginalName()));
                 $filename = rand(1,999).'-'.$name.'.'.$fileExt;
                 $file_absolute = $upload_path.'/'.$path.'/'.$filename;
                 $c ->file_path                  = $path;
@@ -183,7 +198,7 @@ class CarouselsController extends Controller
                         $constraint->upsize();
                     });
                     $imagW = Image::make($file_absolute);
-                    $imagW->resize(4000, 2251, function($constraint){
+                    $imagW->resize(1920, 1080, function($constraint){
                         $constraint->upsize();
                     });
                     $imagT->save($upload_path.'/'.$path.'/t_'.$filename);
@@ -192,7 +207,7 @@ class CarouselsController extends Controller
                 endif;
 
                 if($request->hasFile('file_mobile')):
-                    $fl = $request->file->storeAs($path, $filename, 'uploads');
+                    $fl = $request->file_mobile->storeAs($path, $filename, 'uploads');
                     $imagT = Image::make($file_absolute);
                     $imagT->resize(256, 256, function($constraint){
                         $constraint->upsize();
@@ -230,11 +245,16 @@ class CarouselsController extends Controller
     ////  Galeria  ////////////////////
 
 
-        public function getHometGallery()
+    public function getHometGallery()
     {
         $cats = Carousel::orderBy('name', 'ASC')->where('type', 1)->get();
         $gallery = Section::where('slug', 'galeria')->first();
-
+            if (!$gallery) {
+                $c = new Section;
+                $c ->name                       = 'Galeria';
+                $c ->slug                       = 'galeria';
+                $c->save();
+            }
         $data = [
             'cats' => $cats,
             'gallery' => $gallery
@@ -247,15 +267,15 @@ class CarouselsController extends Controller
     {
         $rules = [
 
-         //   'file'                              => 'required|image|mimes:jpg,png,jpeg|max:4000|dimensions:min_width=1920,min_height=1080,max_width=1920,max_height=1080'
+            'file'                              => 'required|image|mimes:jpg,png,jpeg|max:6144|dimensions:min_width=1920,min_height=1080,max_width=1920,max_height=1080'
 
         ];
 
         $messages = [
-            'file.required'                     => 'Seleccione una imagen destacada un carousel.',
-            'file.image'                        => 'El archivo no es una imagen.',
+            'file.required'                     => 'Seleccione una imagen de galeria',
+            'file.image'                        => 'El archivo no es una imagen. Formatos admitidos (jpg,png,jpeg)',
             'file.dimensions'                   => 'Se requiere una imagen de dimesiones 1920px x 1080px',
-            'file.max'                          => 'La imagen pesa más de 1Mb',
+            'file.max'                          => 'La imagen pesa más de 6Mb',
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -274,8 +294,8 @@ class CarouselsController extends Controller
             $file_absolute = $upload_path.'/'.$path.'/'.$filename;
 
             $c = new Carousel;
-            $c ->name                       = e($request->input('name'));
-            $c ->slug                       = Str::slug($request->input('name'));
+            $c ->name                       = $filename;
+            $c ->slug                       = $name;
             $c ->file_path                  = $path;
             $c ->file                       = $filename;
             $c ->url                        = e($request->input('url'));
@@ -289,7 +309,7 @@ class CarouselsController extends Controller
                         $constraint->upsize();
                     });
                     $imagW = Image::make($file_absolute);
-                    $imagW->resize(1080, 1920, function($constraint){
+                    $imagW->resize(1920, 1080, function($constraint){
                         $constraint->upsize();
                     });
                     $imagT->save($upload_path.'/'.$path.'/t_'.$filename);
@@ -317,7 +337,7 @@ class CarouselsController extends Controller
         if($request->hasFile('file')):
             $rules = [
 
-                'file'                              => 'required|image|mimes:jpg,png,jpeg|max:1000|dimensions:min_width=1920,min_height=1080,max_width=1920,max_height=1080'
+                'file'                              => 'required|image|mimes:jpg,png,jpeg|max:6144|dimensions:min_width=1920,min_height=1080,max_width=1920,max_height=1080'
 
             ];
         else:
@@ -328,10 +348,10 @@ class CarouselsController extends Controller
             ];
         endif;
             $messages = [
-                'file.required'                     => 'Seleccione una imagen destacada un carousel.',
-                'file.image'                        => 'El archivo no es una imagen.',
+                'file.required'                     => 'Seleccione una imagen de galeria',
+                'file.image'                        => 'El archivo no es una imagen. Formatos admitidos (jpg,png,jpeg)',
                 'file.dimensions'                   => 'Se requiere una imagen de dimesiones 1920px x 1080px',
-                'file.max'                          => 'La imagen pesa más de 1Mb',
+                'file.max'                          => 'La imagen pesa más de 6Mb',
             ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -345,8 +365,6 @@ class CarouselsController extends Controller
             $c = Carousel::findOrFail( $id);
             $imagepp                        = $c->file_path;
             $imagep                         = $c->file;
-            $c ->name                       = e($request->input('name'));
-            $c ->slug                       = Str::slug($request->input('name'));
             $c ->status                    = $request->input('status');
             $c ->type                    = 1;
 
@@ -360,7 +378,8 @@ class CarouselsController extends Controller
                 $file_absolute = $upload_path.'/'.$path.'/'.$filename;
                 $c ->file_path                  = $path;
                 $c ->file                       = $filename;
-
+                $c ->name                       = $filename;
+                $c ->slug                       = $name;
 
             endif;
 
@@ -380,11 +399,9 @@ class CarouselsController extends Controller
                     });
                     $imagT->save($upload_path.'/'.$path.'/t_'.$filename);
                     $imagW->save($upload_path.'/'.$path.'/'.$filename);
-                    Storage::disk('uploads')->delete('/'.$imagepp.'/'.$imagep);
-                    Storage::disk('uploads')->delete('/'.$imagepp.'/t_'.$imagep);
                 endif;
 
-                return redirect('/admin/gallery')->with('message', ' Galería guardado con éxito.')->with('typealert', 'success');
+                return back()->with('message', ' Galería guardado con éxito.')->with('typealert', 'success');
 
             endif;
 

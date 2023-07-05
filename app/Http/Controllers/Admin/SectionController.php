@@ -25,11 +25,13 @@ class SectionController extends Controller
 
     public function getHomeVideo()
     {
-        $cats = Section::orderBy('name', 'ASC')->where('slug', 'video')->first();
+        $vid = Section::orderBy('name', 'ASC')->where('slug', 'video')->first();
+        $cats = Section::orderBy('name', 'ASC')->where('slug', 'video')->get();
 
-        $video = count( $cats);
+        $video = count($cats);
         //dd( $video);
         $data = [
+            'cats_' => $vid,
             'cats' => $cats,
             'video' => $video
         ];

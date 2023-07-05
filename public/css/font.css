@@ -24,3 +24,89 @@
     url('../fonts/avenir_condensed.ttf#svgFontName') format('svg');
     /* Legacy iOS */
 }
+@font-face {
+    font-family: 'Avenir-regular';
+    src: url('../fonts/AvenirNextCondensed-Regular.ttf') format('embedded-opentype'), /* IE6-IE8 */
+    url('../fonts/AvenirNextCondensed-Regular.ttf') format('woff'), /* Modern Browsers */
+    url('../fonts/AvenirNextCondensed-Regular.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('../fonts/AvenirNextCondensed-Regular.ttf#svgFontName') format('svg');
+    /* Legacy iOS */
+}
+
+@font-face {
+    font-family: "Acumin";
+    src: url('../fonts/AcuminVariableConcept.otf') format('embedded-opentype'), /* IE6-IE8 */
+    url('../fonts/AcuminVariableConcept.otf') format('woff'), /* Modern Browsers */
+    url('../fonts/AcuminVariableConcept.otf') format('truetype'), /* Safari, Android, iOS */
+    url('../fonts/AcuminVariableConcept.otf#svgFontName') format('svg');
+    /* Legacy iOS */
+}
+@font-face {
+    font-family: "Poppins-Medium";
+    src: url('../fonts/Poppins-Medium.ttf') format('embedded-opentype'), /* IE6-IE8 */
+    url('../fonts/Poppins-Medium.ttf') format('woff'), /* Modern Browsers */
+    url('../fonts/Poppins-Medium.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('../fonts/Poppins-Medium.ttf') format('svg');
+    /* Legacy iOS */
+}
+@font-face {
+    font-family: "Poppins-Bold";
+    src: url('../fonts/Poppins-Bold.ttf') format('embedded-opentype'), /* IE6-IE8 */
+    url('../fonts/Poppins-Bold.ttf') format('woff'), /* Modern Browsers */
+    url('../fonts/Poppins-Bold.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('../fonts/Poppins-Bold.ttf#svgFontName') format('svg');
+    /* Legacy iOS */
+}
+@font-face {
+    font-family: "Poppins-ThinItalic";
+    src: url('../fonts/Poppins-ThinItalic.ttf') format('embedded-opentype'), /* IE6-IE8 */
+    url('../fonts/Poppins-ThinItalic.ttf') format('woff'), /* Modern Browsers */
+    url('../fonts/Poppins-ThinItalic.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('../fonts/Poppins-ThinItalic.ttf#svgFontName') format('svg');
+    /* Legacy iOS */
+}
+
+
+@font-face {
+    font-family: "PermanentMarker-Regular";
+    src: url('../fonts/PermanentMarker-Regular.ttf') format('embedded-opentype'), /* IE6-IE8 */
+    url('../fonts/PermanentMarker-Regular.ttf') format('woff'), /* Modern Browsers */
+    url('../fonts/PermanentMarker-Regular.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('../fonts/PermanentMarker-Regular.ttf#svgFontName') format('svg');
+    /* Legacy iOS */
+}
+
+@font-face {
+    font-family: "Poppins-Regular";
+    src: url('../fonts/Poppins-Regular.ttf') format('embedded-opentype'), /* IE6-IE8 */
+    url('../fonts/Poppins-Regular.ttf') format('woff'), /* Modern Browsers */
+    url('../fonts/Poppins-Regular.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('../fonts/Poppins-Regular.ttf#svgFontName') format('svg');
+    /* Legacy iOS */
+}
+
+@font-face {
+    font-family: "Poppins-Italic";
+    src: url('../fonts/Poppins-Italic.ttf') format('embedded-opentype'), /* IE6-IE8 */
+    url('../fonts/Poppins-Italic.ttf') format('woff'), /* Modern Browsers */
+    url('../fonts/Poppins-Italic.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('../fonts/Poppins-Italic.ttf#svgFontName') format('svg');
+    /* Legacy iOS */
+}
+
+@font-face {
+    font-family: "Poppins-Light";
+    src: url('../fonts/Poppins-Light.ttf') format('embedded-opentype'), /* IE6-IE8 */
+    url('../fonts/Poppins-Light.ttf') format('woff'), /* Modern Browsers */
+    url('../fonts/Poppins-Light.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('../fonts/Poppins-Light.ttf#svgFontName') format('svg');
+    /* Legacy iOS */
+}
+@font-face {
+    font-family: "Poppins-SemiBold";
+    src: url('../fonts/Poppins-SemiBold.ttf') format('embedded-opentype'), /* IE6-IE8 */
+    url('../fonts/Poppins-SemiBold.ttf') format('woff'), /* Modern Browsers */
+    url('../fonts/Poppins-SemiBold.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('../fonts/Poppins-SemiBold.ttf#svgFontName') format('svg');
+    /* Legacy iOS */
+}

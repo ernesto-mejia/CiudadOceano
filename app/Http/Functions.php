@@ -26,9 +26,6 @@
         return $a;
     }
 
-
-
-
     function getRoleUserArray($mode, $id)
     {
 
@@ -138,17 +135,6 @@
                     'articulos_delete' => 'Puede elimiar.',
                 ]
             ],
-            'campañas' => [
-                'icon' => '<i class="fal fa-building"></i>',
-                'title' => 'Modulo de Campaña',
-                'keys' => [
-                    'campaña' => 'Puede ver el listado.',
-                    'campaña_edit' => 'Puede editar.',
-                    'campaña_add' => 'Puede agregar.',
-                    'campaña_delete' => 'Puede elimiar.',
-                ]
-            ],
-
             'exhibiciones' => [
                 'icon' => '<i class="fal fa-camera-polaroid"></i>',
                 'title' => 'Modulo de Exhibiciones',
@@ -159,30 +145,19 @@
                     'exhibiciones_delete' => 'Puede elimiar.',
                 ]
             ],
-            'comunidad' => [
-                'icon' => '<i class="fal fa-users-class"></i>',
-                'title' => 'Modulo de Comunidad',
+            'campañas' => [
+                'icon' => '<i class="fal fa-photo-video"></i>',
+                'title' => 'Modulo de Campañas',
                 'keys' => [
-                    'comunidad' => 'Puede ver el listado.',
-                    'comunidad_edit' => 'Puede editar.',
-                    'comunidad_add' => 'Puede agregar.',
-                    'comunidad_delete' => 'Puede elimiar.',
-                ]
-            ],
-
-            'reciclaje' => [
-                'icon' => '<i class="fad fa-recycle"></i>',
-                'title' => 'Modulo de Reciclaje',
-                'keys' => [
-                    'reciclaje' => 'Puede ver el listado.',
-                    'reciclaje_edit' => 'Puede editar.',
-                    'reciclaje_add' => 'Puede agregar.',
-                    'reciclaje_delete' => 'Puede elimiar.',
+                    'campañas' => 'Puede ver el listado.',
+                    'campaña_edit' => 'Puede editar.',
+                    'campaña_add' => 'Puede agregar.',
+                    'campaña_delete' => 'Puede elimiar.',
                 ]
             ],
             'carousels' => [
                 'icon' => '<i class="far fa-object-group"></i>',
-                'title' => 'Modulo Carousel',
+                'title' => 'Modulo Imagen de inicio',
                 'keys' => [
                     'carousels' => 'Puede ver el listado.',
                     'carousel_edit' => 'Puede editar.',

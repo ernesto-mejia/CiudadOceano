@@ -1,27 +1,40 @@
-
 @extends('master')
-@section('title',  '' )
-
+@foreach ($articles as $article)
+    @if ($article->module === 'articulos')
+        @section('title', 'articulos')
+    @elseif($article->module === 'exhibiciones')
+        @section('title', 'exhibiciones')
+    @elseif($article->module === 'campañas')
+        @section('title', 'campañas')
+    @endif
+@endforeach
 @section('content')
-    <div id="" class="col-12">
-        <div class="row  justify-content-center align-content-center">
-                @foreach ($articles as $article)
+<div id="main_" class="row w-100   justify-content-center align-content-center m-0 h-100">
+    @if ($countArt == 0)
+        <h1 style="color: #fff;">Sin contenido por el momento.</h1>
+    @else
+        @foreach ($articles as $article)
 
-                    <div class="col-md-4 col-6 justify-content-center align-items-center mt-3" style="height: 35%; padding: 0 4%; margin-bottom: 3%;">
+            @if($article->module === 'exhibiciones')
+                <div class="col-md-3 col-12 mb-3" style="height: 95%; border-radius:0 !important;" >
+                    <a href="{{  url('seccion/'.$article->module.'/'.$article->slug) }}">
+                        <img  src="{{ url('/multimedia'.$article->file_path.'/'.$article->slug.'/t_'.$article->file) }}" class="w-100" style="height: 95%;  background-size: 100% auto; background-repeat: no-repeat;">
+                    </a>
+                </div>
+            @else
+                <div class="col-md-4 col-12 mb-3" >
+                    <a href="{{  url('seccion/'.$article->module.'/'.$article->slug) }}">
+                        <div   class="cont-card-event" style="background-color: #000;    height: 250px;     padding: 0% !important;">
 
-                        <a href="{{  url('seccion/'.$article->module.'/'.$article->slug) }}"  class=" h-100 w-100 justify-content-center">
+                            <img  src="{{ url('/multimedia'.$article->file_path.'/'.$article->slug.'/t_'.$article->file) }}" class="w-100" style="border-radius: 8px 8px 0 0; height: 70%;  background-size: 84%; background-repeat: no-repeat;">
+                            <p class="m-0 text-center title_article" >{{ html_entity_decode($article->name, ENT_QUOTES | ENT_XML1, 'UTF-8') }}</p>
 
-                            <img  src="{{ url('/multimedia'.$article->file_path.'/t_'.$article->file) }}" class="w-100">
+                        </div>
 
-                            <p class="m-0 text-center" style=" font-family: 'Montserrat-Bold'; font-size:calc(1rem + 0.5vw); text-align: left;">{{ html_entity_decode($article->name, ENT_QUOTES | ENT_XML1, 'UTF-8') }}</p>
-
-                            <p class="m-0 text-center" style="font-size:calc(0.5rem + 0.4vw); text-align: left;">{{ $article->date }}</p>
-
-                        </a>
-
-                    </div>
-
-                @endforeach
-            </div>
-    </div>
+                    </a>
+                </div>
+            @endif
+        @endforeach
+    @endif
+</div>
 @endsection

@@ -4,13 +4,13 @@
 @section('breadcrumb')
 
     <li class="breadcrumb-item">
-        <a href="{{ url('/admin/articles/1') }}">
+        <a href="{{ url('/admin/articulos/1') }}">
             <i class="fal fa-newspaper"></i>
             Artículos
         </a>
     </li>
     <li class="breadcrumb-item">
-        <a href="{{ url('/admin/article/'.$product->id.'edit ') }}">
+        <a href="{{ url('/admin/articulos/'.$product->id.'/edit ') }}">
             <i class="far fa-folder-open"></i>
             Editar notícia
         </a>
@@ -35,8 +35,9 @@
 
                     <div class="inside">
 
-                        {!! Form::open(['url' => '/admin/'.$product->module.'/edit', 'files' => true]) !!}
 
+                        {!! Form::open(['url' => '/admin/articulos/'.$product->id.'/edit', 'files' => true, 'method' => 'post', 'novalidate']) !!}
+                        @csrf
                             <div class="row" style="padding: 16px;">
 
                                 <div class="col-md-9">
@@ -88,30 +89,42 @@
 
 
                             @for ($i=1 ; $i<=$product->sections; $i++)
-                                <div name="{{$product->sections}}" class="row mt16" style="padding: 16px;" >
+
+                                <div name="" class="row mt16" style="padding: 16px;" >
                                     <div class="col-md-12">
                                         <div class="form-group">
 
-                                            {{ Form::label('body_'.$i,'Descripcion:') }}
+                                            {{ Form::label('description','Descripcion:') }}
                                             <div class="input-group-prepend">
-                                                {!! Form::textarea('body_'.$i, null, ['class' => 'form-control ', 'id' => 'editor_'.$i]) !!}
+                                                @foreach ($descriptions as $description)
+                                                    @if ($description->section == $i-1)
+                                                        {!! Form::textarea('description[]', $description->content, ['class' => 'form-control ', 'id' => 'editor_'.$i]) !!}
+                                                    @endif
+                                                @endforeach
                                             </div>
 
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="row mt16" style="padding: 16px;">
                                     <div class="col-md-12">
                                         <div class="form-group">
 
-                                            {{ Form::label('video_'.$i,'Video:') }}
+                                            {{ Form::label('video','Video:') }}
                                             <div class="input-group-prepend">
-                                                {!! Form::textarea('video_'.$i, null, ['class' => 'form-control ', 'id' => 'video_'.$i]) !!}
+                                                @foreach ($videos as $video)
+                                                    @if ($video->section == $i-1)
+                                                        {!! Form::textarea('video[]', $video->content, ['class' => 'form-control ', 'id' => 'video_'.$i]) !!}
+                                                    @endif
+                                                @endforeach
+
                                             </div>
 
                                         </div>
                                     </div>
                                 </div>
+
                             @endfor
 
                             {!! Form::submit('Guardar', ['class' => 'btn btn-success mt16']) !!}
@@ -135,7 +148,7 @@
                             </h2>
                         </div>
                         <div class="inside">
-                            <img src="{{ url('/multimedia'.$product->file_path.'/'.$product->file) }}" class="img-fluid">
+                            <img src="{{ url('/multimedia'.$product->file_path.'/'.$product->slug.'/'.$product->file) }}" class="img-fluid">
                         </div>
 
                     </div>
@@ -154,14 +167,14 @@
 
                             <div class="inside product_gallery">
 
-                                {!! Form::open(['url' => '/admin/'.$product->module.'/'.$product->id.'/gallery/add/'.$i, 'files' => true, 'id' => 'form_product_gallery_1']) !!}
+                                {!! Form::open(['url' => '/admin/'.$product->module.'/'.$product->id.'/gallery/add/'.$i, 'files' => true, 'id' => 'form_product_gallery_'.$i]) !!}
 
-                                    {!! Form::file('file', ['id' => 'product_file_image_1', 'accept' => 'image/*', 'style' => 'display:none;', 'required']) !!}
+                                    {!! Form::file('file', ['id' => 'product_file_image_'.$i, 'accept' => 'image/*', 'style' => 'display:none;', 'required']) !!}
 
                                 {!! Form::close() !!}
 
                                 <div class="btn-submit">
-                                    <a href="#" id="btn_product_file_image_1" onclick="Ngallery00()"><i class="fas fa-plus"></i></a>
+                                    <a href="#" id="btn_product_file_image_{{$i}}" onclick="Ngallery0{{$i}}()"><i class="fas fa-plus"></i></a>
                                 </div>
 
                                 <div class="tumbs">
@@ -169,7 +182,7 @@
                                         @if ($ima->after == $i)
                                             <div class="tumb">
 
-                                                <a href="{{ url('/admin/article/'.$product->id.'/gallery/'.$ima->id.'/delete') }}" data-toggle="tooltip" data-placement="top" title="Eliminar">
+                                                <a href="{{ url('/admin/articulos/'.$product->id.'/gallery/'.$ima->id.'/delete') }}" data-toggle="tooltip" data-placement="top" title="Eliminar">
                                                     <i class="fas fa-trash-alt"></i>
                                                 </a>
 
@@ -202,7 +215,30 @@
 
         </script>
     @endfor
+    @for ($i = 1; $i <= $product->sections; $i++)
+    <script>
 
+        document.addEventListener('DOMContentLoaded', function() {
+            var btn_gallery_{{$i}} = document.getElementById('btn_product_file_image_{{$i}}');
+            var input_file_{{$i}} = document.getElementById('product_file_image_{{$i}}');
+            if (btn_gallery_{{$i}}) {
+                btn_gallery_{{$i}}.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    input_file_{{$i}}.click();
+                });
+            }
+
+        });
+
+        function Ngallery0{{$i}}(e) {
+            var input_file_{{$i}} = document.getElementById('product_file_image_{{$i}}');
+            input_file_{{$i}}.addEventListener('change', function() {
+                document.getElementById('form_product_gallery_{{$i}}').submit();
+            });
+        }
+
+    </script>
+@endfor
 
 
 @endsection

@@ -1,4 +1,4 @@
-<div  id="carouselExampleIndicators"  class="carousel slide" data-ride="carousel">
+<div  id="carouselExampleIndicators"  class="carousel slide w-100" data-ride="carousel">
 
     <div id="Image_PC" class="carousel-inner h-100">
 
@@ -6,6 +6,7 @@
             @if($i == 0)
                 <div class="carousel-item active h-100">
                     <img class="d-block w-100 h-100" src="{{ url('/multimedia'.$carrousels[$i]->file_path.'/'.$carrousels[$i]->file) }}" alt="First slide">
+                    <h3 class="title_home">Más cerca de lo que imaginas</h3>
                     @if($carrousels[$i]->title1 != null)
                         <div class="carousel-caption">
                             <h1 class="display-2">Bootstrap</h1>
@@ -24,6 +25,7 @@
             @else
                 <div class="carousel-item h-100">
                     <img class="d-block w-100 h-100" src="{{ url('/multimedia'.$carrousels[$i]->file_path.'/'.$carrousels[$i]->file) }}" alt="First slide">
+                    <h3 class="title_home">Más cerca de lo que imaginas</h3>
                     @if($carrousels[$i]->title1 != null)
                         <div class="carousel-caption">
                             <h1 class="display-2">Bootstrap</h1>

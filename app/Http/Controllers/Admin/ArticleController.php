@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Article;
+use App\Description;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
@@ -13,7 +14,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Config;
 use Intervention\Image\Facades\Image;
 use App\NGallery;
-
+use App\Section;
 
 class ArticleController extends Controller
 {
@@ -43,7 +44,7 @@ class ArticleController extends Controller
                 # code...
                 break;
         }
-        $data = ['articles' => $products];
+        $data = ['articulos' => $products];
         return view('admin.article.home', $data);
 
     }
@@ -62,69 +63,110 @@ class ArticleController extends Controller
 
     public function postArticleAdd(Request $request)
     {
-        $rules = [
-    		'name'                              => 'required',
-            'file'                              => 'required',
-            'body_1'                              => 'required',
-        ];
+        $input = $request->all();
+        $input['slug']= Str::slug($request->input('name'));
+        $product    = Article::where('slug', $input['slug'])->first();
+        if ($product == null) {
+            $rules = [
+                'name'                              => 'required',
+                'file'                              => 'required',
+                'date'                              => 'required',
+                'slug'                              => 'slug|unique:articles,slug',
+            ];
 
-        $messages = [
-            'name.required'                     => 'El nombre de la noticia es requerido.',
-            'file.required'                     => 'Seleccione una imagen destacada de noticia.',
-            'body_1.required'                     => 'La descripción de la noticia es requerida.',
-            'date.required'                     => 'La fecha de la noticia es requerida.'
-        ];
+            $messages = [
+                'name.required'                     => 'El nombre de la noticia es requerido.',
+                'file.required'                     => 'Seleccione una imagen destacada de noticia.',
+                'date.required'                     => 'La fecha del artículo es requerida.',
+                'slug.unique'                        => 'El artículo ya se encuentra registrado',
+            ];
 
-        $validator = Validator::make($request->all(), $rules, $messages);
+            $validator = Validator::make($request->all(), $rules, $messages);
 
-        if($validator->fails()):
+            if($validator->fails()):
 
-            return back()->withErrors($validator)->with('message','Se ha producido un error')->with('typealert','danger')->withInput();
+                return back()->withErrors($validator)->with('message','Se ha producido un error')->with('typealert','danger')->withInput();
 
-        else:
+            else:
 
-            $articleName = Str::slug($request->input('name'));
-            $path = '/Article/'.$articleName;
-            $fileExt = trim($request->file('file')->getClientOriginalExtension());
-            $upload_path = Config::get('filesystems.disks.uploads.root');
-            $name = Str::slug(str_replace($fileExt, '', $request->file('file')->getClientOriginalName()));
-            $filename = rand(1,999).'-'.$name.'.'.$fileExt;
+                $s = Str::slug($request->input('name'));
+                $path_ = '/Article';
+                $path = '/Article/'.$s;
+                $fileExt = trim($request->file('file')->getClientOriginalExtension());
+                $upload_path = Config::get('filesystems.disks.uploads.root');
+                $name = Str::slug(str_replace($fileExt, '', $request->file('file')->getClientOriginalName()));
+                $filename = rand(1,999).'-'.$name.'.'.$fileExt;
 
-            $file_absolute = $upload_path.'/'.$path.'/'.$filename;
-            $file_url = 'multimedia'.$path.'/t_'.$filename;
+                $file_url = 'multimedia'.$path.'/t_'.$filename;
 
-            $product = new Article;
-            $product->status                = '0';
-            $product->module                = 'articulos';
-            $product ->name                 = e($request->input('name'));
-            $product ->slug                 = Str::slug($request->input('name'));
-            $product ->file_path            = $path;
-            $product ->file                 = $filename;
-            $product ->mobile               = asset($file_url);
-            $product ->date                 = e($request->input('date'));
-            $product ->body_1               = e($request->input('body_1'));
 
-            if($product->save()):
+                $file_absolute = $upload_path.'/'.$path.'/'.$filename;
 
-                if($request->hasFile('file')):
-                    $fl = $request->file->storeAs($path, $filename, 'uploads');
-                    $imagT = Image::make($file_absolute);
-                    $imagT->resize(256, 256, function($constraint){
-                        $constraint->upsize();
-                    });
-                    $imagW = Image::make($file_absolute);
-                    $imagW->resize(1920, 1080, function($constraint){
-                        $constraint->upsize();
-                    });
-                    $imagT->save($upload_path.'/'.$path.'/t_'.$filename);
-                    $imagW->save($upload_path.'/'.$path.'/'.$filename);
+                $product = new Article;
+                $product->status                = '0';
+                $product->module                = 'articulos';
+                $product ->name                 = e($request->input('name'));
+                $product ->slug                 = Str::slug($request->input('name'));
+                $product ->file_path            = $path_;
+                $product ->file                 = $filename;
+                $product ->mobile               = asset($file_url);
+                $product ->date                 = e($request->input('date'));
+                $product ->sections               = e($request->input('sections'));
+
+                if($product->save()):
+
+                    $p = Article::where('slug', $s)->first();
+                    $s = e($request->input('sections'));
+
+                    for ($i=0; $i <= $s; $i++) {
+                        $content = new Description();
+                        $content->article_id            = $p->id;
+                        $content->type                  = 'description';
+                        $content ->section              = $i;
+                        $content->save();
+
+                        $content = new Description();
+                        $content->article_id            = $p->id;
+                        $content->type                  = 'video';
+                        $content ->section              = $i;
+                        $content->save();
+                    }
+
+                    if($request->hasFile('file')):
+                        $fl = $request->file->storeAs($path,$filename, 'uploads');
+                        $imagT = Image::make($file_absolute);
+                        $imagT->resize(256, 256, function($constraint){
+                            $constraint->upsize();
+                        });
+                        $imagW = Image::make($file_absolute);
+                        $imagW->resize(1920, 1080, function($constraint){
+                            $constraint->upsize();
+                        });
+                        $imagT->save($upload_path.'/'.$path.'/t_'.$filename);
+                        $imagW->save($upload_path.'/'.$path.'/'.$filename);
+                    endif;
+
+                    return redirect('/admin/articulos/1')->with('message', ' Artículo guardado con éxito.')->with('typealert', 'success');
+
                 endif;
 
-                return redirect('/admin/articles/1')->with('message', ' Artículo guardado con éxito.')->with('typealert', 'success');
-
             endif;
+        }else {
+            $rules = [
+                'name'                              => 'required',
+                'file'                              => 'required',
+                'date'                              => 'required',
+                'slug'                              => 'required|slug|unique:articles,slug',
+            ];
+             $messages = [
+                'slug.required'                     => 'El artículo ya se encuentra registrado',
+                'slug.unique'                        => 'El artículo ya se encuentra registrado',
+            ];
+            $validator ='El artículo ya se encuentra registrado';
+            return back()->withErrors($validator)->with('message','Se ha producido un error')->with('typealert','danger')->withInput();
 
-        endif;
+        }
+
     }
 
 
@@ -132,10 +174,14 @@ class ArticleController extends Controller
     {
         $product        = Article::findOrFail($id);
         $galerias        =NGallery::where('article_id', $product->id)->get();
-
+        $descriptions       = Description::where('article_id', $product->id)->where('type', 'description')->get();
+        $videos       = Description::where('article_id', $product->id)->where('type', 'video')->get();
+        //dd($videos);
         $data  = [
             'product' => $product,
-            'galerias' => $galerias
+            'galerias' => $galerias,
+            'descriptions' => $descriptions,
+            'videos' => $videos
         ];
 
         return view('admin.article.edit', $data);
@@ -167,22 +213,65 @@ class ArticleController extends Controller
             $product->module                = 'articulos';
             $product ->name                 = e($request->input('name'));
             $product ->slug                 = Str::slug($request->input('name'));
-            $product ->video_1                 = e($request->input('video_1'));
-            $product ->video_2                 = e($request->input('video_2'));
-            $product ->video_3                 = e($request->input('video_3'));
-            $product ->video_4                 = e($request->input('video_4'));
-            $product ->video_5                 = e($request->input('video_5'));
+
             $product ->date                 = e($request->input('date'));
-            $product ->body_1                 = e($request->input('body_1'));
-            $product ->body_2                 = e($request->input('body_2'));
-            $product ->body_3                = e($request->input('body_3'));
-            $product ->body_4                 = e($request->input('body_4'));
-            $product ->body_5                = e($request->input('body_5'));
+
+            $contacto =  request([
+
+                'description'
+
+            ]);
+
+            foreach($contacto as $clave=> $valor){
+                for($i=0;$i<count($contacto[$clave]);$i++){
+                    $descriptions = Description::where('article_id', $product->id)->where('type', 'description')->where('section', $i)->first();
+                    //dd($descriptions);
+                    if ($descriptions == null) {
+                        $content = new Description();
+                        $content->article_id                = $product->id;
+                        $content->type                  = 'description';
+                        $content ->section                 = $i;
+                        $content ->content                 =$contacto[$clave][$i];
+                        $content->save();
+                    }else {
+                        $descriptions ->content                 =$contacto[$clave][$i];
+                        $descriptions->save();
+                    }
+                }
+            }
+
+
+
+            $contacto =  request([
+
+                'video'
+
+            ]);
+
+            foreach($contacto as $clave=> $valor){
+                for($i=0;$i<count($contacto[$clave]);$i++){
+                    $descriptions = Description::where('article_id', $product->id)->where('type', 'video')->where('section', $i)->first();
+                    //dd($descriptions);
+                    if ($descriptions == null) {
+                        $content = new Description();
+                        $content->article_id                = $product->id;
+                        $content->type                  = 'video';
+                        $content ->section                 = $i;
+                        $content ->content                 =$contacto[$clave][$i];
+                        $content->save();
+                    }else {
+                        $descriptions ->content                 =$contacto[$clave][$i];
+                        $descriptions->save();
+                    }
+                }
+            }
+
 
             if($request->hasFile('file')):
 
-                $articleName = Str::slug($request->input('name'));
-                $path = '/Article/'.$articleName;
+                $s = Str::slug($request->input('name'));
+                $path_ = '/Article';
+                $path = '/Article/'.$s;
                 $fileExt = trim($request->file('file')->getClientOriginalExtension());
                 $upload_path = Config::get('filesystems.disks.uploads.root');
                 $name = Str::slug(str_replace($fileExt, '', $request->file('file')->getClientOriginalName()));
@@ -190,7 +279,7 @@ class ArticleController extends Controller
                 $file_absolute = $upload_path.'/'.$path.'/'.$filename;
                 $file_url = 'multimedia'.$path.'/t_'.$filename;
                 $product ->mobile               = asset($file_url);
-                $product ->file_path            = $path;
+                $product ->file_path            = $path_;
                 $product ->file                 = $filename;
 
             endif;
@@ -239,7 +328,7 @@ class ArticleController extends Controller
 
         if ($product->save()):
 
-            return redirect('/admin/article/'.$product->id.'/edit')->with('message', ' El artículo se restauro correctamente.')->with('typealert', 'success')->withInput();
+            return redirect('/admin/articulos/'.$product->id.'/edit')->with('message', ' El artículo se restauro correctamente.')->with('typealert', 'success')->withInput();
 
         endif;
 
@@ -263,75 +352,52 @@ class ArticleController extends Controller
             return back()->withErrors($validator)->with('message','Se ha producido un error')->with('typealert','danger')->withInput();
 
         else:
-            if($request->hasFile('file')):
-                $article =  DB::table('articles')->orderBy('id', 'DESC')->where('id', $id)->first();
-                $path = '/Article/'.$article->slug;
-                $fileExt = trim($request->file('file')->getClientOriginalExtension());
-                $upload_path = Config::get('filesystems.disks.uploads.root');
+            //dd($gallery);
+            $p = Article::find( $id);
 
-                $name = Str::slug(str_replace($fileExt, '', $request->file('file')->getClientOriginalName()));
+            for ($i=0; $i <= $p->sections ; $i++) {
 
-                $filename = rand(1,999).'-'.$name.'.'.$fileExt;
-                $file_absolute = $upload_path.'/'.$path.'/'.$filename;
+                if($request->hasFile('file')):
+                    $article =  DB::table('articles')->orderBy('id', 'DESC')->where('id', $id)->first();
+                    $path = '/Article/'.$article->slug;
+                    $fileExt = trim($request->file('file')->getClientOriginalExtension());
+                    $upload_path = Config::get('filesystems.disks.uploads.root');
 
-                switch ($gallery):
-                    case '1':
-                        $g =new NGallery;
-                        $g->article_id = $id;
-                        $g->after = $gallery;
-                        $g->file_path = $path;
-                        $g->file_name = $filename;
-                        break;
-                    case '2':
-                        $g =new NGallery;
-                        $g->article_id = $id;
-                        $g->after = $gallery;
-                        $g->file_path = $path;
-                        $g->file_name = $filename;
-                        break;
-                    case '3':
-                        $g =new NGallery;
-                        $g->article_id = $id;
-                        $g->after = $gallery;
-                        $g->file_path = $path;
-                        $g->file_name = $filename;
-                        break;
-                    case '4':
-                        $g =new NGallery;
-                        $g->article_id = $id;
-                        $g->after = $gallery;
-                        $g->file_path = $path;
-                        $g->file_name = $filename;
-                        break;
-                    case '5':
-                        $g =new NGallery;
-                        $g->article_id = $id;
-                        $g->after = $gallery;
-                        $g->file_path = $path;
-                        $g->file_name = $filename;
-                        break;
-                endswitch;
+                    $name = Str::slug(str_replace($fileExt, '', $request->file('file')->getClientOriginalName()));
 
-               if($g->save()):
+                    $filename = rand(1,999).'-'.$name.'.'.$fileExt;
+                    $file_absolute = $upload_path.'/'.$path.'/'.$filename;
 
-                    if($request->hasFile('file')):
-                        $fl = $request->file->storeAs($path, $filename, 'uploads');
-                        $imagT = Image::make($file_absolute);
-                        $imagT->resize(256, 256, function($constraint){
-                            $constraint->upsize();
-                        });
-                        $imagW = Image::make($file_absolute);
-                        $imagW->resize(1920, 1080, function($constraint){
-                            $constraint->upsize();
-                        });
-                        $imagT->save($upload_path.'/'.$path.'/t_'.$filename);
-                        $imagW->save($upload_path.'/'.$path.'/'.$filename);
+
+                    $g =new NGallery;
+                    $g->article_id = $id;
+                    $g->after = $gallery;
+                    $g->file_path = $path;
+                    $g->file_name = $filename;
+
+
+                    if($g->save()):
+
+                        if($request->hasFile('file')):
+                            $fl = $request->file->storeAs($path, $filename, 'uploads');
+                            $imagT = Image::make($file_absolute);
+                            $imagT->resize(256, 256, function($constraint){
+                                $constraint->upsize();
+                            });
+                            $imagW = Image::make($file_absolute);
+                            $imagW->resize(1920, 1080, function($constraint){
+                                $constraint->upsize();
+                            });
+                            $imagT->save($upload_path.'/'.$path.'/t_'.$filename);
+                            $imagW->save($upload_path.'/'.$path.'/'.$filename);
+                        endif;
+
+                        return back()->with('message', ' Archivo multimedia guardado con éxito.')->with('typealert', 'success')->withInput();
+
                     endif;
-
-                    return back()->with('message', ' Archivo multimedia guardado con éxito.')->with('typealert', 'success')->withInput();
-
                 endif;
-            endif;
+            }
+
         endif;
 
     }

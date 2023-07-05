@@ -1,32 +1,40 @@
-<nav class="navbar navbar-expand-md  ">
+<nav class="navbar navbar-expand-md  " style="padding-top: 0; padding-bottom: 0 ">
 
-    <a class="navbar-brand text-center" href="{{url('/')}}">
+    <a class="navbar-brand text-center d-inline-flex" href="{{url('/')}}">
         <img src="{{ url('multimedia'.$company[0]->file_path.'/'.$company[0]->file) }}" alt="" class="" >
         <p class="Logo">{!! html_entity_decode($company[0]->company_name, ENT_QUOTES | ENT_XML1, 'UTF-8') !!}</p>
     </a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-      <i class="fad fa-bars"></i>
+        <span class="navbar-toggler-icon"></span>
+        <i class="fad fa-bars"></i>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item ml-2">
-                <a style="    text-align: center;" href="{{url('/seccion/articulos')}}" class="nav-link"><img width="60" src="{{ asset('media/icons/b.png') }}" alt="" class="" /> <p class="m-0 pnav">Artículos</p></a>
+            <li class="nav-item ml-4">
+                <a  style="text-align: center;" href="{{url('/seccion/articulos')}}" class="nav-link"><p id="articulos_nav" class="m-0 pnav">Artículos</p></a>
             </li>
-            <li class="nav-item ml-2">
-                <a style="    text-align: center;" href="{{url('/seccion/campaña')}}" class="nav-link"><img width="60" src="{{ asset('media/icons/bb.png') }}" alt="" class="" /> <p class="m-0 pnav">Campaña</p></a>
+            <li class="nav-item ml-4">
+                <a  style="text-align: center;" href="{{url('/seccion/exhibiciones')}}" class="nav-link"><p id="exhibiciones_nav" class="m-0 pnav">Exposiciones</p></a>
             </li>
-            <li class="nav-item ml-2">
-                <a style="    text-align: center;" href="{{url('/seccion/exhibiciones')}}" class="nav-link"><img width="60" src="{{ asset('media/icons/a.png') }}" alt="" class="" /> <p class="m-0 pnav">Exhibiciones</p></a>
+
+            <li class="nav-item ml-4">
+                <a style="text-align: center;" href="{{url('/seccion/campañas')}}" class="nav-link"><p class="m-0 pnav">Campañas</p></a>
             </li>
-            <li class="nav-item ml-2">
-                <a style="    text-align: center;" href="{{url('/seccion/reciclaje')}}" class="nav-link"><img width="60" src="{{ asset('media/icons/c.png') }}" alt="" class="" /> <p class="m-0 pnav">Reciclaje</p></a>
-            </li>
-            <li class="nav-item ml-2">
-                <a style="    text-align: center;" href="{{url('/seccion/comunidad')}}" class="nav-link"><img width="60" src="{{ asset('media/icons/o.png') }}" alt="" class="" /> <p class="m-0 pnav">Comunidad</p></a>
+
+            <li class="nav-item ml-4 redes">
+                <a target="_blank" href="https://es-la.facebook.com/ciudadoceano">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a target="_blank" href="https://www.instagram.com/ciudadoceano/?hl=es-la">
+                    <i  class="fab fa-instagram" ></i>
+                </a>
+                <a target="_blank" href="https://www.youtube.com/@ciudadoceano5975">
+                    <i  class="fab fa-youtube" ></i>
+                </a>
+
             </li>
             @auth
                 <li class="nav-item  link-user dropdow ">

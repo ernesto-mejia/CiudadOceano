@@ -52,6 +52,15 @@
         </li>
         @endif
 
+        {{-- @if (kvfj(Auth::user()->permissions, 'areas'))
+        <li>
+            <a href="{{ url('/admin/areas') }}" class="lk-areas lk-area_add lk-area_edit">
+                <i class="far fa-layer-group"></i>
+                Modulos principales
+            </a>
+        </li>
+        @endif --}}
+
         @if (kvfj(Auth::user()->permissions, 'articulos'))
         <li>
             <a href="{{ url('/admin/articulos/1') }}" class="lk-articulos lk-articulos_add lk-articulos_edit">
@@ -60,25 +69,26 @@
             </a>
         </li>
         @endif
+
         @if (kvfj(Auth::user()->permissions, 'campañas'))
         <li>
-            <a href="{{ url('/admin/campañas/1/') }}" class="lk-campaña lk-campaña_add lk-campaña_edit">
+            <a href="{{ url('/admin/campañas/1/') }}" class="lk-campañas lk-campaña_add lk-campaña_edit">
                 <i class="fal fa-building"></i>
-                Campaña
+                Campañas
             </a>
         </li>
         @endif
 
         @if (kvfj(Auth::user()->permissions, 'exhibiciones'))
         <li>
-            <a href="{{ url('/admin/exhibiciones') }}" class="lk-exhibiciones lk-exhibiciones_add lk-exhibiciones_edit">
+            <a href="{{ url('/admin/exhibiciones/1') }}" class="lk-exhibiciones lk-exhibiciones_add lk-exhibiciones_edit">
                 <i class="fal fa-camera-polaroid"></i>
-                Exhibiciones
+                Exposiciones
             </a>
         </li>
         @endif
 
-        @if (kvfj(Auth::user()->permissions, 'comunidad'))
+        {{-- @if (kvfj(Auth::user()->permissions, 'comunidad'))
         <li>
             <a href="{{ url('/admin/communities/1') }}" class="lk-comunidad lk-comunidad_add lk-comunidad_edit">
                 <i class="fal fa-users-class"></i>
@@ -94,7 +104,7 @@
                 Reciclaje
             </a>
         </li>
-        @endif
+        @endif --}}
 
         @if (kvfj(Auth::user()->permissions, 'carousels'))
         <li>
