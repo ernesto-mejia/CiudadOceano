@@ -164,7 +164,7 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
-
+        Berkayk\OneSignal\OneSignalServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -232,7 +232,7 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
-
+        'OneSignal' => Berkayk\OneSignal\OneSignalFacade::class,
     ],
 
 ];

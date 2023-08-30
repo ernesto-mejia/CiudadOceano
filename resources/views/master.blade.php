@@ -84,7 +84,142 @@
                     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
                     <script src="{{ asset('js/site.js') }}"></script>
                     <script src="{{ asset('js/bold.js') }}"></script>
+                    <script>
+                        $.getJSON("https://api64.ipify.org?format=json", function(data) {
 
+                            document.cookie= `"id=${data.ip}; SameSite=None; Secure;"`;
+                            console.log('getIP: '+data.ip);
+
+                        });
+                    </script>
+                    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+                    <script>
+                        window.OneSignal = window.OneSignal || [];
+                        OneSignal.push(function() {
+                            OneSignal.init({
+                            appId: "b5bd90e7-a916-4fdd-8e52-014cc7fe78de",
+                            safari_web_id: "web.onesignal.auto.456a4abd-b5a3-4365-958f-9af6b49613be",
+                            notifyButton: {
+                                enable: true,
+                            },
+                            allowLocalhostAsSecureOrigin: true,
+                            });
+                        });
+
+                        //<!-- ----------------------------------------------------------------------- -->
+
+
+                        $(document).ready(function () {
+                            const settings = {
+                            "async": true,
+                            "crossDomain": true,
+                            "url": "https://onesignal.com/api/v1/players?app_id=b5bd90e7-a916-4fdd-8e52-014cc7fe78de&limit=20&offset=offset",
+                            "method": "GET",
+                            "headers": {
+                                "Accept": "text/plain",
+                                "Authorization": "Basic Mjg5NTY1N2ItZmIzMi00YTQ0LTgzMDktMTliOTIxNTM0MDA2",
+                                "Content-Type": "application/json; charset=utf-8"
+                            }
+                            };
+
+
+                            $.ajax(settings).done(function (response) {
+                                var listaCookies = document.cookie.split(";");
+                                for (i in listaCookies) {
+                                    var busca = listaCookies[i].search("id");
+                                    if (busca > -1) {micookie=listaCookies[i];}
+
+                                }
+                                var igual = micookie.indexOf("=");
+                                let valor = micookie.substring(igual+1);
+                                console.log('oneSignalIP:'+valor);
+
+                                var getBrowserInfo = function() {
+                                    var ua= navigator.userAgent, tem,
+                                    M= ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
+                                    if(/trident/i.test(M[1])){
+                                        tem=  /\brv[ :]+(\d+)/g.exec(ua) || [];
+                                        return 'IE '+(tem[1] || '');
+                                    }
+                                    if(M[1]=== 'Chrome'){
+                                        tem= ua.match(/\b(OPR|Edge)\/(\d+)/);
+                                        if(tem!= null) return tem.slice(1).join(' ').replace('OPR', 'Opera');
+                                    }
+                                    M= M[2]? [M[1], M[2]]: [navigator.appName, navigator.appVersion, '-?'];
+                                    if((tem= ua.match(/version\/(\d+)/i))!= null) M.splice(1, 1, tem[1]);
+                                    return M.join(' ');
+                                };
+
+                            console.log(getBrowserInfo().substring(0, 3));
+
+                                response.players.forEach(function(element) {
+                                    if(getBrowserInfo().substring(0, 3) == 'Fir' && element.device_type == 8){
+
+
+                                        if (element.ip == valor) {
+
+                                        console.log('firefox:'+element.ip);
+                                        console.log(document.cookie= `"os=${element.id}; SameSite=None; Secure;"`);
+                                        }
+
+
+                                    } else if (getBrowserInfo().substring(0, 3) == 'Chr' && element.device_type == 5){
+                                        console.log('crohme:'+element.ip);
+                                        console.log(document.cookie= `"os=${element.id}; SameSite=None; Secure;"`);
+                                    }
+
+                                });
+
+                            });
+                        });
+
+                        function addClient() {
+                            var listaCookies = document.cookie.split(";");
+                            console.log('lista: '+listaCookies);
+                            for (i in listaCookies) {
+                                var busca = listaCookies[i].search("os");
+                                console.log(busca);
+                                if (busca > -1) {
+                                    micookie2=listaCookies[i];
+                                    var igual = micookie2.substr(5);
+                                    let valor = igual;
+                                    let mensaje = 'El cliente tal se agrego a tu listado';
+                                    let titulo = 'Se agrego un cliente';
+                                    console.log('igual: '+ valor);
+                                    $.ajax({
+                                        type    : 'POST',
+                                        url     : 'https://onesignal.com/api/v1/notifications',
+                                        cache   : true,
+                                        headers : {
+                                                    'mode': 'no-cors',
+                                                    'Accept': 'application/json',
+                                                    'Content-Type': 'application/json',
+                                                    'Authorization': 'Basic Mjg5NTY1N2ItZmIzMi00YTQ0LTgzMDktMTliOTIxNTM0MDA2',
+                                                    'Access-Control-Allow-Origin': '*',
+                                                    'Access-Control-Allow-Credentials': 'true',
+                                                    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
+                                                    'Access-Control-Allow-Headers': 'Access-Control-Allow-Credentials, Authorization, Access-Control-Allow-Origin, Accept, Content-Type, Access-Control-Allow-Methods, Access-Control-Allow-Headers'
+                                                },
+                                        data    :   "{\"app_id\": \"b5bd90e7-a916-4fdd-8e52-014cc7fe78de\",\n\"data\": {\"userId\": \"POSTman1235\"},\n  \"contents\": {\"en\": \""+mensaje+"\", \"es\": \""+mensaje+"\"},\n  \"headings\": {\"en\": \""+titulo+"\", \"es\": \""+titulo+"\"},\n  \"include_player_ids\": [\""+valor+"\"]\n}",
+                                        dataType: 'json',
+                                        beforeSend: function () {
+                                            //$("#overlay").fadeIn();
+                                        },
+                                        success: function ( response ) {
+                                            //location.reload();
+                                            //$("#overlay").fadeOut();
+                                                console.log( response );
+                                        },
+                                        error: function ( response ) {
+                                            //console.log( response );
+
+                                        }
+                                    });
+                                }
+                            }
+                        }
+
+                    </script>
                     <!--individual-Script-page-->
                         @yield('scripts')
             </body>
