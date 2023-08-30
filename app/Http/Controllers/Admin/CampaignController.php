@@ -30,13 +30,13 @@ class CampaignController extends Controller
         switch ($status) {
 
             case '1':
-                $products = Article::where('status', '1')->where('module', 'campaña')->orderBy('id', 'DESC')->paginate(20);
+                $products = Article::where('status', '1')->where('module', 'campaigns')->orderBy('id', 'DESC')->paginate(20);
                 break;
             case '0':
-                $products = Article::where('status', '0')->where('module', 'campaña')->orderBy('id', 'DESC')->paginate(20);
+                $products = Article::where('status', '0')->where('module', 'campaigns')->orderBy('id', 'DESC')->paginate(20);
                 break;
             case 'trash':
-                $products = Article::onlyTrashed()->where('module', 'campaña')->orderBy('id', 'DESC')->paginate(20);
+                $products = Article::onlyTrashed()->where('module', 'campaigns')->orderBy('id', 'DESC')->paginate(20);
                 break;
 
             default:
@@ -51,7 +51,7 @@ class CampaignController extends Controller
 
     public function getCampaignAdd()
     {
-        $cats = Article::where('module', 'campaña')->pluck('name', 'id');
+        $cats = Article::where('module', 'campaign')->pluck('name', 'id');
         $data = [
             'cats' => $cats
         ];
@@ -69,9 +69,9 @@ class CampaignController extends Controller
         ];
 
         $messages = [
-            'name.required'                     => 'El nombre de la campaña es requerido.',
-            'file.required'                     => 'Seleccione una imagen destacada de campaña.',
-            'date.required'                     => 'La fecha de la campaña es requerida.'
+            'name.required'                     => 'El nombre de la campaign es requerido.',
+            'file.required'                     => 'Seleccione una imagen destacada de campaign.',
+            'date.required'                     => 'La fecha de la campaign es requerida.'
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -95,7 +95,7 @@ class CampaignController extends Controller
 
             $product = new Article;
             $product->status                = '0';
-            $product->module                = 'campañas';
+            $product->module                = 'campaigns';
             $product ->name                 = e($request->input('name'));
             $product ->slug                 = Str::slug($request->input('name'));
             $product ->file_path            = $path_;
@@ -136,7 +136,7 @@ class CampaignController extends Controller
                     $imagW->save($upload_path.'/'.$path.'/'.$filename);
                 endif;
 
-                return redirect('/admin/campañas/1')->with('message', ' Campaña guardada con éxito.')->with('typealert', 'success');
+                return redirect('/admin/campaigns/0')->with('message', ' Campaña guardada con éxito.')->with('typealert', 'success');
 
             endif;
 
@@ -184,7 +184,7 @@ class CampaignController extends Controller
             $imagepp                        = $product->file_path;
             $imagep                         = $product->file;
             $product->status                = e($request->input('status'));
-            $product->module                = 'campaña';
+            $product->module                = 'campaigns';
             $product ->name                 = e($request->input('name'));
             $product ->slug                 = Str::slug($request->input('name'));
             $product ->date                 = e($request->input('date'));
@@ -297,7 +297,7 @@ class CampaignController extends Controller
 
         if ($product->save()):
 
-            return redirect('/admin/campañas/'.$product->id.'/edit')->with('message', ' La campaña se restauro correctamente.')->with('typealert', 'success')->withInput();
+            return redirect('/admin/campaigns/'.$product->id.'/edit')->with('message', ' La campaign se restauro correctamente.')->with('typealert', 'success')->withInput();
 
         endif;
 

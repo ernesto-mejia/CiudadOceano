@@ -15,9 +15,7 @@
                 </div>
 
             <!-- iMAGEN DESTACADA -->
-                <div  class="col-12 justify-content-center align-items-center Height70 img-portada" style="padding: 0 20%; margin-bottom: 40px;background-image: url({{ url('/multimedia/'.$post->file_path.'/'.$post->slug.'/'.$post->file) }});" >
-
-                </div>
+                <div  class="col-12 justify-content-center align-items-center Height70 img-portada" style="padding: 0 20%; margin-bottom: 40px;background-image: url({{ url('/multimedia/'.$post->file_path.'/'.$post->slug.'/'.$post->file) }});" ></div>
 
             <!-- Secccion-->
                 @for ($i=1 ; $i<=$post->sections; $i++)
@@ -74,7 +72,10 @@
                     @endforeach
                 @endfor
         </div>
+
+
     </div>
+
 @endsection
 
 @section('scripts')

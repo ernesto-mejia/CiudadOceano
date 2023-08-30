@@ -7,7 +7,7 @@ use App\Description;
 use App\Http\Controllers\Controller;
 use App\NGallery;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Http\Request;
 
 
 class HomeController extends Controller
@@ -61,14 +61,25 @@ class HomeController extends Controller
         return view('blog.sections.politica', $data);
     }
 
-    public function getCategories($category)
+    public function getCategories($category, Request $request)
     {
         $articles = DB::table('articles')->where('module', $category)->where('status', '1')->where('deleted_at', null)->orderBy('id', 'DESC')->get();
         $countArt = count($articles);
+        $url = $request->url(); // Obtiene la URL completa
+        $lastSegment = strrchr($url, '/'); // Obtiene la última parte después de la última barra
+        $lastWord = trim($lastSegment, '/'); // Elimina las barras adicionales al principio o final
+
+        $lastWord; // Esto contendrá la última palabra de la URL
+        //dd($lastWord);
+
+        $expos = DB::table('articles')->where('module', 'exhibiciones')->where('status', '1')->where('deleted_at', null)->orderBy('id', 'DESC')->get();
+
 
         $data = [
                     'articles' => $articles,
-                    'countArt' => $countArt
+                    'countArt' => $countArt,
+                    'section' => $lastWord,
+                    'expos' => $expos
 
                 ];
 

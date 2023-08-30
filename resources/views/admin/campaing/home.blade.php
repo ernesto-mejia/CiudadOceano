@@ -4,7 +4,7 @@
 @section('breadcrumb')
 
     <li class="breadcrumb-item">
-        <a href="{{ url('/admin/campañas/1') }}">
+        <a href="{{ url('/admin/campaigns/1') }}">
             <i class="fal fa-camera-polaroid"></i>
             Campañas
         </a>
@@ -28,7 +28,7 @@
 
                     <div class="inside">
 
-                        {!! Form::open(['url' => '/admin/campaña/add', 'files' => true]) !!}
+                        {!! Form::open(['url' => '/admin/campaigns/add', 'files' => true]) !!}
 
                             <div class="row">
 
@@ -111,17 +111,17 @@
                                 <a href="#">Filtrar <i class="fas fa-chevron-down"></i></a>
                                 <ul>
                                     <li>
-                                        <a href="{{ url('/admin/campañas/1') }}">
+                                        <a href="{{ url('/admin/campaigns/1') }}">
                                             <i class="fas fa-globe-americas" style="color: green;"></i> Públicados
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="{{ url('/admin/campañas/0') }}">
+                                        <a href="{{ url('/admin/campaigns/0') }}">
                                             <i class="fas fa-globe-americas" style="color: blue;"></i> No públicados
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="{{ url('/admin/campañas/trash') }}">
+                                        <a href="{{ url('/admin/campaigns/trash') }}">
                                             <i class="fas fa-trash" style="color: red;"></i> Papelera
                                         </a>
                                     </li>

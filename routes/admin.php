@@ -62,15 +62,15 @@ Route::prefix('/admin')->group(function(){
         Route::get('/articulos/{slug}/gallery/{id}/delete',           'Admin\ArticleController@getArticleGalleryDelete')->name('articulos_edit');
 
     //Module Campaign
-        Route::get('/campañas/{status}/',                           'Admin\CampaignController@getHome')->name('campañas');
-        Route::get('/campaña/add',                                  'Admin\CampaignController@getCampaignAdd')->name('campaña_add');
-        Route::post('/campaña/add/',                                'Admin\CampaignController@postCampaignAdd')->name('campaña_add');
-        Route::get('/campaña/{id}/edit',                           'Admin\CampaignController@getCampaignEdit')->name('campaña_edit');
-        Route::post('/campaña/{id}/edit',                          'Admin\CampaignController@postCampaignEdit')->name('campaña_edit');
-        Route::get('/campaña/{id}/delete',                         'Admin\CampaignController@getCampaignDelete')->name('campaña_delete');
-        Route::get('/campaña/{id}/restore',                        'Admin\CampaignController@getCampaignRestore')->name('campaña_delete');
-        Route::post('/campaña/{id}/gallery/add/{gallery}',         'Admin\CampaignController@postCampaignGalleryAdd')->name('campaña_edit');
-        Route::get('/campaña/{id}/gallery/{gid}/delete',           'Admin\CampaignController@getCampaignGalleryDelete')->name('campaña_edit');
+        Route::get('/campaigns/{status}/',                           'Admin\CampaignController@getHome')->name('campaigns');
+        Route::get('/campaigns/add',                                  'Admin\CampaignController@getCampaignAdd')->name('campaign_add');
+        Route::post('/campaigns/add/',                                'Admin\CampaignController@postCampaignAdd')->name('campaign_add');
+        Route::get('/campaigns/{id}/edit',                           'Admin\CampaignController@getCampaignEdit')->name('campaign_edit');
+        Route::post('/campaigns/{id}/edit',                          'Admin\CampaignController@postCampaignEdit')->name('campaign_edit');
+        Route::get('/campaigns/{id}/delete',                         'Admin\CampaignController@getCampaignDelete')->name('campaign_delete');
+        Route::get('/campaigns/{id}/restore',                        'Admin\CampaignController@getCampaignRestore')->name('campaign_delete');
+        Route::post('/campaigns/{id}/gallery/add/{gallery}',         'Admin\CampaignController@postCampaignGalleryAdd')->name('campaign_edit');
+        Route::get('/campaigns/{id}/gallery/{gid}/delete',           'Admin\CampaignController@getCampaignGalleryDelete')->name('campaign_edit');
 
     //Module Community
         Route::get('/comunidades/{status}/',                           'Admin\CommunityController@getHome')->name('comunidades');

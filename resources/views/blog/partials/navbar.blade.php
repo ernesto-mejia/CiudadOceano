@@ -21,7 +21,11 @@
             </li>
 
             <li class="nav-item ml-4">
-                <a style="text-align: center;" href="{{url('/seccion/campañas')}}" class="nav-link"><p class="m-0 pnav">Campañas</p></a>
+                <a style="text-align: center;" href="{{url('/seccion/campaigns')}}" class="nav-link"><p id="campaigns_nav" class="m-0 pnav">Campañas</p></a>
+            </li>
+
+            <li class="nav-item ml-4">
+                <a style="text-align: center;" href="{{url('/seccion/reviews')}}" class="nav-link"><p id="reviews_nav" class="m-0 pnav">Reseñas</p></a>
             </li>
 
             <li class="nav-item ml-4 redes">

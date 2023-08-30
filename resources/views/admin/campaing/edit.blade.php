@@ -4,13 +4,13 @@
 @section('breadcrumb')
 
     <li class="breadcrumb-item">
-        <a href="{{ url('/admin/campañas/1') }}">
+        <a href="{{ url('/admin/campaigns/1') }}">
             <i class="fal fa-newspaper"></i>
             Campañas
         </a>
     </li>
     <li class="breadcrumb-item">
-        <a href="{{ url('/admin/campaña/'.$product->id.'/edit ') }}">
+        <a href="{{ url('/admin/campaigns/'.$product->id.'/edit ') }}">
             <i class="far fa-folder-open"></i>
             Editar campaña
         </a>
@@ -29,14 +29,14 @@
                     <div class="header">
                         <h2 class="title">
                             <i class="far fa-edit"></i>
-                            Editar campaña
+                            Editar campaign
                         </h2>
                     </div>
 
                     <div class="inside">
 
 
-                        {!! Form::open(['url' => '/admin/campaña/'.$product->id.'/edit', 'files' => true, 'method' => 'post', 'novalidate']) !!}
+                        {!! Form::open(['url' => '/admin/campaigns/'.$product->id.'/edit', 'files' => true, 'method' => 'post', 'novalidate']) !!}
                         @csrf
                             <div class="row" style="padding: 16px;">
 
@@ -182,7 +182,7 @@
                                         @if ($ima->after == $i)
                                             <div class="tumb">
 
-                                                <a href="{{ url('/admin/campaña/'.$product->id.'/gallery/'.$ima->id.'/delete') }}" data-toggle="tooltip" data-placement="top" title="Eliminar">
+                                                <a href="{{ url('/admin/campaigns/'.$product->id.'/gallery/'.$ima->id.'/delete') }}" data-toggle="tooltip" data-placement="top" title="Eliminar">
                                                     <i class="fas fa-trash-alt"></i>
                                                 </a>
 

@@ -149,10 +149,10 @@
                 'icon' => '<i class="fal fa-photo-video"></i>',
                 'title' => 'Modulo de Campañas',
                 'keys' => [
-                    'campañas' => 'Puede ver el listado.',
-                    'campaña_edit' => 'Puede editar.',
-                    'campaña_add' => 'Puede agregar.',
-                    'campaña_delete' => 'Puede elimiar.',
+                    'campaigns' => 'Puede ver el listado.',
+                    'campaigns_edit' => 'Puede editar.',
+                    'campaigns_add' => 'Puede agregar.',
+                    'campaigns_delete' => 'Puede elimiar.',
                 ]
             ],
             'carousels' => [

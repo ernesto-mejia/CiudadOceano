@@ -14,7 +14,7 @@
         <div class="email">
             <p>{{ Auth::user()->email }}</p>
         </div>
-        <div class=" d-flex campaña-content-end align-content-end pr-1 " >
+        <div class=" d-flex campaign-content-end align-content-end pr-1 " >
             <a href="{{ url('/logout') }}" data-toggle="tooltip" data-placement="top" title="Cerrar Sesión">
                 Salir <i class="fas fa-power-off"></i>
             </a>
@@ -70,9 +70,9 @@
         </li>
         @endif
 
-        @if (kvfj(Auth::user()->permissions, 'campañas'))
+        @if (kvfj(Auth::user()->permissions, 'campaigns'))
         <li>
-            <a href="{{ url('/admin/campañas/1/') }}" class="lk-campañas lk-campaña_add lk-campaña_edit">
+            <a href="{{ url('/admin/campaigns/1/') }}" class="lk-campaigns lk-campaign_add lk-campaign_edit">
                 <i class="fal fa-building"></i>
                 Campañas
             </a>
